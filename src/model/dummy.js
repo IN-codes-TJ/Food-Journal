@@ -3,6 +3,9 @@ const express = require('express');
 
 class dummyModel {
    async testMethod() {
+      const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+      await connect.pool.query(setSchema);
+      
       var result = await connect.pool.query(
             "SELECT * FROM testtable",
          []
