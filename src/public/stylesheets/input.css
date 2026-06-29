@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+    --spacing: 0.7rem;
+    --border-size: 3px;
+}
+
+@layer base {
+    body {
+    }
+}

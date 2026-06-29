@@ -8,7 +8,7 @@ class dummyModel {
          await connect.pool.query(setSchema);
          
          var result = await connect.pool.query(
-               "SELECT * FROM test",
+               "SELECT * FROM foodData",
             []
          );
 
