@@ -1,11 +1,46 @@
 @import "tailwindcss";
 
 @theme {
-    --spacing: 0.7rem;
+    --spacing: 1rem;
     --border-size: 3px;
+
 }
 
 @layer base {
     body {
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.17rem;
+    }
+
+    h4 {
+        font-size: 1rem;
+    }
+
+    h5 {
+        font-size: 0.83rem;
+    }
+}
+
+@layer components {
+    .icon {
+        @apply border-2 border-transparent my-auto mx-0; 
+        @apply hover:border-0 hover:m-0 hover:md:m-[2px];
+    }
+
+    .icon img {
+        @apply mx-auto;
+    }
+    .icon h5 {
+        @apply hidden md:block;
     }
 }
