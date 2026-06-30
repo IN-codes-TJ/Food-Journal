@@ -4,7 +4,7 @@ const express = require('express');
 class dummyModel {
    async testMethod() {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         /*const setSchema = "SET search_path TO foodjournal, PUBLIC;"
          await connect.pool.query(setSchema);
          
          var result = await connect.pool.query(
@@ -13,7 +13,7 @@ class dummyModel {
          );
 
          var jsonRes = JSON.parse(JSON.stringify(result.rows));
-         console.log(jsonRes);
+         console.log(jsonRes);*/
       }
       catch (error) {
          console.error(error);

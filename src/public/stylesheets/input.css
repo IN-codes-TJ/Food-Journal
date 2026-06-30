@@ -43,4 +43,8 @@
     .icon h5 {
         @apply hidden md:block;
     }
+
+    .hiddenNavHamb {
+        @apply border-l-transparent!;
+    }
 }
