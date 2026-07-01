@@ -7,5 +7,12 @@ export class navScripts {
             this.toToggle.classList.toggle("hidden");
             this.hamburger.parentElement.classList.toggle("hiddenNavHamb");
         });
+
+        this.create = document.getElementById("create-icon");
+        this.createOptions = document.getElementById("create-options")
+
+        this.create.addEventListener("click", (e) => {
+            this.createOptions.classList.toggle("showCreateOptions");
+        });
     }
 }

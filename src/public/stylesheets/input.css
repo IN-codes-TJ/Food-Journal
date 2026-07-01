@@ -34,11 +34,11 @@
 @layer components {
     .icon {
         @apply border-2 border-transparent my-auto mx-0; 
-        @apply hover:border-0 hover:m-0 hover:md:m-[2px];
+        @apply hover:border-0 hover:m-0 hover:md:mx-[2px];
     }
 
     .icon img {
-        @apply mx-auto;
+        @apply mx-auto dark:invert my-auto;
     }
     .icon h5 {
         @apply hidden md:block;
@@ -46,5 +46,16 @@
 
     .hiddenNavHamb {
         @apply border-l-transparent!;
+    }
+
+    .showCreateOptions {
+        @apply border-2 rounded-b-2xl p-[2px];
+    }
+    .showCreateOptions a {
+        @apply block!;
+    }
+
+    .create-div:has(.showCreateOptions) #create-icon {
+        background-color: rgb(197, 195, 195);
     }
 }

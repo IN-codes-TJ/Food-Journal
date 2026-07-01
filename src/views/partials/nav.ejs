@@ -1,5 +1,5 @@
 <div class="flex flex-row gap-1 h-2 top-0 w-full px-1 my-1 justify-end-safe fixed">
-    <div class="flex flex-row gap-1 md:gap-2 h-full w-full justify-around md:justify-end-safe mx-auto md:ml-auto md:mr-0" id="navToggle">
+    <div class="flex flex-row gap-1 flex-wrap md:gap-2 h-full w-full justify-around md:justify-end-safe mx-auto md:ml-auto md:mr-0" id="navToggle">
         <a href="/" class="h-full icon">
             <img src="/assets/home-icon.png" alt="A house icon, linking to the home page" class="h-full">
             <h5>Home</h5>
@@ -12,30 +12,32 @@
             <img src="/assets/food-list-icon.png" alt="An icon of a list with a strawberry infront, linking to the food list page" class="h-full">
             <h5>Foods</h5>
         </a>
-        <div class="flex flex-row gap-1 h-full">
-            <div class="h-full icon">
+        <div class="flex flex-col h-full create-div">
+            <div class="h-full icon mb-0">
                 <img src="/assets/create-icon.png" alt="A plus icon, to show more create options" id="create-icon" class="h-full">
                 <h5>Create</h5>
             </div>
-            <a href="" class="h-full hidden icon">
-                <img src="/assets/food-icon.png" alt="An icon of a strawberry, linking to the create food page" class="h-full">
-                <h5>Food</h5>
-            </a>
-            <a href="" class="h-full hidden icon">
-                <img src="/assets/mood-icon.png" alt="An icon of a smiling face, linking to the create mood page" class="h-full">
-                <h5>Mood</h5>
-            </a>
-            <a href="" class="h-full hidden icon">
-                <img src="/assets/sickness-icon.png" alt="An icon of an ill face, linking to the create sickness page" class="h-full">
-                <h5>Sickness</h5>
-            </a>
+            <div id="create-options" class="flex flex-col w-2 gap-0.5 mt-0">
+                <a href="" class="h-full hidden icon">
+                    <img src="/assets/food-icon.png" alt="An icon of a strawberry, linking to the create food page" class="h-full">
+                    <h5>Food</h5>
+                </a>
+                <a href="" class="h-full hidden icon">
+                    <img src="/assets/mood-icon.png" alt="An icon of a smiling face, linking to the create mood page" class="h-full">
+                    <h5>Mood</h5>
+                </a>
+                <a href="" class="h-full hidden icon">
+                    <img src="/assets/sickness-icon.png" alt="An icon of an ill face, linking to the create sickness page" class="h-full">
+                    <h5>Sickness</h5>
+                </a>
+            </div>
         </div>
     </div>
-    <div class="flex h-full border-l-2 px-1 mr-0">
-        <img src="/assets/hamburger-icon.png" alt="A hamburger icon to toggle the navigation" id="hamburger" class="h-1.5 mr-[4px] ml-auto icon hover:mr-0! hover:my-auto">
+    <div class="flex h-full border-l-2 dark:border-l-white px-1 mr-0">
+        <img src="/assets/hamburger-icon.png" alt="A hamburger icon to toggle the navigation" id="hamburger" class="h-1.5 mr-[4px] ml-auto icon hover:mr-0! hover:my-auto dark:invert">
     </div>
 </div>
-<a href="/" class="md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] h-5 border-2 border-black rounded-full">
+<a href="/" class="md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] h-5 hover:h-[calc(5rem+2px)] hover:bottom-[calc(2rem-1px)] border-2 border-black rounded-full dark:invert">
     <img src="/assets/home-icon.png" alt="A house icon, linking to the home page" class="h-full p-1">
 </a>
 
