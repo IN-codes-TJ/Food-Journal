@@ -1,0 +1,12 @@
+<% if (typeof href != "string") { %>
+    <div class="<%= typeof addClass == 'string' ? addClass + ' h-full' : 'h-full' %>" id="<%= typeof id == "string" ? id : "" %>">
+        <img src="<%=src%>" alt="<%=alt%>"" class="icon">
+        <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
+    </div>
+<% } else { %>
+    <a href="<%=href%>" class="<%= typeof addClass == 'string' ? addClass + ' h-full' : 'h-full' %>" id="<%= typeof id == "string" ? id : "" %>">
+        <img src="<%=src%>" alt="<%=alt%>" class="icon">
+        <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
+    </a>
+<% } %>
+

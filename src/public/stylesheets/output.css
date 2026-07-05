@@ -7,12 +7,11 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-black: #000;
-    --color-white: #fff;
     --spacing: 1rem;
-    --radius-2xl: 1rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --color-light-text: black;
+    --color-dark-text: white;
   }
 }
 @layer base {
@@ -176,6 +175,9 @@
   .left-\[50\%\] {
     left: 50%;
   }
+  .m-auto {
+    margin: auto;
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -191,11 +193,11 @@
   .mr-\[4px\] {
     margin-right: 4px;
   }
-  .mb-0 {
-    margin-bottom: 0;
-  }
   .ml-auto {
     margin-left: auto;
+  }
+  .block {
+    display: block;
   }
   .flex {
     display: flex;
@@ -203,8 +205,8 @@
   .hidden {
     display: none;
   }
-  .h-1\.5 {
-    height: calc(var(--spacing) * 1.5);
+  .table {
+    display: table;
   }
   .h-2 {
     height: calc(var(--spacing) * 2);
@@ -212,18 +214,30 @@
   .h-5 {
     height: calc(var(--spacing) * 5);
   }
+  .h-fit {
+    height: fit-content;
+  }
   .h-full {
     height: 100%;
   }
   .w-2 {
     width: calc(var(--spacing) * 2);
   }
+  .w-fit {
+    width: fit-content;
+  }
   .w-full {
     width: 100%;
+  }
+  .border-collapse {
+    border-collapse: collapse;
   }
   .translate-x-\[-50\%\] {
     --tw-translate-x: -50%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .resize {
+    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -240,6 +254,9 @@
   .justify-end-safe {
     justify-content: safe flex-end;
   }
+  .gap-0 {
+    gap: 0;
+  }
   .gap-0\.5 {
     gap: calc(var(--spacing) * 0.5);
   }
@@ -249,6 +266,10 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
   .border-2 {
     border-style: var(--tw-border-style);
     border-width: 2px;
@@ -257,14 +278,42 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 2px;
   }
-  .border-black {
-    border-color: var(--color-black);
+  .border-light-text {
+    border-color: var(--color-light-text);
+  }
+  .p-0 {
+    padding: 0;
+  }
+  .p-0\.5 {
+    padding: calc(var(--spacing) * 0.5);
   }
   .p-1 {
     padding: var(--spacing);
   }
+  .px-0 {
+    padding-inline: 0;
+  }
+  .px-0\.5 {
+    padding-inline: calc(var(--spacing) * 0.5);
+  }
   .px-1 {
     padding-inline: var(--spacing);
+  }
+  .pt-0 {
+    padding-top: 0;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .hover\:bottom-\[calc\(2rem-1px\)\] {
     &:hover {
@@ -304,6 +353,11 @@
       margin-left: auto;
     }
   }
+  .md\:block {
+    @media (width >= 48rem) {
+      display: block;
+    }
+  }
   .md\:hidden {
     @media (width >= 48rem) {
       display: none;
@@ -319,9 +373,9 @@
       gap: calc(var(--spacing) * 2);
     }
   }
-  .dark\:border-l-white {
+  .dark\:border-l-dark-text {
     @media (prefers-color-scheme: dark) {
-      border-left-color: var(--color-white);
+      border-left-color: var(--color-dark-text);
     }
   }
   .dark\:invert {
@@ -350,50 +404,26 @@
 }
 @layer components {
   .icon {
-    margin-inline: 0;
-    margin-block: auto;
+    margin: auto;
+    height: calc(var(--spacing) * 2);
     border-style: var(--tw-border-style);
     border-width: 2px;
     border-color: transparent;
-    &:hover {
-      @media (hover: hover) {
-        margin: 0;
-      }
-    }
-    &:hover {
-      @media (hover: hover) {
-        border-style: var(--tw-border-style);
-        border-width: 0px;
-      }
-    }
-    &:hover {
-      @media (hover: hover) {
-        @media (width >= 48rem) {
-          margin-inline: 2px;
-        }
-      }
-    }
-  }
-  .icon img {
-    margin-inline: auto;
-    margin-block: auto;
     @media (prefers-color-scheme: dark) {
       --tw-invert: invert(100%);
       filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
     }
   }
-  .icon h5 {
-    display: none;
-    @media (width >= 48rem) {
-      display: block;
-    }
+  .icon:hover {
+    border-style: var(--tw-border-style);
+    border-width: 0px;
   }
   .hiddenNavHamb {
     border-left-color: transparent !important;
   }
   .showCreateOptions {
-    border-bottom-right-radius: var(--radius-2xl);
-    border-bottom-left-radius: var(--radius-2xl);
+    border-bottom-right-radius: calc(infinity * 1px);
+    border-bottom-left-radius: calc(infinity * 1px);
     border-style: var(--tw-border-style);
     border-width: 2px;
     padding: 2px;
@@ -402,7 +432,19 @@
     display: block !important;
   }
   .create-div:has(.showCreateOptions) #create-icon {
-    background-color: rgb(197, 195, 195);
+    border-top-left-radius: calc(infinity * 1px);
+    border-top-right-radius: calc(infinity * 1px);
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 0px;
+    padding: calc(var(--spacing) * 0.25);
+  }
+  .create-div:has(.showCreateOptions) #create-icon img {
+    height: calc(var(--spacing) * 1.5) !important;
+  }
+  .create-div:has(.showCreateOptions) #create-icon h5 {
+    display: none !important;
   }
 }
 @property --tw-translate-x {
@@ -421,6 +463,11 @@
   initial-value: 0;
 }
 @property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-outline-style {
   syntax: "*";
   inherits: false;
   initial-value: solid;
@@ -485,6 +532,7 @@
       --tw-translate-y: 0;
       --tw-translate-z: 0;
       --tw-border-style: solid;
+      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;

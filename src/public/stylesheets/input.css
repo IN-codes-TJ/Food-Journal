@@ -4,6 +4,17 @@
     --spacing: 1rem;
     --border-size: 3px;
 
+    /* Colour Schemes */
+    --color-light-primary: #606C38;
+    --color-light-pop: #BC6C25;
+    --color-light-text: black;
+    --color-light-background: #FEFAE0;
+
+    --color-dark-primary: #606C38;
+    --color-dark-pop: #BC6C25;
+    --color-dark-text: white;
+    --color-dark-background: #283618;
+
 }
 
 @layer base {
@@ -32,30 +43,37 @@
 }
 
 @layer components {
+    /* ICONS */
     .icon {
-        @apply border-2 border-transparent my-auto mx-0; 
-        @apply hover:border-0 hover:m-0 hover:md:mx-[2px];
+        @apply h-2 border-2 border-transparent m-auto dark:invert;
     }
 
-    .icon img {
-        @apply mx-auto dark:invert my-auto;
-    }
-    .icon h5 {
-        @apply hidden md:block;
+    .icon:hover {
+        @apply border-0;
     }
 
+    /* NAVIGATION */
     .hiddenNavHamb {
         @apply border-l-transparent!;
     }
 
     .showCreateOptions {
-        @apply border-2 rounded-b-2xl p-[2px];
+        @apply border-2 rounded-b-full p-[2px];
     }
+
     .showCreateOptions a {
         @apply block!;
     }
 
     .create-div:has(.showCreateOptions) #create-icon {
-        background-color: rgb(197, 195, 195);
+        @apply border-2 border-b-0 rounded-t-full p-0.25;
+    }
+
+    .create-div:has(.showCreateOptions) #create-icon img {
+        @apply h-1.5!;
+    }
+
+    .create-div:has(.showCreateOptions) #create-icon h5 {
+        @apply hidden!;
     }
 }
