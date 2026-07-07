@@ -9,21 +9,28 @@
 </head>
 <body>
     <%-include('partials/nav') %>
-    <main class="flex flex-col justify-center">
-        <img src="/assets/food-journal-logo.png" alt="A journal drawing with a strawberry image on the journal">
-        <h1>My Food Journal</h1>
+    <main class="flex flex-col justify-center mx-1">
+        <img src="/assets/food-journal-logo.png" alt="A journal drawing with a strawberry image on the journal" class="mx-auto" id="logoTitle">
+        <h1 class="text-center">My Food Journal</h1>
         <% if (typeof timeItems[0] != 'undefined') { %>
             <% for (var timeItem of timeItems) { %>
-                <h3><%= timeItem['time'] %>:00</h3>
+                <h3 class="text-center"><%= timeItem['time'] %>:00</h3>
                 <% for (var item of timeItem['items']) { %>
-                    <div>
-                        <img src="" alt="">
-                        <div>
+                    <div class="flex flex-row gap-1 justify-center border-2 rounded-2xl mb-1">
+                        <% if (item['type'] == 'Food') { %>
+                            <img src="/assets/food-icon.png" alt="An icon of a strawberry, linking to the create food page" class="h-2">
+                        <% } else if (item['type'] == 'Mood') { %>
+                            <img src="/assets/mood-icon.png" alt="An icon of a smiling face, linking to the create mood page" class="h-2">
+                        <% } else { %>
+                            <img src="/assets/sickness-icon.png" alt="An icon of an ill face, linking to the create sickness page" class="h-2">
+                        <% } %>
+                        <div class="flex flex-col gap-0.5">
                             <h3><%= item['name'] %></h3>
                             <p><%= item['description'] %></p>
-                            <p><%= item['type'] == 'Food' ? item['timeeaten'] : item['time'] %></p>
-                            <p><%= item['type'] %></p>
                         </div>
+                        <time><%= item['type'] == 'Food' ? item['timeeaten'] : item['time'] %></time>
+                        <%-include('partials/icon', {href:"", src:"/assets/Delete-Icon.png", 
+                        alt:"A bin, clicked to delete items", text:"Delete", addClass:(item['type'] == 'Food' ? 'deleteItem Food-'+item['foodid'] : item['type'] == 'Mood' ? 'deleteItem Mood-'+item['moodid'] : 'deleteItem Sickness-'+item['sicknessid'])}) %>
                     </div>
                 <% } %>
             <% } %>

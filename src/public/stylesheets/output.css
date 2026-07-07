@@ -8,6 +8,7 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --spacing: 1rem;
+    --radius-2xl: 1rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-light-text: black;
@@ -177,8 +178,14 @@
   .left-\[50\%\] {
     left: 50%;
   }
+  .m-1 {
+    margin: var(--spacing);
+  }
   .m-auto {
     margin: auto;
+  }
+  .mx-1 {
+    margin-inline: var(--spacing);
   }
   .mx-auto {
     margin-inline: auto;
@@ -191,6 +198,9 @@
   }
   .mr-0 {
     margin-right: 0;
+  }
+  .mb-1 {
+    margin-bottom: var(--spacing);
   }
   .block {
     display: block;
@@ -225,6 +235,12 @@
   .w-full {
     width: 100%;
   }
+  .max-w-\[400px\] {
+    max-width: 400px;
+  }
+  .max-w-\[600px\] {
+    max-width: 600px;
+  }
   .border-collapse {
     border-collapse: collapse;
   }
@@ -253,9 +269,6 @@
   .justify-end-safe {
     justify-content: safe flex-end;
   }
-  .justify-items-center {
-    justify-items: center;
-  }
   .gap-0 {
     gap: 0;
   }
@@ -264,6 +277,15 @@
   }
   .gap-1 {
     gap: var(--spacing);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
@@ -297,6 +319,9 @@
   }
   .pt-0 {
     padding-top: 0;
+  }
+  .pb-1 {
+    padding-bottom: var(--spacing);
   }
   .text-center {
     text-align: center;
@@ -369,6 +394,7 @@
 }
 @layer base {
   body {
+    margin-top: calc(var(--spacing) * 5);
     background-color: var(--color-light-background);
     color: var(--color-light-text);
     @media (prefers-color-scheme: dark) {
@@ -437,6 +463,10 @@
   }
   .create-div:has(.showCreateOptions) #create-icon h5 {
     display: none !important;
+  }
+  #logoTitle {
+    height: calc(var(--spacing) * 5);
+    max-height: 20vw;
   }
 }
 @property --tw-translate-x {

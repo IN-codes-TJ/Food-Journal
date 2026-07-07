@@ -19,7 +19,7 @@
 
 @layer base {
     body {
-        @apply bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text;
+        @apply bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text mt-5;
     }
 
     h1 {
@@ -76,5 +76,11 @@
 
     .create-div:has(.showCreateOptions) #create-icon h5 {
         @apply hidden!;
+    }
+
+    /* OTHER */
+    #logoTitle {
+        height: calc(var(--spacing) * 5);
+        max-height: 20vw;
     }
 }
