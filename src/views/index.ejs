@@ -9,16 +9,26 @@
 </head>
 <body>
     <%-include('partials/nav') %>
-    <main class="flex flex-row justify-center">
+    <main class="flex flex-col justify-center">
         <img src="/assets/food-journal-logo.png" alt="A journal drawing with a strawberry image on the journal">
         <h1>My Food Journal</h1>
-        <% for (timeItem of timeItems) { %>
-            <h3><%= timeItem['time'] %></h3>
-            <% for (item of timeItem['items']) { %>
-                <div>
-                    <img src="" alt="">
-                </div>
+        <% if (typeof timeItems[0] != 'undefined') { %>
+            <% for (var timeItem of timeItems) { %>
+                <h3><%= timeItem['time'] %>:00</h3>
+                <% for (var item of timeItem['items']) { %>
+                    <div>
+                        <img src="" alt="">
+                        <div>
+                            <h3><%= item['name'] %></h3>
+                            <p><%= item['description'] %></p>
+                            <p><%= item['type'] == 'Food' ? item['timeeaten'] : item['time'] %></p>
+                            <p><%= item['type'] %></p>
+                        </div>
+                    </div>
+                <% } %>
             <% } %>
+        <% } else { %>
+            <p>No items</p>
         <% } %>
     </main>
 </body>

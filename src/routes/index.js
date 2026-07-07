@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const dummyModel = require('../model/dummy');
+const itemsModel = require('../model/timeItemsModel');
 
 router.get('/', async function(req, res) {
-    dummyModel.testMethod().then((result)=>{
-        res.render('index', {testData: "Initial Setup"});
+    // Change 1 to userID
+    itemsModel.getTimeItems(1).then((result)=>{
+        res.render('index', {timeItems: result});
     });
 });
 

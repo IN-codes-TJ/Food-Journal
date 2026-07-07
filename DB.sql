@@ -1,4 +1,5 @@
-/*DROP SCHEMA foodjournal CASCADE;*/
+/*DROP SCHEMA foodjournal CASCADE;
+CREATE SCHEMA foodjournal;*/
 SET SEARCH_PATH TO foodjournal, PUBLIC;
 /* ACCOUNT */
 
@@ -69,7 +70,7 @@ CREATE TABLE modification (
 CREATE TABLE mood (
 	moodID				SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
-	mood				VARCHAR(128) NOT NULL,
+	name				VARCHAR(128) NOT NULL,
 	time				TIME NOT NULL,
 	description			VARCHAR(512),
 	FOREIGN KEY (userID) REFERENCES account ON UPDATE CASCADE ON DELETE CASCADE
@@ -92,8 +93,6 @@ CREATE TABLE symptom (
 	symptom				VARCHAR(128) NOT NULL,
 	FOREIGN KEY (sicknessID) REFERENCES sickness ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
-
-
 
 /* EFFECTS/ASSOCIATIONS */
 
@@ -135,8 +134,11 @@ ON effect
 FOR EACH ROW
 EXECUTE FUNCTION checkEffect();
 
-
-
+INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
+INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff', 'Loved');
+INSERT INTO eatenFood VALUES (1, 1, 1, '12:20');
+INSERT INTO mood VALUES (1, 1, 'Unhappy', '12:40', 'Feeling unhappy desc');
+INSERT INTO sickness VALUES (1, 1, 'Stomach ache', '13:01', 'Not good');
 /* VIEWS */
 
 CREATE VIEW eatenData AS
