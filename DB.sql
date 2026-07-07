@@ -1,5 +1,5 @@
+/*DROP SCHEMA foodjournal CASCADE;*/
 SET SEARCH_PATH TO foodjournal, PUBLIC;
-
 /* ACCOUNT */
 
 /* User account information */
@@ -70,6 +70,7 @@ CREATE TABLE mood (
 	moodID				SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
 	mood				VARCHAR(128) NOT NULL,
+	time				TIME NOT NULL,
 	description			VARCHAR(512),
 	FOREIGN KEY (userID) REFERENCES account ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
@@ -79,6 +80,7 @@ CREATE TABLE sickness (
 	sicknessID			SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
 	name				VARCHAR(128) NOT NULL,
+	time				TIME NOT NULL,
 	description			VARCHAR(512),
 	FOREIGN KEY (userID) REFERENCES account ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
@@ -132,3 +134,11 @@ BEFORE INSERT
 ON effect
 FOR EACH ROW
 EXECUTE FUNCTION checkEffect();
+
+
+
+/* VIEWS */
+
+CREATE VIEW eatenData AS
+SELECT foodData.foodID, foodData.userID, foodData.name, foodData.description, foodData.satisfaction, 
+eatenFood.eatenID, eatenFood.timeEaten FROM foodData INNER JOIN eatenFood ON foodData.foodID = eatenFood.foodID;

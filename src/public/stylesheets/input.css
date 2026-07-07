@@ -4,21 +4,22 @@
     --spacing: 1rem;
     --border-size: 3px;
 
-    /* Colour Schemes */
+    /* Colour Schemes (not finished) */
     --color-light-primary: #606C38;
     --color-light-pop: #BC6C25;
     --color-light-text: black;
-    --color-light-background: #FEFAE0;
+    --color-light-background: white;
 
     --color-dark-primary: #606C38;
     --color-dark-pop: #BC6C25;
     --color-dark-text: white;
-    --color-dark-background: #283618;
+    --color-dark-background: #111A0A;
 
 }
 
 @layer base {
     body {
+        @apply bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text;
     }
 
     h1 {

@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/output.css">
     <%-include('partials/favicon') %>
-    <title>Food Journal</title>
+    <title>My Food Journal</title>
 </head>
 <body>
     <%-include('partials/nav') %>
+    <main class="flex flex-row justify-center">
+        <img src="/assets/food-journal-logo.png" alt="A journal drawing with a strawberry image on the journal">
+        <h1>My Food Journal</h1>
+        <% for (timeItem of timeItems) { %>
+            <h3><%= timeItem['time'] %></h3>
+            <% for (item of timeItem['items']) { %>
+                <div>
+                    <img src="" alt="">
+                </div>
+            <% } %>
+        <% } %>
+    </main>
 </body>
 </html>
