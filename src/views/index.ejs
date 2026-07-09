@@ -13,10 +13,12 @@
         <img src="/assets/food-journal-logo.png" alt="A journal drawing with a strawberry image on the journal" class="mx-auto" id="logoTitle">
         <h1 class="text-center">My Food Journal</h1>
         <% if (typeof timeItems[0] != 'undefined') { %>
+            <div class="min-w-1/2 mx-auto">
             <% for (var timeItem of timeItems) { %>
-                <h3 class="text-center"><%= timeItem['time'] %>:00</h3>
+                <h3 class="text-center py-1"><%= timeItem['time'] %>:00</h3>
                 <% for (var item of timeItem['items']) { %>
-                    <div class="flex flex-row gap-1 justify-center border-2 rounded-2xl mb-1">
+                    <a href="<%= item['type'] == 'Food' ? 'food-item?id='+item['foodid'] : item['type'] == 'Mood' ? 'mood-item?id='+item['moodid'] : 'sickness-item?id='+item['sicknessid']%>"
+                    class="flex flex-row gap-1 justify-center div-hover mb-1 w-full">
                         <% if (item['type'] == 'Food') { %>
                             <img src="/assets/food-icon.png" alt="An icon of a strawberry, linking to the create food page" class="h-2">
                         <% } else if (item['type'] == 'Mood') { %>
@@ -25,15 +27,16 @@
                             <img src="/assets/sickness-icon.png" alt="An icon of an ill face, linking to the create sickness page" class="h-2">
                         <% } %>
                         <div class="flex flex-col gap-0.5">
-                            <h3><%= item['name'] %></h3>
+                            <h3 class="border-underline"><%= item['name'] %></h3>
                             <p><%= item['description'] %></p>
                         </div>
-                        <time><%= item['type'] == 'Food' ? item['timeeaten'] : item['time'] %></time>
-                        <%-include('partials/icon', {href:"", src:"/assets/Delete-Icon.png", 
+                        <p class="ml-auto mr-0 h-fit border-underline"><%= item['type'] == 'Food' ? item['timeeaten'].slice(0, 5) : item['time'].slice(0, 5) %></p>
+                        <%-include('partials/icon', {src:"/assets/Delete-Icon.png", 
                         alt:"A bin, clicked to delete items", text:"Delete", addClass:(item['type'] == 'Food' ? 'deleteItem Food-'+item['foodid'] : item['type'] == 'Mood' ? 'deleteItem Mood-'+item['moodid'] : 'deleteItem Sickness-'+item['sicknessid'])}) %>
-                    </div>
+                    </a>
                 <% } %>
             <% } %>
+            </div>
         <% } else { %>
             <p>No items</p>
         <% } %>

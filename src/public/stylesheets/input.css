@@ -6,6 +6,7 @@
 
     /* Colour Schemes (not finished) */
     --color-light-primary: #606C38;
+    --color-light-primary-200: rgba(96, 108, 56, 0.2); /* Defo change (maybe also primary so more vibrant) */
     --color-light-pop: #BC6C25;
     --color-light-text: black;
     --color-light-background: white;
@@ -78,7 +79,27 @@
         @apply hidden!;
     }
 
-    /* OTHER */
+    /* ITEMS */
+    .border-colour {
+        @apply border-4 border-light-primary dark:border-dark-primary;
+    }
+
+    .border-style {
+        @apply border-light-primary dark:border-dark-primary;
+        @apply border-4 rounded-2xl p-1;
+    }
+
+    .border-underline {
+        @apply border-b-4 border-b-light-primary dark:border-b-dark-primary
+    }
+
+    .div-hover {
+        @apply border-light-primary dark:border-dark-primary;
+        @apply border-4 rounded-2xl p-1;
+        @apply hover:bg-light-primary-200;
+    }
+
+    /* OTHER SPECIFICS */
     #logoTitle {
         height: calc(var(--spacing) * 5);
         max-height: 20vw;
