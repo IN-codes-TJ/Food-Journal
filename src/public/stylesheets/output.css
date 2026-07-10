@@ -190,6 +190,9 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .my-0 {
+    margin-block: 0;
+  }
   .my-1 {
     margin-block: var(--spacing);
   }
@@ -213,6 +216,9 @@
   }
   .h-2 {
     height: calc(var(--spacing) * 2);
+  }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
   }
   .h-5 {
     height: calc(var(--spacing) * 5);
@@ -238,6 +244,9 @@
   .translate-x-\[-50\%\] {
     --tw-translate-x: -50%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .cursor-pointer {
+    cursor: pointer;
   }
   .flex-col {
     flex-direction: column;
@@ -277,6 +286,9 @@
   .border-light-text {
     border-color: var(--color-light-text);
   }
+  .bg-light-background {
+    background-color: var(--color-light-background);
+  }
   .p-0\.5 {
     padding: calc(var(--spacing) * 0.5);
   }
@@ -307,6 +319,18 @@
       @media (hover: hover) {
         height: calc(5rem + 2px);
       }
+    }
+  }
+  .hover\:p-\[calc\(var\(--spacing\)-2px\)\] {
+    &:hover {
+      @media (hover: hover) {
+        padding: calc(var(--spacing) - 2px);
+      }
+    }
+  }
+  .sm\:flex-row {
+    @media (width >= 40rem) {
+      flex-direction: row;
     }
   }
   .md\:mr-0 {
@@ -342,6 +366,11 @@
   .dark\:border-l-dark-text {
     @media (prefers-color-scheme: dark) {
       border-left-color: var(--color-dark-text);
+    }
+  }
+  .dark\:bg-dark-background {
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-dark-background);
     }
   }
   .dark\:invert {
@@ -383,6 +412,7 @@
   .icon {
     margin: auto;
     height: calc(var(--spacing) * 2);
+    max-width: none;
     border-style: var(--tw-border-style);
     border-width: 2px;
     border-color: transparent;
@@ -407,6 +437,28 @@
   }
   .showCreateOptions a {
     display: block !important;
+  }
+  .showCreateOptionsEasy {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 2px;
+    padding: 2px;
+    padding-inline: calc(var(--spacing) * 2);
+    @media (width >= 40rem) {
+      border-top-style: var(--tw-border-style);
+      border-top-width: 0px;
+    }
+    @media (width >= 40rem) {
+      border-left-style: var(--tw-border-style);
+      border-left-width: 2px;
+    }
+    @media (width >= 40rem) {
+      padding: 2px;
+    }
+  }
+  .showCreateOptionsEasy a {
+    margin-block: auto;
+    display: block !important;
+    height: fit-content !important;
   }
   .create-div:has(.showCreateOptions) #create-icon {
     border-top-left-radius: calc(infinity * 1px);

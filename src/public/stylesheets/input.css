@@ -47,7 +47,7 @@
 @layer components {
     /* ICONS */
     .icon {
-        @apply h-2 border-2 border-transparent m-auto dark:invert;
+        @apply h-2 border-2 border-transparent m-auto dark:invert max-w-none;
     }
 
     .icon:hover {
@@ -65,6 +65,14 @@
 
     .showCreateOptions a {
         @apply block!;
+    }
+
+    .showCreateOptionsEasy {
+        @apply border-t-2 sm:border-l-2 sm:border-t-0 p-[2px] px-2 sm:p-[2px];
+    }
+
+    .showCreateOptionsEasy a {
+        @apply block! h-fit! my-auto;
     }
 
     .create-div:has(.showCreateOptions) #create-icon {

@@ -14,5 +14,13 @@ export class navScripts {
         this.create.addEventListener("click", (e) => {
             this.createOptions.classList.toggle("showCreateOptions");
         });
+
+        this.createEasy = document.getElementById("create-div-easy");
+        this.createOptionsEasy = document.getElementById("create-options-easy")
+
+        this.createEasy.addEventListener("click", (e) => {
+            this.createOptionsEasy.classList.toggle("showCreateOptionsEasy");
+            this.createEasy.classList.toggle('hide-border-sm');
+        });
     }
 }

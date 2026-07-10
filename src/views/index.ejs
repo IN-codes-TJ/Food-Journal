@@ -8,7 +8,7 @@
     <title>My Food Journal</title>
 </head>
 <body>
-    <%-include('partials/nav') %>
+    <%-include('partials/nav', {'home': 'home'}) %>
     <main class="flex flex-col justify-center mx-1">
         <img src="/assets/food-journal-logo.png" alt="A journal drawing with a strawberry image on the journal" class="mx-auto" id="logoTitle">
         <h1 class="text-center">My Food Journal</h1>
@@ -31,8 +31,6 @@
                             <p><%= item['description'] %></p>
                         </div>
                         <p class="ml-auto mr-0 h-fit border-underline"><%= item['type'] == 'Food' ? item['timeeaten'].slice(0, 5) : item['time'].slice(0, 5) %></p>
-                        <%-include('partials/icon', {src:"/assets/Delete-Icon.png", 
-                        alt:"A bin, clicked to delete items", text:"Delete", addClass:(item['type'] == 'Food' ? 'deleteItem Food-'+item['foodid'] : item['type'] == 'Mood' ? 'deleteItem Mood-'+item['moodid'] : 'deleteItem Sickness-'+item['sicknessid'])}) %>
                     </a>
                 <% } %>
             <% } %>

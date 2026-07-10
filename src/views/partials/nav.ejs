@@ -12,15 +12,15 @@
         
             <div class="flex flex-col h-full create-div">
                 <%-include('icon', {src:"/assets/create-icon.png", id:"create-icon", 
-                alt:"A plus icon, to show more create options", text:"Create"}) %>
+                alt:"A plus icon, to show more create options", text:"Create", addClass:"cursor-pointer"}) %>
                 <div id="create-options" class="flex flex-col w-fit gap-0.5 mt-0 p-0.5 pt-0">
-                    <%-include('icon', {href:"", src:"/assets/food-icon.png", 
+                    <%-include('icon', {href:"create-food", src:"/assets/food-icon.png", 
                     alt:"An icon of a strawberry, linking to the create food page", text:"Food", addClass:"hidden"}) %>
                     
-                    <%-include('icon', {href:"", src:"/assets/mood-icon.png", 
+                    <%-include('icon', {href:"create-mood", src:"/assets/mood-icon.png", 
                     alt:"An icon of a smiling face, linking to the create mood page", text:"Mood", addClass:"hidden"}) %>
                     
-                    <%-include('icon', {href:"", src:"/assets/sickness-icon.png", 
+                    <%-include('icon', {href:"create-sickness", src:"/assets/sickness-icon.png", 
                     alt:"An icon of an ill face, linking to the create sickness page", text:"Sickness", addClass:"hidden"}) %>
                 </div>
             </div>
@@ -31,10 +31,26 @@
     </div>
 </header>
 
-<footer>
-    <a href="/" class="md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] h-5 hover:h-[calc(5rem+2px)] hover:bottom-[calc(2rem-1px)] border-2 border-light-text rounded-full dark:invert">
-        <img src="/assets/home-icon.png" alt="A house icon, linking to the home page" class="h-full p-1">
-    </a>
+<footer></footer>
+    <% if (typeof home != 'undefined') { %>
+        <div id="create-div-easy" class="flex flex-col sm:flex-row flex-wrap bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] border-2 border-light-text rounded-full dark:invert cursor-pointer">
+            <img src="/assets/create-icon.png" alt="A plus icon, to show more create options" class="h-4 w-fit mx-auto p-1 hover:p-[calc(var(--spacing)-2px)]">
+            <div id="create-options-easy" class="flex flex-row gap-0.5 m-auto my-0">
+                <%-include('icon', {href:"/create-food", src:"/assets/food-icon.png", 
+                alt:"An icon of a strawberry, linking to the create food page", text:"Food", addClass:"hidden"}) %>
+                    
+                <%-include('icon', {href:"create-mood", src:"/assets/mood-icon.png", 
+                alt:"An icon of a smiling face, linking to the create mood page", text:"Mood", addClass:"hidden"}) %>
+                    
+                <%-include('icon', {href:"create-sickness", src:"/assets/sickness-icon.png", 
+                alt:"An icon of an ill face, linking to the create sickness page", text:"Sickness", addClass:"hidden"}) %>
+            </div>
+        </div>
+    <% } else { %>
+        <a href="/" class="bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] h-5 hover:h-[calc(5rem+2px)] hover:bottom-[calc(2rem-1px)] border-2 border-light-text rounded-full dark:invert">
+            <img src="/assets/home-icon.png" alt="A house icon, linking to the home page" class="h-full p-1">
+        </a>
+        <% } %>
 </footer>
 
 <script type="module">
