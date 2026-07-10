@@ -10,7 +10,6 @@
 <body>
     <%-include('partials/nav', {'home': 'home'}) %>
     <main class="flex flex-col justify-center mx-1">
-        <img src="/assets/food-journal-logo.png" alt="A journal drawing with a strawberry image on the journal" class="mx-auto" id="logoTitle">
         <h1 class="text-center">My Food Journal</h1>
         <% if (typeof timeItems[0] != 'undefined') { %>
             <div class="min-w-1/2 mx-auto">
@@ -20,17 +19,17 @@
                     <a href="<%= item['type'] == 'Food' ? 'food-item?id='+item['foodid'] : item['type'] == 'Mood' ? 'mood-item?id='+item['moodid'] : 'sickness-item?id='+item['sicknessid']%>"
                     class="flex flex-row gap-1 justify-center div-hover mb-1 w-full">
                         <% if (item['type'] == 'Food') { %>
-                            <img src="/assets/food-icon.png" alt="An icon of a strawberry, linking to the create food page" class="h-2">
+                            <img src="/assets/food-icon.png" alt="An icon of a strawberry, linking to the create food page" class="h-2 my-auto dark:invert">
                         <% } else if (item['type'] == 'Mood') { %>
-                            <img src="/assets/mood-icon.png" alt="An icon of a smiling face, linking to the create mood page" class="h-2">
+                            <img src="/assets/mood-icon.png" alt="An icon of a smiling face, linking to the create mood page" class="h-2 my-auto dark:invert">
                         <% } else { %>
-                            <img src="/assets/sickness-icon.png" alt="An icon of an ill face, linking to the create sickness page" class="h-2">
+                            <img src="/assets/sickness-icon.png" alt="An icon of an ill face, linking to the create sickness page" class="h-2 my-auto dark:invert">
                         <% } %>
                         <div class="flex flex-col gap-0.5">
                             <h3 class="border-underline"><%= item['name'] %></h3>
                             <p><%= item['description'] %></p>
                         </div>
-                        <p class="ml-auto mr-0 h-fit border-underline"><%= item['type'] == 'Food' ? item['timeeaten'].slice(0, 5) : item['time'].slice(0, 5) %></p>
+                        <h3 class="ml-auto mr-0 h-fit border-underline"><%= item['type'] == 'Food' ? item['timeeaten'].slice(0, 5) : item['time'].slice(0, 5) %></h3>
                     </a>
                 <% } %>
             <% } %>

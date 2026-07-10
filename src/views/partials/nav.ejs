@@ -1,3 +1,6 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&family=Geist+Pixel&display=swap');
+</style>
 <header>
     <div class="flex flex-row gap-1 h-2 top-0 w-full px-1 my-1 justify-end-safe fixed">
         <div class="flex flex-row gap-1 flex-wrap md:gap-2 h-full w-full justify-around md:justify-end-safe mx-auto md:ml-auto md:mr-0" id="navToggle">
@@ -25,16 +28,16 @@
                 </div>
             </div>
         </div>
-        <div class="flex h-full border-l-2 dark:border-l-dark-text px-1 mr-0">
+        <div class="flex h-full border-l-(length:--border-size-small) dark:border-l-dark-text px-1 mr-0">
             <img src="/assets/hamburger-icon.png" alt="A hamburger icon to toggle the navigation" id="hamburger" class="w-2 h-fit icon">
         </div>
     </div>
 </header>
 
-<footer></footer>
+<footer class="z-20 fixed">
     <% if (typeof home != 'undefined') { %>
-        <div id="create-div-easy" class="flex flex-col sm:flex-row flex-wrap bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] border-2 border-light-text rounded-full dark:invert cursor-pointer">
-            <img src="/assets/create-icon.png" alt="A plus icon, to show more create options" class="h-4 w-fit mx-auto p-1 hover:p-[calc(var(--spacing)-2px)]">
+        <div id="create-div-easy" class="flex flex-col sm:flex-row flex-wrap bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] border-(length:--border-size-small) border-light-text dark:border-dark-text rounded-full cursor-pointer">
+            <img src="/assets/create-icon.png" alt="A plus icon, to show more create options" class="h-4 w-fit mx-auto p-1 hover:p-[calc(var(--spacing)-2px)] dark:invert">
             <div id="create-options-easy" class="flex flex-row gap-0.5 m-auto my-0">
                 <%-include('icon', {href:"/create-food", src:"/assets/food-icon.png", 
                 alt:"An icon of a strawberry, linking to the create food page", text:"Food", addClass:"hidden"}) %>
@@ -47,7 +50,7 @@
             </div>
         </div>
     <% } else { %>
-        <a href="/" class="bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] h-5 hover:h-[calc(5rem+2px)] hover:bottom-[calc(2rem-1px)] border-2 border-light-text rounded-full dark:invert">
+        <a href="/" class="bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] h-5 hover:h-[calc(5rem+2px)] hover:bottom-[calc(2rem-1px)] border-(length:--border-size-small) border-light-text rounded-full dark:invert">
             <img src="/assets/home-icon.png" alt="A house icon, linking to the home page" class="h-full p-1">
         </a>
         <% } %>

@@ -2,25 +2,30 @@
 
 @theme {
     --spacing: 1rem;
-    --border-size: 3px;
+    --border-size: 2px;
+    --border-size-small: 2px;
 
     /* Colour Schemes (not finished) */
-    --color-light-primary: #606C38;
-    --color-light-primary-200: rgba(96, 108, 56, 0.2); /* Defo change (maybe also primary so more vibrant) */
-    --color-light-pop: #BC6C25;
+    /* 201, 79, 132*/
+    --color-light-primary: rgb(117, 183, 42);
+    --color-light-primary-200: rgba(117, 183, 42, 0.1); /* Defo change (maybe also primary so more vibrant) */
+    --color-light-pop: #66DAC5;
     --color-light-text: black;
-    --color-light-background: white;
+    --color-light-background: white; 
 
-    --color-dark-primary: #606C38;
-    --color-dark-pop: #BC6C25;
+    --color-dark-primary: rgb(176, 48, 163);
+    --color-dark-primary-200: rgba(176, 48, 163, 0.2);
+    --color-dark-pop: #aaaaa;
     --color-dark-text: white;
-    --color-dark-background: #111A0A;
+    --color-dark-background: black;
 
 }
 
 @layer base {
     body {
-        @apply bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text mt-5;
+        @apply bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text mt-4;
+        font-family: 'Chivo', sans-serif;
+        font-weight: 300;
     }
 
     h1 {
@@ -47,7 +52,7 @@
 @layer components {
     /* ICONS */
     .icon {
-        @apply h-2 border-2 border-transparent m-auto dark:invert max-w-none;
+        @apply h-2 border-(length:--border-size-small) border-transparent m-auto dark:invert max-w-none;
     }
 
     .icon:hover {
@@ -60,7 +65,7 @@
     }
 
     .showCreateOptions {
-        @apply border-2 rounded-b-full p-[2px];
+        @apply border-(length:--border-size-small) rounded-b-full p-[2px] bg-light-background dark:bg-dark-background;
     }
 
     .showCreateOptions a {
@@ -68,7 +73,7 @@
     }
 
     .showCreateOptionsEasy {
-        @apply border-t-2 sm:border-l-2 sm:border-t-0 p-[2px] px-2 sm:p-[2px];
+        @apply border-t-(length:--border-size-small) sm:border-l-(length:--border-size-small) sm:border-t-0 p-[2px] px-2 sm:p-[2px];
     }
 
     .showCreateOptionsEasy a {
@@ -76,7 +81,7 @@
     }
 
     .create-div:has(.showCreateOptions) #create-icon {
-        @apply border-2 border-b-0 rounded-t-full p-0.25;
+        @apply border-(length:--border-size-small) border-b-0 rounded-t-full p-0.25;
     }
 
     .create-div:has(.showCreateOptions) #create-icon img {
@@ -89,22 +94,22 @@
 
     /* ITEMS */
     .border-colour {
-        @apply border-4 border-light-primary dark:border-dark-primary;
+        @apply border-(length:--border-size) border-light-primary dark:border-dark-primary;
     }
 
     .border-style {
         @apply border-light-primary dark:border-dark-primary;
-        @apply border-4 rounded-2xl p-1;
+        @apply border-(length:--border-size) rounded-2xl p-1;
     }
 
     .border-underline {
-        @apply border-b-4 border-b-light-primary dark:border-b-dark-primary
+        @apply border-b-(length:--border-size) border-b-light-primary dark:border-b-dark-primary;
     }
 
     .div-hover {
         @apply border-light-primary dark:border-dark-primary;
-        @apply border-4 rounded-2xl p-1;
-        @apply hover:bg-light-primary-200;
+        @apply border-(length:--border-size) rounded-2xl p-1;
+        @apply hover:bg-light-primary-200 hover:dark:bg-dark-primary-200;
     }
 
     /* OTHER SPECIFICS */
