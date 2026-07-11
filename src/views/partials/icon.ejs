@@ -1,12 +1,16 @@
 <% if (typeof href != "string") { %>
-    <div class="<%= typeof addClass == 'string' ? addClass + ' h-full' : 'h-full' %>" id="<%= typeof id == "string" ? id : "" %>">
-        <img src="<%=src%>" alt="<%=alt%>" class="icon">
-        <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
+    <div class="<%= typeof addClass == 'string' ? addClass + ' icon-parent' : 'icon-parent' %>" id="<%= typeof id == "string" ? id : "" %>">
+        <img src="/assets/plain.png" alt="<%=alt%>" style="mask-image: url(<%=src%>)" class="icon">
+        <% if (typeof text == 'string') { %>
+            <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
+        <% } %>
     </div>
 <% } else { %>
-    <a href="<%=href%>" class="<%= typeof addClass == 'string' ? addClass + ' h-full' : 'h-full' %>" id="<%= typeof id == "string" ? id : "" %>">
-        <img src="<%=src%>" alt="<%=alt%>" class="icon">
-        <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
+    <a href="<%=href%>" class="<%= typeof addClass == 'string' ? addClass + ' icon-parent' : 'icon-parent' %>" id="<%= typeof id == "string" ? id : "" %>">
+        <img src="/assets/plain.png" alt="<%=alt%>" style="mask-image: url(<%=src%>)" class="icon">
+        <% if (typeof text == 'string') { %>
+            <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
+        <% } %>
     </a>
 <% } %>
 

@@ -5,7 +5,7 @@ export class navScripts {
   
         this.hamburger.addEventListener("click", (e) => {
             this.toToggle.classList.toggle("hidden");
-            this.hamburger.parentElement.classList.toggle("hiddenNavHamb");
+            this.hamburger.classList.toggle("hiddenNavHamb");
         });
 
         this.create = document.getElementById("create-icon");
