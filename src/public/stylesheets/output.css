@@ -295,6 +295,9 @@
   .bg-light-background {
     background-color: var(--color-light-background);
   }
+  .p-0 {
+    padding: 0;
+  }
   .p-0\.5 {
     padding: calc(var(--spacing) * 0.5);
   }
@@ -368,12 +371,6 @@
       background-color: var(--color-dark-background);
     }
   }
-  .dark\:invert {
-    @media (prefers-color-scheme: dark) {
-      --tw-invert: invert(100%);
-      filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-    }
-  }
 }
 @layer base {
   body {
@@ -436,6 +433,13 @@
         padding: 0;
       }
     }
+    &:hover {
+      @media (hover: hover) {
+        @media (width >= 48rem) {
+          margin-inline: 2px;
+        }
+      }
+    }
     @media (prefers-color-scheme: dark) {
       border-color: var(--color-dark-navcolour);
     }
@@ -481,6 +485,13 @@
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 0px;
     padding: calc(var(--spacing) * 0.25);
+    &:hover {
+      @media (hover: hover) {
+        @media (width >= 48rem) {
+          margin-inline: 0;
+        }
+      }
+    }
   }
   .create-div:has(.showCreateOptions) #create-icon img {
     height: calc(var(--spacing) * 1.5) !important;

@@ -1,6 +1,7 @@
-/*DROP SCHEMA foodjournal CASCADE;
-CREATE SCHEMA foodjournal;*/
+DROP SCHEMA foodjournal CASCADE;
+CREATE SCHEMA foodjournal;
 SET SEARCH_PATH TO foodjournal, PUBLIC;
+SET TIME ZONE 'Europe/London';
 /* ACCOUNT */
 
 /* User account information */
@@ -47,7 +48,7 @@ CREATE TABLE eatenFood(
 	eatenID				SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
 	foodID				INTEGER NOT NULL,
-	timeEaten			TIME NOT NULL,
+	time				TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (userID) REFERENCES account ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (foodID) REFERENCES foodData ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
@@ -71,7 +72,7 @@ CREATE TABLE mood (
 	moodID				SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
 	name				VARCHAR(128) NOT NULL,
-	time				TIME NOT NULL,
+	time				TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	description			VARCHAR(512),
 	FOREIGN KEY (userID) REFERENCES account ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
@@ -81,7 +82,7 @@ CREATE TABLE sickness (
 	sicknessID			SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
 	name				VARCHAR(128) NOT NULL,
-	time				TIME NOT NULL,
+	time				TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	description			VARCHAR(512),
 	FOREIGN KEY (userID) REFERENCES account ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
@@ -136,11 +137,12 @@ EXECUTE FUNCTION checkEffect();
 
 INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
 INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff', 'Loved');
-INSERT INTO eatenFood VALUES (1, 1, 1, '12:20');
-INSERT INTO mood VALUES (1, 1, 'Unhappy', '12:40', 'Feeling unhappy desc');
-INSERT INTO sickness VALUES (1, 1, 'Stomach ache', '13:01', 'Not good');
+INSERT INTO eatenFood VALUES (3, 1, 1); 
+SELECT * FROM eatenFood;
+INSERT INTO mood (moodID, userID, name, description) VALUES (1, 1, 'Unhappy', 'Feeling unhappy desc');
+INSERT INTO sickness (sicknessID, userID, name, description) VALUES (1, 1, 'Stomach ache', 'Not good');
 /* VIEWS */
 
 CREATE VIEW eatenData AS
 SELECT foodData.foodID, foodData.userID, foodData.name, foodData.description, foodData.satisfaction, 
-eatenFood.eatenID, eatenFood.timeEaten FROM foodData INNER JOIN eatenFood ON foodData.foodID = eatenFood.foodID;
+eatenFood.eatenID, eatenFood.time FROM foodData INNER JOIN eatenFood ON foodData.foodID = eatenFood.foodID;

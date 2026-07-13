@@ -66,7 +66,7 @@
     }
 
     .icon-parent {
-        @apply p-[2px] hover:p-0 h-full border-light-navcolour dark:border-dark-navcolour;
+        @apply p-[2px] hover:p-0 hover:md:mx-[2px] h-full border-light-navcolour dark:border-dark-navcolour;
     }
 
     /* NAVIGATION */
@@ -100,7 +100,7 @@
     }
 
     .create-div:has(.showCreateOptions) #create-icon {
-        @apply border-(length:--border-size-small) border-b-0 rounded-t-(length:--border-rounded) p-0.25;
+        @apply border-(length:--border-size-small) border-b-0 rounded-t-(length:--border-rounded) p-0.25 hover:md:mx-0;
     }
 
     .create-div:has(.showCreateOptions) #create-icon img {

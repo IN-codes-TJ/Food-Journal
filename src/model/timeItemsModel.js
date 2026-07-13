@@ -7,26 +7,28 @@ class itemsModel {
          const setSchema = "SET search_path TO foodjournal, PUBLIC;"
          await connect.pool.query(setSchema);
 
+         // Redo with a database view, order correctly, and group by date as well as time
+
          // Get all data (foods, moods and sicknesses), ordered and grouped
          // by time, to the nearest hour
          
          var timeItems = []; // {['time': 'tt:tt', 'items': [items]]}
+         var timeDifferenceHours = Math.floor(new Date().getTimezoneOffset()/60);
+         var timeDifferenceMinutes = new Date().getTimezoneOffset()%60;
 
          // Food data
          var foods = await connect.pool.query(
-            "SELECT *, 'Food' as type FROM eatenData WHERE userID = $1 ORDER BY timeEaten ASC",
+            "SELECT *, 'Food' as type FROM eatenData WHERE userID = $1 ORDER BY time ASC",
             [userID]
          );
          var foodsJsonRes = JSON.parse(JSON.stringify(foods.rows));
 
-         console.log("Foods: ");
-         console.log(foodsJsonRes);
-
          var inserted = false;
          for (var food of foodsJsonRes) {
             inserted = false;
+            food['time'] = this.convertTime(food['time'], timeDifferenceHours, timeDifferenceMinutes);
             for (let i = 0; i < timeItems.length; i++) {
-               if (timeItems[i]['time'] == food['timeeaten'].slice(0, 2)) {
+               if (timeItems[i]['time'] == food['time']) {
                   timeItems[i]['items'].push(food);
                   inserted = true;
                   break;
@@ -34,7 +36,7 @@ class itemsModel {
             }
             if (!inserted) {
                timeItems.push({
-                  'time' : food['timeeaten'].slice(0, 2),
+                  'time' : food['time'],
                   'items' : [food]
                });
             }
@@ -47,14 +49,12 @@ class itemsModel {
          );
          var moodsJsonRes = JSON.parse(JSON.stringify(moods.rows));
 
-         console.log("Moods: ");
-         console.log(moodsJsonRes);
-
          var inserted = false;
          for (var mood of moodsJsonRes) {
             inserted = false;
+            mood['time'] = this.convertTime(mood['time'], timeDifferenceHours, timeDifferenceMinutes);
             for (let i = 0; i < timeItems.length; i++) {
-               if (timeItems[i]['time'] == mood['time'].slice(0, 2)) {
+               if (timeItems[i]['time'] == mood['time']) {
                   timeItems[i]['items'].push(mood);
                   inserted = true;
                   break;
@@ -62,7 +62,7 @@ class itemsModel {
             }
             if (!inserted) {
                timeItems.push({
-                  'time' : mood['time'].slice(0, 2),
+                  'time' : mood['time'],
                   'items' : [mood]
                });
             }
@@ -75,14 +75,12 @@ class itemsModel {
          );
          var sicknessJsonRes = JSON.parse(JSON.stringify(sicknesses.rows));
 
-         console.log("Sicknesses: ");
-         console.log(sicknessJsonRes);
-
          var inserted = false;
          for (var sickness of sicknessJsonRes) {
             inserted = false;
+            sickness['time'] = this.convertTime(sickness['time'], timeDifferenceHours, timeDifferenceMinutes);
             for (let i = 0; i < timeItems.length; i++) {
-               if (timeItems[i]['time'] == sickness['time'].slice(0, 2)) {
+               if (timeItems[i]['time'] == sickness['time']) {
                   timeItems[i]['items'].push(sickness);
                   inserted = true;
                   break;
@@ -90,7 +88,7 @@ class itemsModel {
             }
             if (!inserted) {
                timeItems.push({
-                  'time' : sickness['time'].slice(0, 2),
+                  'time' : sickness['time'],
                   'items' : [sickness]
                });
             }
@@ -104,6 +102,17 @@ class itemsModel {
          console.error(error);
       } 
    };
+
+   convertTime(time, hDiff, mDiff) {
+      time = time.split("T");
+      var newTime = {'date': time[0],
+                 'time': {'hours': time[1].slice(0, 2) - hDiff,
+                          'minutes': time[1].slice(3, 5) - mDiff
+                 }
+      };
+
+      return newTime;
+   }
 }
 
 
