@@ -1,7 +1,7 @@
 DROP SCHEMA foodjournal CASCADE;
 CREATE SCHEMA foodjournal;
 SET SEARCH_PATH TO foodjournal, PUBLIC;
-SET TIME ZONE 'Europe/London';
+/*SET TIME ZONE 'Europe/London';*/
 /* ACCOUNT */
 
 /* User account information */
@@ -143,6 +143,12 @@ INSERT INTO mood (moodID, userID, name, description) VALUES (1, 1, 'Unhappy', 'F
 INSERT INTO sickness (sicknessID, userID, name, description) VALUES (1, 1, 'Stomach ache', 'Not good');
 /* VIEWS */
 
-CREATE VIEW eatenData AS
+CREATE OR REPLACE VIEW eatenData AS
 SELECT foodData.foodID, foodData.userID, foodData.name, foodData.description, foodData.satisfaction, 
 eatenFood.eatenID, eatenFood.time FROM foodData INNER JOIN eatenFood ON foodData.foodID = eatenFood.foodID;
+
+CREATE OR REPLACE VIEW itemsList AS
+SELECT eatenID as ID, userID, name, description, time, 'Food' as type FROM eatenData UNION
+SELECT moodID as ID, userID, name, description, time, 'Mood' as type FROM mood UNION
+SELECT sicknessID as ID, userID, name, description, time, 'Sickness' as type FROM sickness
+ORDER BY time;
