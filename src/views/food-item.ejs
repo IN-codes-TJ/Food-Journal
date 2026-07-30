@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <%-include('partials/nav') %>
+    <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
+        <div class="heading flex flex-col mb-1">
+            <%-include('partials/icon', {src:"/assets/food-icon.png", 
+            alt:"An icon of a strawberry, linking to the create food page", addClass: "h-4 my-auto p-0"}) %>
+            <h2 class="text-center"><%= item['name'] %></h2>
+            <%-include('partials/opinionText', {text:item['satisfaction']}) %>
+        </div>
+        <p class="border-style"><%= item['description'] %></p>
+        <div class="flex flex-row w-fit gap-1">
+            <h3 class="border-underline w-fit">Time Eaten: </h3>
+            <p class="align-baseline leading-1 h-fit my-auto border-underline border-b-transparent"><%= item['time'][0].toString().padStart(2, "0") + ':' + item['time'][1].toString().padStart(2, "0") %></p>
+        </div>
+        <h3 class="border-underline w-fit">Ingredients</h3>
+        <ul>
+            <% for (var ingredient of ingredients) { %>
+                <li><%= ingredient['name'] %></li>
+            <% } %>
+        </ul>
+
+        <h3 class="border-underline w-fit">Effects (WIP) </h3>
+        <ul>
+            <% if (typeof effects != 'undefined') {for (var effect of effects) { %>
+                <li><%= effect['name'] %></li>
+            <% }} %>
+        </ul>
+    </main>
+</body>
+</html>

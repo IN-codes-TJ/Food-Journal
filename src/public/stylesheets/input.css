@@ -20,7 +20,7 @@
     --color-dark-pop: #aaaaaa;
     --color-dark-text: white;
     --color-dark-background: black;
-    --color-dark-navcolour: yellow;
+    --color-dark-navcolour: white;
 
 }
 
@@ -50,19 +50,23 @@
     h5 {
         font-size: 0.83rem;
     }
+
+    p {
+        @apply wrap-anywhere;
+    }
 }
 
 @layer components {
     /* ICONS */
     .icon {
-        @apply m-auto dark:invert max-w-none h-full;
+        @apply m-auto max-w-none h-full;
         @apply bg-light-primary dark:bg-dark-primary;
         mask-repeat: no-repeat;
         mask-size: contain;
     }
 
     .nav .icon {
-        @apply bg-light-navcolour dark:bg-dark-navcolour;
+        @apply bg-light-navcolour dark:bg-dark-navcolour invert-0!;
     }
 
     .icon-parent {

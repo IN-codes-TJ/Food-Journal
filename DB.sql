@@ -17,18 +17,11 @@ CREATE TABLE account (
 /* FOOD */
 
 /* Food information except it's ingredients and possible effects on this user */
-CREATE DOMAIN satisfactionDomain AS VARCHAR(8) 
-DEFAULT 'Okay' CHECK (VALUE IN ('Loved', 
-								'Liked', 
-								'Okay', 
-								'Disliked', 
-								'Hated'));
 CREATE TABLE foodData (
 	foodID				SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
 	name				VARCHAR(128) NOT NULL,
 	description			VARCHAR(512),
-	satisfaction		satisfactionDomain,
 	FOREIGN KEY (userID) REFERENCES account ON DELETE CASCADE ON UPDATE CASCADE
 ); /* TESTED */
 
@@ -44,11 +37,18 @@ CREATE TABLE ingredient (
 /* The user can eat a saved food multiple times, including any possible modifications
  * made to the food 
  */
+CREATE DOMAIN satisfactionDomain AS VARCHAR(8) 
+DEFAULT 'Okay' CHECK (VALUE IN ('Loved', 
+								'Liked', 
+								'Okay', 
+								'Disliked', 
+								'Hated'));
 CREATE TABLE eatenFood(
 	eatenID				SERIAL PRIMARY KEY,
 	userID				INTEGER NOT NULL,
 	foodID				INTEGER NOT NULL,
 	time				TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	satisfaction		satisfactionDomain,
 	FOREIGN KEY (userID) REFERENCES account ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (foodID) REFERENCES foodData ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
@@ -136,17 +136,24 @@ FOR EACH ROW
 EXECUTE FUNCTION checkEffect();
 
 INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
-INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff', 'Loved');
-INSERT INTO eatenFood VALUES (3, 1, 1); 
+INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff');
+INSERT INTO eatenFood VALUES (4, 1, 1); 
+INSERT INTO foodData VALUES (2, 1, 'Onigiri', 'This is the absolute best thing you will every try. The best snack one can ever eat. The description for this has to be long so I can test things, so here I am trying to make it reallyreallyreallysosososoterriblymassivelylongbecause I am testing yay!!!! :D');
+INSERT INTO eatenFood VALUES (6, 1, 2);
+INSERT INTO ingredient VALUES (1, 1, 'Bread');
+INSERT INTO ingredient VALUES (2, 1, 'Butter');
+INSERT INTO ingredient VALUES (3, 1, 'Cheese');
+INSERT INTO ingredient VALUES (3, 1, 'Cheese');
+INSERT INTO modification VALUES(2, 4, 3, 'Ham');
 SELECT * FROM eatenFood;
 INSERT INTO mood (moodID, userID, name, description) VALUES (1, 1, 'Unhappy', 'Feeling unhappy desc');
 INSERT INTO sickness (sicknessID, userID, name, description) VALUES (1, 1, 'Stomach ache', 'Not good');
 /* VIEWS */
 
 CREATE OR REPLACE VIEW eatenData AS
-SELECT foodData.foodID, foodData.userID, foodData.name, foodData.description, foodData.satisfaction, 
+SELECT foodData.foodID, foodData.userID, foodData.name, foodData.description, eatenFood.satisfaction, 
 eatenFood.eatenID, eatenFood.time FROM foodData INNER JOIN eatenFood ON foodData.foodID = eatenFood.foodID;
-
+SELECT * FROM eatenData;
 CREATE OR REPLACE VIEW itemsList AS
 SELECT eatenID as ID, userID, name, description, time, 'Food' as type FROM eatenData UNION
 SELECT moodID as ID, userID, name, description, time, 'Mood' as type FROM mood UNION

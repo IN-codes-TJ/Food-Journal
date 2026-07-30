@@ -9,17 +9,17 @@
 </head>
 <body>
     <%-include('partials/nav', {'home': 'home'}) %>
-    <main class="flex flex-col justify-center mx-1">
+    <main class="flex flex-col justify-center mx-auto max-w-52 w-[80vw]">
         <h1 class="text-center">My Food Journal</h1>
         <% if (typeof timeItems[0] != 'undefined') { %>
-            <div class="min-w-1/2 mx-auto">
+            <div>
             <% for (var timeItem of timeItems) { %>
                 <h2 class="text-center p-0 my-1 mx-auto w-fit border-underline"><%= timeItem['date'] %></h2>
                 <% for (var time of timeItem['times']) { %>
                     <h3 class="text-center pb-1"><%= time['time'] %>:00</h3>
                     <% for (var item of time['items']) { %>
                         <a href="<%= item['type'] == 'Food' ? 'food-item?id='+item['id'] : item['type'] == 'Mood' ? 'mood-item?id='+item['id'] : 'sickness-item?id='+item['id']%>"
-                        class="flex flex-row gap-1 justify-center div-hover mb-1 w-full">
+                        class="flex flex-row gap-1 justify-center div-hover mb-1">
                             <% if (item['type'] == 'Food') { %>
                                 <%-include('partials/icon', {src:"/assets/food-icon.png", 
                                 alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0"}) %>

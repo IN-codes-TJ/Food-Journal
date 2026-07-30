@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const itemsModel = require('../model/timeItemsModel');
+const timeItemsModel = require('../model/timeItemsModel');
 
 router.get('/', async function(req, res) {
     // Change 1 to userID
@@ -10,11 +10,7 @@ router.get('/', async function(req, res) {
         alt:"A bin, clicked to delete items", text:"Delete", addClass:(item['type'] == 'Food' ? 'deleteItem Food-'+item['foodid'] : item['type'] == 'Mood' ? 'deleteItem Mood-'+item['moodid'] : 'deleteItem Sickness-'+item['sicknessid'])}) %>
                     
     */
-    itemsModel.getTimeItems(1).then((result)=>{
-        console.log(result[0]['times'][0]['items'][0]['time']);
-        console.log(result[1]['times'][0]['items'][0]['time']);
-        console.log(result[0]['times']);
-        console.log(result[1]['times'][1]['items'][0]['time']);
+    timeItemsModel.getTimeItems(1).then((result)=>{
         res.render('index', {timeItems: result});
     });
 });

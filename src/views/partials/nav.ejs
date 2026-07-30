@@ -51,8 +51,10 @@
             </div>
         </div>
     <% } else { %>
-        <%-include('icon', {href: "/", src:"/assets/home-icon.png", 
-        alt:"A house icon, linking to the home page", text:"Create", addClass:"cursor-pointer h-2 m-1"}) %>
+        <div id="create-div-easy" class="flex flex-row flex-wrap p-1 bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] border-(length:--border-size-small) border-light-navcolour dark:border-dark-navcolour rounded-full cursor-pointer">
+            <%-include('icon', {href: "/", src:"/assets/home-icon.png", 
+            alt:"A house icon, linking to the home page", text:"Create", addClass:"cursor-pointer h-2"}) %>
+        </div>
     <% } %>
 </footer>
 
