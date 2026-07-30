@@ -310,6 +310,9 @@
   .py-1 {
     padding-block: var(--spacing);
   }
+  .pt-1 {
+    padding-top: var(--spacing);
+  }
   .pb-1 {
     padding-bottom: var(--spacing);
   }

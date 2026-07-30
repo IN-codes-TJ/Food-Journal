@@ -50,7 +50,7 @@ class itemsModel {
                else {
                   // There is not an associated time, so add to a new group
                   groupedList[groupedPointer]['times'].push({
-                     'time': preparedItem['time'][0],
+                     'time': preparedItem['time']['time'][0],
                      'items': [preparedItem]
                   });
                   groupedTimePointer++;
@@ -61,7 +61,7 @@ class itemsModel {
                groupedList.push({
                   'date': separatedTime[0],
                   'times': [{
-                     'time': preparedItem['time'][0],
+                     'time': preparedItem['time']['time'][0],
                      'items': [preparedItem]
                   }]
                });

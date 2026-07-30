@@ -11,6 +11,10 @@ router.get('/', async function(req, res) {
                     
     */
     itemsModel.getTimeItems(1).then((result)=>{
+        console.log(result[0]['times'][0]['items'][0]['time']);
+        console.log(result[1]['times'][0]['items'][0]['time']);
+        console.log(result[0]['times']);
+        console.log(result[1]['times'][1]['items'][0]['time']);
         res.render('index', {timeItems: result});
     });
 });

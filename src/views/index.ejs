@@ -14,11 +14,11 @@
         <% if (typeof timeItems[0] != 'undefined') { %>
             <div class="min-w-1/2 mx-auto">
             <% for (var timeItem of timeItems) { %>
-                <h2 class="text-center py-1"><%= timeItem['date'] %></h2>
+                <h2 class="text-center p-0 my-1 mx-auto w-fit border-underline"><%= timeItem['date'] %></h2>
                 <% for (var time of timeItem['times']) { %>
-                    <h3 class="text-center py-1"><%= time['time'] %></h3>
+                    <h3 class="text-center pb-1"><%= time['time'] %>:00</h3>
                     <% for (var item of time['items']) { %>
-                        <a href="<%= item['type'] == 'Food' ? 'food-item?id='+item['foodid'] : item['type'] == 'Mood' ? 'mood-item?id='+item['moodid'] : 'sickness-item?id='+item['sicknessid']%>"
+                        <a href="<%= item['type'] == 'Food' ? 'food-item?id='+item['id'] : item['type'] == 'Mood' ? 'mood-item?id='+item['id'] : 'sickness-item?id='+item['id']%>"
                         class="flex flex-row gap-1 justify-center div-hover mb-1 w-full">
                             <% if (item['type'] == 'Food') { %>
                                 <%-include('partials/icon', {src:"/assets/food-icon.png", 
@@ -34,7 +34,7 @@
                                 <h3 class="border-underline"><%= item['name'] %></h3>
                                 <p><%= item['description'] %></p>
                             </div>
-                            <h3 class="ml-auto mr-0 h-fit border-underline"><%= item['time']['time'][0] + ':' + item['time']['time'][1] %></h3>
+                            <h3 class="ml-auto mr-0 h-fit border-underline"><%= item['time']['time'][0].toString().padStart(2, "0") + ':' + item['time']['time'][1].toString().padStart(2, "0") %></h3>
                         </a>
                     <% } %>
                 <% } %>
