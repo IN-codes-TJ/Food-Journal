@@ -35,14 +35,17 @@ class itemsModel {
          var alteredJsonRes = JSON.parse(JSON.stringify(alteredIngredients.rows));
 
          var finalIngredients = [];
+         var modified = false;
          for (var ingredient of ingredientsJsonRes) {
+            modified = false;
             for (var alteration of alteredJsonRes) {
                if (alteration['alteredingredientid'] == ingredient['ingredientid']) {
                   ingredient['name'] = alteration['newingredient'];
+                  modified = true;
                }
                break;
             }
-
+            ingredient['modified'] = modified;
             finalIngredients.push(ingredient);
          }
 

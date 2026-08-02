@@ -24,7 +24,13 @@
         <h3 class="border-underline w-fit">Ingredients</h3>
         <ul>
             <% for (var ingredient of ingredients) { %>
-                <li><%= ingredient['name'] %></li>
+                <li class="flex flex-row">
+                    <%= ingredient['name'] %>
+                    <% if (ingredient['modified'] == true) { %> 
+                        <h5 class="text-red-500 mt-0 mb-auto modStar">*</h5>
+                        <h5 class="text-red-500 mt-0 mb-auto modification">modification</h5>
+                    <% } %>
+                </li>
             <% } %>
         </ul>
 
@@ -35,5 +41,10 @@
             <% }} %>
         </ul>
     </main>
+    <script type="module">
+        import {modifiedScript} from "./js/modified.js";
+        
+        const scripts = new modifiedScript();
+    </script>
 </body>
 </html>

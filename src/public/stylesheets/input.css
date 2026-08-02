@@ -48,7 +48,7 @@
     }
 
     h5 {
-        font-size: 0.83rem;
+        font-size: 0.8rem;
     }
 
     p {
@@ -121,6 +121,20 @@
 
     #create-div-easy:has(.showCreateOptionsEasy) #create-icon {
         @apply mx-auto!;
+    }
+
+    /* MODIFICATIONS */
+    .modification {
+        overflow-x: hidden;
+        display: none;
+        padding: 0;
+        transition: width 2s;
+        transition: display 2s;
+    }
+    
+    .showMe {
+        width: auto;
+        display: block;
     }
 
     /* ITEMS */
