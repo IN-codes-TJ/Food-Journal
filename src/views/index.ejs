@@ -22,13 +22,13 @@
                         class="flex flex-row gap-1 justify-center div-hover mb-1">
                             <% if (item['type'] == 'Food') { %>
                                 <%-include('partials/icon', {src:"/assets/food-icon.png", 
-                                alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0"}) %>
+                                alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0 still"}) %>
                             <% } else if (item['type'] == 'Mood') { %>
                                 <%-include('partials/icon', {src:"/assets/mood-icon.png", 
-                                alt:"An icon of a smiling face, linking to the create mood page", addClass: "h-2 my-auto p-0"}) %>
+                                alt:"An icon of a smiling face, linking to the create mood page", addClass: "h-2 my-auto p-0 still"}) %>
                             <% } else { %>
                                 <%-include('partials/icon', {src:"/assets/sickness-icon.png", 
-                                alt:"An icon of an ill face, linking to the create sickness page", addClass: "h-2 my-auto p-0"}) %>
+                                alt:"An icon of an ill face, linking to the create sickness page", addClass: "h-2 my-auto p-0 still"}) %>
                             <% } %>
                             <div class="flex flex-col gap-0.5">
                                 <h3 class="border-underline"><%= item['name'] %></h3>

@@ -49,7 +49,32 @@ class itemsModel {
             finalIngredients.push(ingredient);
          }
 
-         return {'foodData': dataItem, 'ingredients': finalIngredients};
+         var effects = await connect.pool.query(
+            "SELECT * FROM effect WHERE eatenID = $1",
+            [eatenID]
+         );
+         var effectsJsonRes = JSON.parse(JSON.stringify(effects.rows));
+         
+         var effectData;
+         var effectsData = [];
+         var query;
+         for (var effect of effectsJsonRes) {
+            if (effect['causetype'] == 'M') {
+               query = "SELECT * FROM mood WHERE moodID = $1";
+            }
+            else {
+               query = "SELECT * FROM sickness WHERE sicknessID = $1";
+            }
+
+            effectData = await connect.pool.query(
+               query,
+               [effect['causetypeid']]
+            );
+
+            effectsData.push(JSON.parse(JSON.stringify(effectData.rows))[0]);
+         }
+
+         return {'foodData': dataItem, 'ingredients': finalIngredients, 'effects': effectsData};
       }
       catch (error) {
          console.error(error);

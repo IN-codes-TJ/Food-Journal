@@ -25,7 +25,6 @@
     --color-blue-800: oklch(42.4% 0.199 265.638);
     --spacing: 1rem;
     --radius-sm: 0.25rem;
-    --radius-2xl: 1rem;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --border-size: 2px;
@@ -207,6 +206,9 @@
   .z-20 {
     z-index: 20;
   }
+  .m-0 {
+    margin: 0;
+  }
   .m-auto {
     margin: auto;
   }
@@ -298,6 +300,9 @@
   .gap-1 {
     gap: var(--spacing);
   }
+  .rounded-\(length\:--border-rounded\) {
+    border-radius: var(--border-rounded);
+  }
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
@@ -318,6 +323,9 @@
   .border-light-navcolour {
     border-color: var(--color-light-navcolour);
   }
+  .border-light-primary-200 {
+    border-color: var(--color-light-primary-200);
+  }
   .border-orange-900 {
     border-color: var(--color-orange-900);
   }
@@ -326,6 +334,9 @@
   }
   .border-teal-900 {
     border-color: var(--color-teal-900);
+  }
+  .border-transparent {
+    border-color: transparent;
   }
   .border-yellow-900 {
     border-color: var(--color-yellow-900);
@@ -384,6 +395,13 @@
   }
   .text-red-500 {
     color: var(--color-red-500);
+  }
+  .hover\:bg-light-primary-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-light-primary-200);
+      }
+    }
   }
   .md\:mr-0 {
     @media (width >= 48rem) {
@@ -465,6 +483,15 @@
       background-color: var(--color-yellow-800);
     }
   }
+  .hover\:dark\:bg-dark-primary-200 {
+    &:hover {
+      @media (hover: hover) {
+        @media (prefers-color-scheme: dark) {
+          background-color: var(--color-dark-primary-200);
+        }
+      }
+    }
+  }
 }
 @layer base {
   body {
@@ -519,7 +546,7 @@
       background-color: var(--color-dark-navcolour);
     }
   }
-  .icon-parent {
+  .icon-parent:not(.still) {
     height: 100%;
     border-color: var(--color-light-navcolour);
     padding: 2px;
@@ -624,7 +651,7 @@
     @media (prefers-color-scheme: dark) {
       border-color: var(--color-dark-primary);
     }
-    border-radius: var(--radius-2xl);
+    border-radius: var(--border-rounded);
     border-style: var(--tw-border-style);
     border-width: var(--border-size);
     padding: var(--spacing);

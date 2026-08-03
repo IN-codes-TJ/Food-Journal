@@ -69,7 +69,7 @@
         @apply bg-light-navcolour dark:bg-dark-navcolour invert-0!;
     }
 
-    .icon-parent {
+    .icon-parent:not(.still) {
         @apply p-[2px] hover:p-0 hover:md:mx-[2px] h-full border-light-navcolour dark:border-dark-navcolour;
     }
 
@@ -144,7 +144,7 @@
 
     .border-style {
         @apply border-light-primary dark:border-dark-primary;
-        @apply border-(length:--border-size) rounded-2xl p-1;
+        @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
     }
 
     .border-underline {

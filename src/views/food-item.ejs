@@ -23,21 +23,43 @@
         </div>
         <h3 class="border-underline w-fit">Ingredients</h3>
         <ul>
-            <% for (var ingredient of ingredients) { %>
-                <li class="flex flex-row">
-                    <%= ingredient['name'] %>
-                    <% if (ingredient['modified'] == true) { %> 
-                        <h5 class="text-red-500 mt-0 mb-auto modStar">*</h5>
-                        <h5 class="text-red-500 mt-0 mb-auto modification">modification</h5>
-                    <% } %>
-                </li>
+            <% if (ingredients.length == 0) { %>
+                <p>There are no associated ingredients with this food.</p>
+            <% } else { %>
+                <% for (var ingredient of ingredients) { %>
+                    <li class="flex flex-row">
+                        <%= ingredient['name'] %>
+                        <% if (ingredient['modified'] == true) { %> 
+                            <h5 class="text-red-500 mt-0 mb-auto modStar">*</h5>
+                            <h5 class="text-red-500 mt-0 mb-auto modification">modification</h5>
+                        <% } %>
+                    </li>
+                <% } %>
             <% } %>
         </ul>
 
-        <h3 class="border-underline w-fit">Effects (WIP) </h3>
-        <ul>
-            <% if (typeof effects != 'undefined') {for (var effect of effects) { %>
-                <li><%= effect['name'] %></li>
+        <h3 class="border-underline w-fit">Effects</h3>
+        <ul class="flex flex-col gap-1">
+            <% if (effects.length == 0) { %>
+                <p>There are no associated effects with this food.</p>
+            <% } else { for (var effect of effects) { %>
+                <% if (typeof effect['moodid'] != undefined) { %>
+                    <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
+                        <a href="<%= 'mood-item?id='+effect['moodid'] %>" class="flex flex-row gap-1">
+                            <%-include('partials/icon', {src:"/assets/mood-icon.png",
+                            alt:"An icon of a smiling face, linking to the create mood page", addClass: "h-2 my-auto p-0 still"}) %>
+                            <p class="h-fit my-auto"><%= effect['name'] %></p>
+                        </a>
+                    </li>
+                <% } else { %>
+                    <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
+                        <a href="<%= 'sickness-item?id='+effect['sicknessid'] %>" class="flex flex-row gap-1">
+                            <%-include('partials/icon', {src:"/assets/sickness-icon.png", 
+                            alt:"An icon of an ill face, linking to the create sickness page", addClass: "h-2 my-auto p-0 still"}) %>
+                            <p class="h-fit my-auto"><%= effect['name'] %></p>
+                        </a>
+                    </li>
+                <% } %>
             <% }} %>
         </ul>
     </main>
