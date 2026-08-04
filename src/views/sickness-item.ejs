@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <%-include('partials/nav') %>
+    <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
+        <div class="heading flex flex-col mb-1">
+            <%-include('partials/icon', {src:"/assets/sickness-icon.png", 
+            alt:"An icon of an ill face, linking to the create sickness page", addClass: "h-4 my-auto p-0"}) %>
+            <h2 class="text-center"><%= item['name'] %></h2>
+        </div>
+        <div class="flex flex-row w-fit gap-1">
+            <h3 class="border-underline w-fit">Time: </h3>
+            <p class="align-baseline leading-1 h-fit my-auto border-underline border-b-transparent"><%= item['time'][0].toString().padStart(2, "0") + ':' + item['time'][1].toString().padStart(2, "0") %></p>
+        </div>
+        <p class="border-style"><%= item['description'] %></p>
+
+        <h3 class="border-underline w-fit">Symptoms</h3>
+        <ul class="flex flex-col gap-1">
+            <% if (symptoms.length == 0) { %>
+                <p>There are no associated symptoms with this sickness.</p>
+            <% } else { for (var symptom of symptoms) { %>
+                <li class="flex flex-row">
+                    <%= symptom['symptom'] %>
+                </li>
+            <% }} %>
+        </ul>
+
+        <h3 class="border-underline w-fit">Associated Foods</h3>
+        <ul class="flex flex-col gap-1">
+            <% if (associations.length == 0) { %>
+                <p>There are no associated foods with this sickness.</p>
+            <% } else { for (var association of associations) { %>
+                <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
+                    <a href="<%= 'food-item?id='+association['eatenid'] %>" class="flex flex-row gap-1">
+                        <%-include('partials/icon', {src:"/assets/food-icon.png",
+                        alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0 still"}) %>
+                        <p class="h-fit my-auto"><%= association['name'] %></p>
+                        <% if (association['modified'] == true) { %> 
+                            <h5 class="text-red-500 mt-0 mb-auto modStar">*</h5>
+                            <h5 class="text-red-500 mt-0 mb-auto modification">modification</h5>
+                        <% } %>
+                    </a>
+                </li>
+            <% }} %>
+        </ul>
+    </main>
+    <script type="module">
+        import {modifiedScript} from "./js/modified.js";
+        
+        const scripts = new modifiedScript();
+    </script>
+</body>
+</html>

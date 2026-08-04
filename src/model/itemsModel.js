@@ -130,6 +130,45 @@ class itemsModel {
          return {'error': true};
       }
    }
+
+   async getSicknessItem(sicknessID) {
+      try {
+         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         await connect.pool.query(setSchema);
+
+         // Get data about this sickness item
+
+         var sicknessData = await connect.pool.query(
+            "SELECT * FROM sickness WHERE sicknessID = $1;",
+            [sicknessID]
+         );
+         var dataItem = JSON.parse(JSON.stringify(sicknessData.rows))[0];
+         if (typeof dataItem == 'undefined') throw new Error('Invalid sicknessID');
+
+         dataItem = this.prepareItem(dataItem);
+
+         // TODO: Get associated symptoms of this food
+         var symptomsData = await connect.pool.query(
+            "SELECT * FROM symptom WHERE sicknessID = $1",
+            [sicknessID]
+         );
+         var symptomsJsonRes = JSON.parse(JSON.stringify(symptomsData.rows));
+         
+         // Get associated foods that resulted in this sickness
+
+         var associationsData = await connect.pool.query(
+            "SELECT * FROM eatenData WHERE eatenID = (SELECT eatenID FROM effect WHERE causeTypeID = $1 AND causeType = 'S' LIMIT 1);",
+            [sicknessID]
+         );
+         var associationsJsonRes = JSON.parse(JSON.stringify(associationsData.rows));
+         
+         return {'sicknessData': dataItem, 'symptoms': symptomsJsonRes, 'associations': associationsJsonRes};
+      }
+      catch (error) {
+         console.error(error);
+         return {'error': true};
+      }
+   }
 }
 
 

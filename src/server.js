@@ -20,12 +20,14 @@ var errorRouter = require("./routes/error");
 var indexRouter = require("./routes/index");
 var foodItemRouter = require("./routes/food-item");
 var moodItemRouter = require("./routes/mood-item");
+var sicknessItemRouter = require("./routes/sickness-item");
 
 app.use("/error", errorRouter);
 app.use("/", indexRouter);
 app.use("/home", indexRouter);
 app.use("/food-item", foodItemRouter);
 app.use("/mood-item", moodItemRouter);
+app.use("/sickness-item", sicknessItemRouter);
 
 // Error handling
 app.use((req, res, next) => {
