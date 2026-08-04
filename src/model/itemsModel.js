@@ -8,12 +8,18 @@ class itemsModel {
    }
 
    prepareItem(item) {
-      var splitTime = item['time'].split("T");
- 
-      item['time'] = [splitTime[1].slice(0, 2) - this.timeDifferenceHours,
-                  splitTime[1].slice(3, 5) - this.timeDifferenceMinutes] // Split into hours [0] and minutes [1]
+      try {
+         console.log("inere");
+         var splitTime = item['time'].split("T");
+   
+         item['time'] = [splitTime[1].slice(0, 2) - this.timeDifferenceHours,
+                     splitTime[1].slice(3, 5) - this.timeDifferenceMinutes] // Split into hours [0] and minutes [1]
 
-      return item;
+         return item;
+      }
+      catch (error) {
+         console.error(error);
+      }
    }
 
    async getFoodItem(eatenID) {
@@ -28,6 +34,8 @@ class itemsModel {
             [eatenID]
          );
          var dataItem = JSON.parse(JSON.stringify(foodData.rows))[0];
+         
+         if (typeof dataItem == 'undefined') throw new Error('Invalid eatenID');
 
          dataItem = this.prepareItem(dataItem);
 
@@ -87,6 +95,7 @@ class itemsModel {
       }
       catch (error) {
          console.error(error);
+         return {'error': true};
       }
    }
 
@@ -102,6 +111,7 @@ class itemsModel {
             [moodID]
          );
          var dataItem = JSON.parse(JSON.stringify(moodData.rows))[0];
+         if (typeof dataItem == 'undefined') throw new Error('Invalid moodID');
 
          dataItem = this.prepareItem(dataItem);
 
@@ -117,6 +127,7 @@ class itemsModel {
       }
       catch (error) {
          console.error(error);
+         return {'error': true};
       }
    }
 }

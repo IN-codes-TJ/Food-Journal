@@ -16,14 +16,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+var errorRouter = require("./routes/error");
 var indexRouter = require("./routes/index");
 var foodItemRouter = require("./routes/food-item");
 var moodItemRouter = require("./routes/mood-item");
 
+app.use("/error", errorRouter);
 app.use("/", indexRouter);
 app.use("/home", indexRouter);
 app.use("/food-item", foodItemRouter);
 app.use("/mood-item", moodItemRouter);
+
+// Error handling
+app.use((req, res, next) => {
+    res.redirect("/error");
+})
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

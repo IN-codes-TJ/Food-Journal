@@ -10,9 +10,15 @@ router.get('/', async function(req, res) {
         alt:"A bin, clicked to delete items", text:"Delete", addClass:(item['type'] == 'Food' ? 'deleteItem Food-'+item['foodid'] : item['type'] == 'Mood' ? 'deleteItem Mood-'+item['moodid'] : 'deleteItem Sickness-'+item['sicknessid'])}) %>
                     
     */
-    timeItemsModel.getTimeItems(1).then((result)=>{
-        res.render('index', {timeItems: result});
-    });
+   try {
+        timeItemsModel.getTimeItems(1).then((result)=>{
+            res.render('index', {timeItems: result});
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.render('error');
+    }
 });
 
 module.exports = router;
