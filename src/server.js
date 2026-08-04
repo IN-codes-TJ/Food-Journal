@@ -18,9 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 
 var indexRouter = require("./routes/index");
 var foodItemRouter = require("./routes/food-item");
+var moodItemRouter = require("./routes/mood-item");
 
 app.use("/", indexRouter);
+app.use("/home", indexRouter);
 app.use("/food-item", foodItemRouter);
+app.use("/mood-item", moodItemRouter);
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

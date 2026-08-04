@@ -300,9 +300,6 @@
   .gap-1 {
     gap: var(--spacing);
   }
-  .rounded-\(length\:--border-rounded\) {
-    border-radius: var(--border-rounded);
-  }
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
@@ -334,9 +331,6 @@
   }
   .border-teal-900 {
     border-color: var(--color-teal-900);
-  }
-  .border-transparent {
-    border-color: transparent;
   }
   .border-yellow-900 {
     border-color: var(--color-yellow-900);
@@ -395,13 +389,6 @@
   }
   .text-red-500 {
     color: var(--color-red-500);
-  }
-  .hover\:bg-light-primary-200 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-light-primary-200);
-      }
-    }
   }
   .md\:mr-0 {
     @media (width >= 48rem) {
@@ -481,15 +468,6 @@
   .dark\:bg-yellow-800 {
     @media (prefers-color-scheme: dark) {
       background-color: var(--color-yellow-800);
-    }
-  }
-  .hover\:dark\:bg-dark-primary-200 {
-    &:hover {
-      @media (hover: hover) {
-        @media (prefers-color-scheme: dark) {
-          background-color: var(--color-dark-primary-200);
-        }
-      }
     }
   }
 }

@@ -7,6 +7,15 @@ class itemsModel {
       this.timeDifferenceMinutes = new Date().getTimezoneOffset()%60;
    }
 
+   prepareItem(item) {
+      var splitTime = item['time'].split("T");
+ 
+      item['time'] = [splitTime[1].slice(0, 2) - this.timeDifferenceHours,
+                  splitTime[1].slice(3, 5) - this.timeDifferenceMinutes] // Split into hours [0] and minutes [1]
+
+      return item;
+   }
+
    async getFoodItem(eatenID) {
       try {
          const setSchema = "SET search_path TO foodjournal, PUBLIC;"
@@ -81,14 +90,34 @@ class itemsModel {
       }
    }
 
-   prepareItem(item) {
-      console.log(item);
-      var splitTime = item['time'].split("T");
- 
-      item['time'] = [splitTime[1].slice(0, 2) - this.timeDifferenceHours,
-                  splitTime[1].slice(3, 5) - this.timeDifferenceMinutes] // Split into hours [0] and minutes [1]
+   async getMoodItem(moodID) {
+      try {
+         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         await connect.pool.query(setSchema);
 
-      return item;
+         // Get data about this mood item
+
+         var moodData = await connect.pool.query(
+            "SELECT * FROM mood WHERE moodID = $1;",
+            [moodID]
+         );
+         var dataItem = JSON.parse(JSON.stringify(moodData.rows))[0];
+
+         dataItem = this.prepareItem(dataItem);
+
+         // Get associated foods that resulted in this mood
+
+         var associationsData = await connect.pool.query(
+            "SELECT * FROM eatenData WHERE eatenID = (SELECT eatenID FROM effect WHERE causeTypeID = $1 AND causeType = 'M' LIMIT 1);",
+            [moodID]
+         );
+         var associationsJsonRes = JSON.parse(JSON.stringify(associationsData.rows));
+         
+         return {'moodData': dataItem, 'associations': associationsJsonRes};
+      }
+      catch (error) {
+         console.error(error);
+      }
    }
 }
 
