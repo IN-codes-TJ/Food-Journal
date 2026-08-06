@@ -51,7 +51,7 @@
         font-size: 0.8rem;
     }
 
-    p {
+    p, label, input {
         @apply wrap-anywhere;
     }
 }
