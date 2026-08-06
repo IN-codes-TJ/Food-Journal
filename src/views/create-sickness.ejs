@@ -27,17 +27,26 @@
                     <label for="desc">Description:</label>
                     <input type="text" name="desc" class="border-underline">
                 </fieldset>
-                <fieldset>
+                <fieldset class="addList">
                     <p>Symptoms:</p>
-                    <button id="addSymptom">Add symptom</button>
+                    <div id="symptoms"></div>
+                    <button type="button" id="addSymptom" class="w-fit mx-auto">Add symptom</button>
                 </fieldset>
-                <fieldset>
+                <fieldset class="addList">
                     <p>Associated Foods:</p>
-                    <button id="addAssociatedFood">Add association</button>
+                    <div id="associatedFoods"></div>
+                    <button type="button" id="addAssociatedFood" class="w-fit mx-auto">Add association</button>
                 </fieldset>
                 <input type="submit" value="Add Sickness" class="flex mx-auto my-1">
             </form>
         </div>
     </main>
+    <script type="module">
+        import {insertItem} from "./js/insertFormListItem.js";
+        const scripts = new insertItem();
+
+        scripts.listenForSymptomAdd("addSymptom");
+        scripts.listenForAssociationAdd("addAssociatedFood");
+    </script>
 </body>
 </html>

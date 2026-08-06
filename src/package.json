@@ -17,15 +17,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon server.js",
-    "build:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
-    "dev": "concurrently \"nodemon server.js\" \"npm run build:css\""
+    "dev": "concurrently \"nodemon server.js\" \"npm run build:css\"",
+    "build:css": "tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.3.2",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
     "pg": "^8.22.0",
     "tailwindcss": "^4.3.2"
   },
