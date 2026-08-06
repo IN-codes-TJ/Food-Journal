@@ -21,6 +21,7 @@ var indexRouter = require("./routes/index");
 var foodItemRouter = require("./routes/food-item");
 var moodItemRouter = require("./routes/mood-item");
 var sicknessItemRouter = require("./routes/sickness-item");
+var createSicknessRouter = require("./routes/create-sickness");
 
 app.use("/error", errorRouter);
 app.use("/", indexRouter);
@@ -28,6 +29,7 @@ app.use("/home", indexRouter);
 app.use("/food-item", foodItemRouter);
 app.use("/mood-item", moodItemRouter);
 app.use("/sickness-item", sicknessItemRouter);
+app.use("/create-sickness", createSicknessRouter);
 
 // Error handling
 app.use((req, res, next) => {

@@ -9,7 +9,6 @@ class itemsModel {
 
    prepareItem(item) {
       try {
-         console.log("inere");
          var splitTime = item['time'].split("T");
    
          item['time'] = [splitTime[1].slice(0, 2) - this.timeDifferenceHours,

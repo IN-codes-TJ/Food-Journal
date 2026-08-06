@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <%-include('partials/nav') %>
+    <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
+        <div class="heading flex flex-col mb-1">
+            <%-include('partials/icon', {src:"/assets/sickness-icon.png", 
+            alt:"An icon of an ill face, linking to the create sickness page", addClass: "h-4 mt-auto mb-1 p-0"}) %>
+            <h3>Adding a New Sickness...</h3>
+            <form action="#", method="POST">
+                <fieldset>
+                    <label for="name">Illness:</label>
+                    <input type="text" name="name" class="border-underline">
+                </fieldset>
+                <fieldset>
+                    <label for="time">Time:</label>
+                    <input type="time" name="time" class="border-underline">
+                </fieldset>
+                <fieldset>
+                    <label for="desc">Description:</label>
+                    <input type="text" name="desc" class="border-underline">
+                </fieldset>
+                <fieldset>
+                    <p>Symptoms:</p>
+                    <button id="addSymptom">Add symptom</button>
+                </fieldset>
+                <fieldset>
+                    <p>Associated Foods:</p>
+                    <button id="addAssociatedFood">Add association</button>
+                </fieldset>
+                <input type="submit" value="Add Sickness">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

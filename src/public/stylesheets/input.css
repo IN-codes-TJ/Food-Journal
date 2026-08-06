@@ -154,7 +154,24 @@
     .div-hover {
         @apply border-light-primary dark:border-dark-primary;
         @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
-        @apply hover:bg-light-primary-200 hover:dark:bg-dark-primary-200;
+        @apply hover:bg-light-primary-200 hover:dark:bg-dark-primary-200 hover:cursor-pointer;
+    }
+
+    .button, button {
+        @apply border-light-primary dark:border-dark-primary;
+        @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
+        @apply hover:bg-light-primary hover:dark:bg-dark-primary hover:text-dark-text hover:cursor-pointer;
+
+        @apply py-0 px-0.5 transition-colors;
+    }
+
+    .submit, input[type="submit"] {
+        @apply border-light-primary dark:border-dark-primary;
+        @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
+        
+        @apply py-0 px-0.5 transition-colors;
+
+        @apply border-red-500 hover:bg-red-500 hover:text-dark-text hover:cursor-pointer;
     }
 
     /* OTHER SPECIFICS */
