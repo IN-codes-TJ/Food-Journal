@@ -1,3 +1,4 @@
+
 export class insertItem {
     constructor() {
         this.addToSymptom = document.getElementById("symptoms");
@@ -46,6 +47,7 @@ export class insertItem {
 
     listenForAssociationAdd(elementId) {
         var target = document.getElementById(elementId);
+        //var dropdownItems = from a model;
         
         target.addEventListener("click", ()=>{
             var newDiv = document.createElement("div");

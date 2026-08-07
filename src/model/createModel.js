@@ -11,7 +11,7 @@ class createModel {
       try {
         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
         await connect.pool.query(setSchema);
-
+         console.log("running");
         // Add data to database
 
         var sicknessData = await connect.pool.query(
@@ -20,7 +20,7 @@ class createModel {
         );
         var dataItem = JSON.parse(JSON.stringify(sicknessData.rows))[0];
 
-        return;
+        return 1;
       }
       catch (error) {
          console.error(error);
