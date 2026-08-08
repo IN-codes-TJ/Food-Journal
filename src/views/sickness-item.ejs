@@ -42,19 +42,10 @@
                         <%-include('partials/icon', {src:"/assets/food-icon.png",
                         alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0 still"}) %>
                         <p class="h-fit my-auto"><%= association['name'] %></p>
-                        <% if (association['modified'] == true) { %> 
-                            <h5 class="text-red-500 mt-0 mb-auto modStar">*</h5>
-                            <h5 class="text-red-500 mt-0 mb-auto modification">modification</h5>
-                        <% } %>
                     </a>
                 </li>
             <% }} %>
         </ul>
     </main>
-    <script type="module">
-        import {modifiedScript} from "./js/modified.js";
-        
-        const scripts = new modifiedScript();
-    </script>
 </body>
 </html>

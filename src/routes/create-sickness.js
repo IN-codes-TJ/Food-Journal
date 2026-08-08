@@ -9,16 +9,18 @@ const limiter = rateLimit({
 });
 
 const createModel = require('../model/createModel');
+const itemsModel = require('../model/itemsModel');
 
 router.get('/', async function(req, res) {
     try {
+        var userID = 1;
+        var foodOptions = await itemsModel.getFoodItems(userID);
+        
         if (typeof req.query.created == 'undefined') {
-            res.render("create-sickness", {})
+            res.render("create-sickness", {foodOptions})
         }
         else {
-            createModel.createSickness(req.query.id).then((result)=>{
-                res.render('create-sickness', {created: true});
-            });
+            res.render('create-sickness', {created: true, foodOptions});
         }
     }
     catch (error) {

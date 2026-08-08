@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/output.css">
+    <script type="module">
+        import {insertItem} from "./js/insertFormListItem.js";
+        const scripts = new insertItem();
+
+        scripts.listenForSymptomAdd("addSymptom");
+        scripts.listenForAssociationAdd("addAssociatedFood");
+    </script>
     <%-include('partials/favicon') %>
     <title>My Food Journal</title>
 </head>
@@ -36,17 +43,11 @@
                     <p>Associated Foods:</p>
                     <div id="associatedFoods"></div>
                     <button type="button" id="addAssociatedFood" class="w-fit">Add association</button>
+                    <input type="hidden" name="foodOptions" id="foodOptions" value="<%=foodOptions%>">
                 </fieldset>
                 <input type="submit" value="Add Sickness" class="flex mx-auto my-1">
             </form>
         </div>
     </main>
-    <script type="module">
-        import {insertItem} from "./js/insertFormListItem.js";
-        const scripts = new insertItem();
-
-        scripts.listenForSymptomAdd("addSymptom");
-        scripts.listenForAssociationAdd("addAssociatedFood");
-    </script>
 </body>
 </html>

@@ -7,7 +7,7 @@ class createModel {
       this.timeDifferenceMinutes = new Date().getTimezoneOffset()%60;
    }
 
-   async createSickness() {
+   async createSickness(userID, name, time, description) {
       try {
         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
         await connect.pool.query(setSchema);
@@ -15,12 +15,14 @@ class createModel {
         // Add data to database
 
         var sicknessData = await connect.pool.query(
-            "",
-            []
+            "INSERT INTO sickness(userid, name, time, description) VALUES($1, $2, $3, $4)",
+            [userID, name, time, description]
         );
         var dataItem = JSON.parse(JSON.stringify(sicknessData.rows))[0];
 
-        return 1;
+        // Don't forget symptoms and associations
+
+        return;
       }
       catch (error) {
          console.error(error);

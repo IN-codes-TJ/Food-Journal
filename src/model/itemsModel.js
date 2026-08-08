@@ -21,6 +21,37 @@ class itemsModel {
       }
    }
 
+   async getFoodItems(userID) {
+      try {
+         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         await connect.pool.query(setSchema);
+
+         // Get data about this user's food items
+
+         var foodData = await connect.pool.query(
+            "SELECT name, eatenid FROM eatenData WHERE userID = $1;",
+            [userID]
+         );
+         var foodRows = foodData.rows;
+
+         var modifiedCheck;
+         for (var foodItem of foodRows) {
+            modifiedCheck = await connect.pool.query(
+               "SELECT modificationID FROM modification WHERE eatenID = $1",
+               [foodItem.eatenid]
+            );
+            console.log(modifiedCheck.rows)
+            if (modifiedCheck.rows.length != 0) foodItem['name'] = foodItem['name'] + " (modified)";
+         }
+
+         return JSON.stringify(foodRows);
+      }
+      catch (error) {
+         console.error(error);
+         return {'error': true};
+      }
+   }
+
    async getFoodItem(eatenID) {
       try {
          const setSchema = "SET search_path TO foodjournal, PUBLIC;"
