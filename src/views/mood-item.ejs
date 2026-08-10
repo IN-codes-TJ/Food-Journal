@@ -19,7 +19,8 @@
             <h3 class="border-underline w-fit">Time: </h3>
             <p class="align-baseline leading-1 h-fit my-auto border-underline border-b-transparent"><%= item['time'][0].toString().padStart(2, "0") + ':' + item['time'][1].toString().padStart(2, "0") %></p>
         </div>
-        <p class="border-style"><%= item['description'] %></p>
+        <p class="border-style"><%= item['description'].length == 0 ? 'No Description' : item['description'] %></p>
+
         <h3 class="border-underline w-fit">Associated Foods</h3>
         <ul class="flex flex-col gap-1">
             <% if (associations.length == 0) { %>

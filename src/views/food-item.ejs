@@ -21,7 +21,8 @@
             <h3 class="border-underline w-fit">Time Eaten: </h3>
             <p class="align-baseline leading-1 h-fit my-auto border-underline border-b-transparent"><%= item['time'][0].toString().padStart(2, "0") + ':' + item['time'][1].toString().padStart(2, "0") %></p>
         </div>
-        <p class="border-style"><%= item['description'] %></p>
+        <p class="border-style"><%= item['description'].length == 0 ? 'No Description' : item['description'] %></p>
+
         <h3 class="border-underline w-fit">Ingredients</h3>
         <ul>
             <% if (ingredients.length == 0) { %>
@@ -44,7 +45,7 @@
             <% if (effects.length == 0) { %>
                 <p>There are no associated effects with this food.</p>
             <% } else { for (var effect of effects) { %>
-                <% if (typeof effect['moodid'] != undefined) { %>
+                <% if (typeof effect['moodid'] != "undefined") { %>
                     <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
                         <a href="<%= 'mood-item?id='+effect['moodid'] %>" class="flex flex-row gap-1">
                             <%-include('partials/icon', {src:"/assets/mood-icon.png",
@@ -52,7 +53,7 @@
                             <p class="h-fit my-auto"><%= effect['name'] %></p>
                         </a>
                     </li>
-                <% } else { %>
+                <% } else if (typeof effect['sicknessid'] != "undefined") { %>
                     <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
                         <a href="<%= 'sickness-item?id='+effect['sicknessid'] %>" class="flex flex-row gap-1">
                             <%-include('partials/icon', {src:"/assets/sickness-icon.png", 

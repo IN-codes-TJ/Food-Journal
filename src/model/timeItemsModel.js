@@ -21,7 +21,7 @@ class itemsModel {
             [userID]
          );
          var itemsJsonRes = JSON.parse(JSON.stringify(itemsList.rows));
-
+         
          if (itemsJsonRes.length == 0) return itemsJsonRes;
          
          var separatedTime = itemsJsonRes[0]['time'].split("T");
@@ -40,9 +40,12 @@ class itemsModel {
          for (let i = 1; i < itemsJsonRes.length; i++) {
             separatedTime = itemsJsonRes[i]['time'].split("T");
             preparedItem = this.prepareItem(itemsJsonRes[i], separatedTime);
+            console.log(preparedItem);
+            console.log("prep")
             if (separatedTime[0] == groupedList[groupedPointer]['date']) {
                // Same date, so add to this date group
                // First, check if there's already an associated time
+               console.log(groupedList[groupedPointer]['times'][groupedTimePointer])
                if (groupedList[groupedPointer]['times'][groupedTimePointer]['time'] == preparedItem['time']['time'][0]) {
                   // There is an associated time, so add to this group
                   groupedList[groupedPointer]['times'][groupedTimePointer]['items'].push(preparedItem);
@@ -66,9 +69,9 @@ class itemsModel {
                   }]
                });
                groupedPointer++;
+               groupedTimePointer = 0;
             }
          }
-
          return groupedList;
 
       }

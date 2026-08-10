@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/output.css">
     <script type="module">
-        import {insertItem} from "./js/insertFormListItem.js";
-        const scripts = new insertItem();
-
-        scripts.listenForSymptomAdd("addSymptom");
-        scripts.listenForAssociationAdd("addAssociatedFood");
+        import {createSickness} from "./js/createSickness.js";
+        const scripts = new createSickness();
     </script>
     <%-include('partials/favicon') %>
     <title>My Food Journal</title>
 </head>
 <body>
     <%-include('partials/nav') %>
+    <% if (typeof error != "undefined") {
+        if (error == 'asdup') { %>
+            <%-include('partials/popup', {error:'You cannot have duplicate associated foods', href:'create-sickness'}) %>
+        <% } else { %>
+            <%-include('partials/popup', {error, href:'create-sickness'}) %>
+        <% }
+    } %>
     <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
         <div class="heading flex flex-col mb-1">
             <%-include('partials/icon', {src:"/assets/sickness-icon.png", 
@@ -24,11 +28,7 @@
             <form action="#", method="POST" class="border-style border-light-primary-200 flex flex-col gap-0.5">
                 <fieldset>
                     <label for="name">Illness:</label>
-                    <input type="text" name="name" class="border-underline">
-                </fieldset>
-                <fieldset>
-                    <label for="time">Time:</label>
-                    <input type="time" name="time" class="border-underline">
+                    <input type="text" name="name" class="border-underline" required>
                 </fieldset>
                 <fieldset>
                     <label for="desc">Description:</label>
@@ -36,12 +36,12 @@
                 </fieldset>
                 <fieldset class="addList">
                     <p>Symptoms:</p>
-                    <div id="symptoms"></div>
+                    <fieldset id="symptoms"></fieldset>
                     <button type="button" id="addSymptom" class="w-fit">Add symptom</button>
                 </fieldset>
                 <fieldset class="addList">
                     <p>Associated Foods:</p>
-                    <div id="associatedFoods"></div>
+                    <fieldset id="associatedFoods"></fieldset>
                     <button type="button" id="addAssociatedFood" class="w-fit">Add association</button>
                     <input type="hidden" name="foodOptions" id="foodOptions" value="<%=foodOptions%>">
                 </fieldset>

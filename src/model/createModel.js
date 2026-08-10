@@ -7,22 +7,35 @@ class createModel {
       this.timeDifferenceMinutes = new Date().getTimezoneOffset()%60;
    }
 
-   async createSickness(userID, name, time, description) {
+   async createSickness(userID, name, description, symptoms, associatedFoods) {
       try {
-        const setSchema = "SET search_path TO foodjournal, PUBLIC;"
-        await connect.pool.query(setSchema);
-         console.log("running");
-        // Add data to database
+         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         await connect.pool.query(setSchema);
+         // Add data to database
 
-        var sicknessData = await connect.pool.query(
-            "INSERT INTO sickness(userid, name, time, description) VALUES($1, $2, $3, $4)",
-            [userID, name, time, description]
-        );
-        var dataItem = JSON.parse(JSON.stringify(sicknessData.rows))[0];
+         var sicknessData = await connect.pool.query(
+            "INSERT INTO sickness(userid, name, description) VALUES($1, $2, $3) RETURNING sicknessID",
+            [userID, name, description]
+         );
+         var sicknessID = sicknessData.rows[0]['sicknessid'];
 
-        // Don't forget symptoms and associations
+         var symptomInsert;
+         for (var symptom of symptoms) {
+            symptomInsert = await connect.pool.query(
+               "INSERT INTO symptom(sicknessID, symptom) VALUES($1, $2);",
+               [sicknessID, symptom]
+            );
+         }
 
-        return;
+         var associatedFoodInsert;
+         for (var eatenID of associatedFoods) {
+            associatedFoodInsert = await connect.pool.query(
+               "INSERT INTO effect(eatenID, causeTypeID, causeType) VALUES($1, $2, 'S');",
+               [eatenID, sicknessID]
+            );
+         }
+
+         return true;
       }
       catch (error) {
          console.error(error);

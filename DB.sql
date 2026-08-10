@@ -135,19 +135,32 @@ ON effect
 FOR EACH ROW
 EXECUTE FUNCTION checkEffect();
 
-INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
-INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff');
-INSERT INTO eatenFood VALUES (4, 1, 1); 
-INSERT INTO foodData VALUES (2, 1, 'Onigiri', 'This is the absolute best thing you will every try. The best snack one can ever eat. The description for this has to be long so I can test things, so here I am trying to make it reallyreallyreallysosososoterriblymassivelylongbecause I am testing yay!!!! :D');
-INSERT INTO eatenFood VALUES (6, 1, 2);
-INSERT INTO ingredient VALUES (1, 1, 'Bread');
-INSERT INTO ingredient VALUES (2, 1, 'Butter');
-INSERT INTO ingredient VALUES (3, 1, 'Cheese');
-INSERT INTO ingredient VALUES (3, 1, 'Cheese');
-INSERT INTO modification VALUES(2, 4, 3, 'Ham');
-SELECT * FROM eatenFood;
-INSERT INTO mood (moodID, userID, name, description) VALUES (1, 1, 'Unhappy', 'Feeling unhappy desc');
-INSERT INTO sickness (sicknessID, userID, name, description) VALUES (1, 1, 'Stomach ache', 'Not good');
+CREATE OR REPLACE FUNCTION deleteSicknessEffect()
+RETURNS TRIGGER AS $$
+BEGIN
+	DELETE FROM effect WHERE causeType = 'S' AND causeTypeID = OLD.sicknessID;
+	RETURN OLD;
+END; $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER deleteSicknessEffect
+AFTER DELETE 
+ON sickness
+FOR EACH ROW
+EXECUTE FUNCTION deleteSicknessEffect();
+
+CREATE OR REPLACE FUNCTION deleteMoodEffect()
+RETURNS TRIGGER AS $$
+BEGIN
+	DELETE FROM effect WHERE causeType = 'M' AND causeTypeID = OLD.moodID;
+	RETURN OLD;
+END; $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER deleteMoodEffect
+AFTER DELETE 
+ON mood
+FOR EACH ROW
+EXECUTE FUNCTION deleteMoodEffect();
+
 /* VIEWS */
 
 CREATE OR REPLACE VIEW eatenData AS
@@ -159,3 +172,24 @@ SELECT eatenID as ID, userID, name, description, time, 'Food' as type FROM eaten
 SELECT moodID as ID, userID, name, description, time, 'Mood' as type FROM mood UNION
 SELECT sicknessID as ID, userID, name, description, time, 'Sickness' as type FROM sickness
 ORDER BY time;
+
+/* Test Data */
+
+INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
+INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff');
+INSERT INTO eatenFood VALUES (4, 1, 1); 
+INSERT INTO foodData VALUES (2, 1, 'Onigiri', 'This is the absolute best thing you will every try. The best snack one can ever eat. The description for this has to be long so I can test things, so here I am trying to make it reallyreallyreallysosososoterriblymassivelylongbecause I am testing yay!!!! :D');
+INSERT INTO eatenFood VALUES (6, 1, 2);
+INSERT INTO ingredient VALUES (1, 1, 'Bread');
+INSERT INTO ingredient VALUES (2, 1, 'Butter');
+INSERT INTO ingredient VALUES (3, 1, 'Cheese');
+INSERT INTO ingredient VALUES (3, 1, 'Cheese');
+INSERT INTO modification VALUES(2, 4, 3, 'Ham');
+SELECT * FROM sickness;
+SELECT * FROM effect;
+INSERT INTO mood (moodID, userID, name, description) VALUES (1, 1, 'Unhappy', 'Feeling unhappy desc');
+INSERT INTO sickness (sicknessID, userID, name, description) VALUES (1, 1, 'Stomach ache', 'Not good');
+INSERT INTO effect (eatenID, causeTypeID, causeType) VALUES (4, 1, 'S');
+DELETE FROM mood;
+SELECT * FROM mood;
+INSERT INTO effect (eatenID, causeTypeID, causeType) VALUES (4, 1, 'M');

@@ -16,11 +16,15 @@ router.get('/', async function(req, res) {
         var userID = 1;
         var foodOptions = await itemsModel.getFoodItems(userID);
         
-        if (typeof req.query.created == 'undefined') {
+        if (typeof req.query.err == 'undefined' && typeof req.query.created == 'undefined') {
             res.render("create-sickness", {foodOptions})
         }
-        else {
+        else if (typeof req.query.created != 'undefined') {
             res.render('create-sickness', {created: true, foodOptions});
+        }
+        else {
+            // An error occured
+            res.render('create-sickness', {error: req.query.err, foodOptions});
         }
     }
     catch (error) {
@@ -30,11 +34,34 @@ router.get('/', async function(req, res) {
 });
 
 router.post("/", limiter, async(req, res, next) => {
+    var userID = 1;
+
     const name = req.body.name;
-    const time = req.body.time;
-    const description = req.body.description;
-    // Get symptoms
-    // Get associated foods
+    const description = req.body.desc || "";
+    const symptoms = req.body.symptoms || "";
+    const associatedFoods = req.body.associatedFoods || "";
+
+    var checkedAssociatedFoods = [];
+    
+    if (typeof associatedFoods != "undefined") {for (var food of associatedFoods) {
+        if (checkedAssociatedFoods.includes(food)) {
+            res.redirect("create-sickness?err=asdup");
+            return;
+        }
+        else {
+            checkedAssociatedFoods.push(food);
+        }
+    }}
+
+    createModel.createSickness(userID, name, description, symptoms, associatedFoods).then((result)=>{
+        if (result == true) {
+            res.redirect("create-sickness?created");
+        }
+        else {
+            res.redirect("create-sickness?err=nCreate")
+        }
+    });
+
 });
 
 module.exports = router;

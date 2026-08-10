@@ -1,11 +1,13 @@
-export class insertItem {
+export class createSickness {
     constructor() {
         this.addToSymptom = document.getElementById("symptoms");
         this.addToAssociation = document.getElementById("associatedFoods");
-        this.count = 0;
 
         var foodOptionsRaw = document.getElementById("foodOptions");
         this.foodOptions = JSON.parse(foodOptionsRaw.getAttribute("value"));
+        
+        this.listenForSymptomAdd("addSymptom");
+        this.listenForAssociationAdd("addAssociatedFood");
     }
 
     createDeletor(newDiv) {
@@ -35,9 +37,9 @@ export class insertItem {
 
             var newInputElement = document.createElement("input");
             newInputElement.setAttribute("type", "text");
-            newInputElement.setAttribute("name", "symptom"+this.count);
-            this.count++;
             newInputElement.setAttribute("class", "border-underline");
+            newInputElement.setAttribute("required", "");
+            newInputElement.setAttribute("name", "symptoms[]");
             newDiv.appendChild(newInputElement);
 
             this.createDeletor(newDiv);
@@ -62,9 +64,9 @@ export class insertItem {
 
             var dropdown = document.createElement("select");
             dropdown.setAttribute("class", "w-full");
+            dropdown.setAttribute("name", "associatedFoods[]");
             var option;
             for (var foodOption of this.foodOptions) {
-                console.log(foodOption)
                 option = document.createElement("option");
                 option.setAttribute("label", foodOption["name"]);
                 option.setAttribute("value", foodOption["eatenid"]);

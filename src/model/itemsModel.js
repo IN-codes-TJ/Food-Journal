@@ -40,7 +40,6 @@ class itemsModel {
                "SELECT modificationID FROM modification WHERE eatenID = $1",
                [foodItem.eatenid]
             );
-            console.log(modifiedCheck.rows)
             if (modifiedCheck.rows.length != 0) foodItem['name'] = foodItem['name'] + " (modified)";
          }
 
@@ -97,11 +96,11 @@ class itemsModel {
          }
 
          var effects = await connect.pool.query(
-            "SELECT * FROM effect WHERE eatenID = $1",
+            "SELECT * FROM effect WHERE eatenID = $1;",
             [eatenID]
          );
          var effectsJsonRes = JSON.parse(JSON.stringify(effects.rows));
-         
+         console.log(effectsJsonRes)
          var effectData;
          var effectsData = [];
          var query;
@@ -120,7 +119,7 @@ class itemsModel {
 
             effectsData.push(JSON.parse(JSON.stringify(effectData.rows))[0]);
          }
-
+         console.log(effectsData)
          return {'foodData': dataItem, 'ingredients': finalIngredients, 'effects': effectsData};
       }
       catch (error) {

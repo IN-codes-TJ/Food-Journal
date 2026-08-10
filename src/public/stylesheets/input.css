@@ -157,6 +157,12 @@
         @apply hover:bg-light-primary-200 hover:dark:bg-dark-primary-200 hover:cursor-pointer;
     }
 
+    .div-still {
+        @apply bg-light-background dark:bg-dark-background;
+        @apply border-light-primary dark:border-dark-primary;
+        @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
+    }
+
     .button, button {
         @apply border-light-primary dark:border-dark-primary;
         @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
@@ -179,15 +185,15 @@
         @apply flex flex-col;
     }
 
-    .addList div {
+    .addList fieldset {
         @apply flex flex-col;
     }
 
-    .addList div div {
+    .addList div {
         @apply flex flex-row mb-0.5;
     }
 
-    .addList div div input {
+    .addList fieldset div input {
         @apply w-full;
     }
 
