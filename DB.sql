@@ -167,6 +167,7 @@ CREATE OR REPLACE VIEW eatenData AS
 SELECT foodData.foodID, foodData.userID, foodData.name, foodData.description, eatenFood.satisfaction, 
 eatenFood.eatenID, eatenFood.time FROM foodData INNER JOIN eatenFood ON foodData.foodID = eatenFood.foodID;
 SELECT * FROM eatenData;
+
 CREATE OR REPLACE VIEW itemsList AS
 SELECT eatenID as ID, userID, name, description, time, 'Food' as type FROM eatenData UNION
 SELECT moodID as ID, userID, name, description, time, 'Mood' as type FROM mood UNION

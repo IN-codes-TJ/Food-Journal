@@ -18,20 +18,22 @@ app.use(express.urlencoded({ extended: true }));
 
 var errorRouter = require("./routes/error");
 var indexRouter = require("./routes/index");
-var foodItemRouter = require("./routes/food-item");
+var eatenItemRouter = require("./routes/eaten-item");
 var moodItemRouter = require("./routes/mood-item");
 var sicknessItemRouter = require("./routes/sickness-item");
 var createSicknessRouter = require("./routes/create-sickness");
 var createMoodRouter = require("./routes/create-mood");
+var foodListRouter = require("./routes/food-list");
 
 app.use("/error", errorRouter);
 app.use("/", indexRouter);
 app.use("/home", indexRouter);
-app.use("/food-item", foodItemRouter);
+app.use("/eaten-item", eatenItemRouter);
 app.use("/mood-item", moodItemRouter);
 app.use("/sickness-item", sicknessItemRouter);
 app.use("/create-sickness", createSicknessRouter);
 app.use("/create-mood", createMoodRouter);
+app.use("/food-list", foodListRouter);
 
 // Error handling
 app.use((req, res, next) => {

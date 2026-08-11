@@ -4,9 +4,9 @@ const itemsModel = require('../model/itemsModel');
 
 router.get('/', async function(req, res) {
     try {
-        itemsModel.getFoodItem(req.query.id).then((result)=>{
+        itemsModel.getEatenItem(req.query.id).then((result)=>{
             if (typeof result['error'] != 'undefined') {res.redirect("/error")};
-            res.render('food-item', {item: result['foodData'], ingredients: result['ingredients'], effects: result['effects']});
+            res.render('eaten-item', {item: result['foodData'], ingredients: result['ingredients'], effects: result['effects']});
         });
     }
     catch (error) {

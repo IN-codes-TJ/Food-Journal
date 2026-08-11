@@ -17,7 +17,7 @@
                 <%-include('icon', {src:"/assets/create-icon.png", id:"create-icon", 
                 alt:"A plus icon, to show more create options", text:"Create", addClass:"cursor-pointer"}) %>
                 <div id="create-options" class="flex flex-col w-fit gap-0.5 mt-0 p-0.5 pb-1">
-                    <%-include('icon', {href:"create-food", src:"/assets/food-icon.png", 
+                    <%-include('icon', {href:"food-list", src:"/assets/food-icon.png", 
                     alt:"An icon of a strawberry, linking to the create food page", text:"Food", addClass:"hidden h-2 mb-0.5"}) %>
                     
                     <%-include('icon', {href:"create-mood", src:"/assets/mood-icon.png", 
@@ -40,7 +40,7 @@
             <%-include('icon', {src:"/assets/create-icon.png", id:"create-icon", 
             alt:"A plus icon, to show more create options", text:"Create", addClass:"cursor-pointer h-2"}) %>
             <div id="create-options-easy" class="flex flex-row gap-0.5 h-2 my-auto">
-                <%-include('icon', {href:"/create-food", src:"/assets/food-icon.png", 
+                <%-include('icon', {href:"/food-list", src:"/assets/food-icon.png", 
                 alt:"An icon of a strawberry, linking to the create food page", addClass:"hidden"}) %>
                     
                 <%-include('icon', {href:"create-mood", src:"/assets/mood-icon.png", 
@@ -51,11 +51,21 @@
             </div>
         </div>
     <% } else { %>
-        <div id="create-div-easy" class="flex flex-row flex-wrap p-1 bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] border-(length:--border-size-small) border-light-navcolour dark:border-dark-navcolour rounded-full cursor-pointer">
-            <%-include('icon', {href: "/", src:"/assets/home-icon.png", 
-            alt:"A house icon, linking to the home page", text:"Create", addClass:"cursor-pointer h-2"}) %>
-        </div>
+        <% if (typeof foodList != 'undefined') { %>
+            <div id="create-div-easy" class="flex flex-row flex-wrap p-1 bg-light-background dark:bg-dark-background fixed bottom-2 left-[50%] translate-x-[-50%] border-(length:--border-size-small) border-light-navcolour dark:border-dark-navcolour rounded-full cursor-pointer">
+                <%-include('icon', {href: "/", src:"/assets/home-icon.png", 
+                alt:"A house icon, linking to the home page", text:"Create", addClass:"cursor-pointer h-2 md:hidden border-r-(length:--border-size) mr-0.5 pr-0.5"}) %>
+                <%-include('icon', {href: "create-food", src:"/assets/create-icon.png", id:"create-icon", 
+                alt:"A plus icon, to show more create options", addClass:"cursor-pointer h-2"}) %>
+            </div>
+        <% } else { %>
+            <div id="create-div-easy" class="flex flex-row flex-wrap p-1 bg-light-background dark:bg-dark-background md:hidden fixed bottom-2 left-[50%] translate-x-[-50%] border-(length:--border-size-small) border-light-navcolour dark:border-dark-navcolour rounded-full cursor-pointer">
+                <%-include('icon', {href: "/", src:"/assets/home-icon.png", 
+                alt:"A house icon, linking to the home page", text:"Create", addClass:"cursor-pointer h-2"}) %>
+            </div>
+        <% } %>
     <% } %>
+        </div>
 </footer>
 
 <script type="module">

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <%-include('partials/nav', {foodList: true}) %>
+    <main class="flex flex-col justify-center mx-auto max-w-52 w-[80vw]">
+        <h1 class="text-center">My Foods</h1>
+        <h5 class="mx-auto w-4/5 text-center mb-1">Click a food to view it and declare that you have eaten it (or a modified version of it)!</h5>
+        <% if (typeof foods[0] != 'undefined') { 
+            for (var food of foods) { %>
+                <a href="<%= 'food-item?id='+food['id'] %>" class="flex flex-row gap-1 justify-center div-hover mb-1">
+                    <%-include('partials/icon', {src:"/assets/food-icon.png", 
+                    alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0 still"}) %>
+                    <div class="flex flex-col gap-0.5 ml-0 mr-auto">
+                        <h3 class="border-underline"><%= food['name'] %></h3>
+                        <p><%= food['description'] %></p>
+                    </div>
+                </a>
+        <% }} else { %>
+            <p>No items</p>
+        <% } %>
+    </main>
+</body>
+</html>

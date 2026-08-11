@@ -14,7 +14,7 @@ const itemsModel = require('../model/itemsModel');
 router.get('/', async function(req, res) {
     try {
         var userID = 1;
-        var foodOptions = await itemsModel.getFoodItems(userID);
+        var foodOptions = await itemsModel.getEatenItems(userID);
         
         if (typeof req.query.err == 'undefined' && typeof req.query.created == 'undefined') {
             res.render("create-sickness", {foodOptions})

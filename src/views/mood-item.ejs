@@ -27,7 +27,7 @@
                 <p>There are no associated foods with this mood.</p>
             <% } else { for (var association of associations) { %>
                 <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
-                    <a href="<%= 'food-item?id='+association['eatenid'] %>" class="flex flex-row gap-1">
+                    <a href="<%= 'eaten-item?id='+association['eatenid'] %>" class="flex flex-row gap-1">
                         <%-include('partials/icon', {src:"/assets/food-icon.png",
                         alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0 still"}) %>
                         <p class="h-fit my-auto"><%= association['name'] %></p>

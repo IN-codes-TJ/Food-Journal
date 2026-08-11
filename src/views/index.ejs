@@ -18,7 +18,7 @@
                 <% for (var time of timeItem['times']) { %>
                     <h3 class="text-center pb-1"><%= time['time'] %>:00</h3>
                     <% for (var item of time['items']) { %>
-                        <a href="<%= item['type'] == 'Food' ? 'food-item?id='+item['id'] : item['type'] == 'Mood' ? 'mood-item?id='+item['id'] : 'sickness-item?id='+item['id']%>"
+                        <a href="<%= item['type'] == 'Food' ? 'eaten-item?id='+item['id'] : item['type'] == 'Mood' ? 'mood-item?id='+item['id'] : 'sickness-item?id='+item['id']%>"
                         class="flex flex-row gap-1 justify-center div-hover mb-1">
                             <% if (item['type'] == 'Food') { %>
                                 <%-include('partials/icon', {src:"/assets/food-icon.png", 

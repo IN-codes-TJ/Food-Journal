@@ -29,6 +29,28 @@ class itemsModel {
          // Get data about this user's food items
 
          var foodData = await connect.pool.query(
+            "SELECT * FROM foodData WHERE userID = $1",
+            [userID]
+         );
+         var foodDataRes = foodData.rows;
+
+         return foodDataRes;
+      }
+      catch (error) {
+         console.error(error);
+         return {'error': true};
+      }
+
+   }
+
+   async getEatenItems(userID) {
+      try {
+         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         await connect.pool.query(setSchema);
+
+         // Get data about this user's food items
+
+         var foodData = await connect.pool.query(
             "SELECT name, eatenid FROM eatenData WHERE userID = $1;",
             [userID]
          );
@@ -51,7 +73,7 @@ class itemsModel {
       }
    }
 
-   async getFoodItem(eatenID) {
+   async getEatenItem(eatenID) {
       try {
          const setSchema = "SET search_path TO foodjournal, PUBLIC;"
          await connect.pool.query(setSchema);
