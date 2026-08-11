@@ -1,12 +1,12 @@
-export class createSickness {
-    constructor() {
-        this.addToSymptom = document.getElementById("symptoms");
+export class createItem {
+    constructor(type) {
+        if (type == 'S') this.addToSymptom = document.getElementById("symptoms");
         this.addToAssociation = document.getElementById("associatedFoods");
 
         var foodOptionsRaw = document.getElementById("foodOptions");
         this.foodOptions = JSON.parse(foodOptionsRaw.getAttribute("value"));
         
-        this.listenForSymptomAdd("addSymptom");
+        if (type == 'S') this.listenForSymptomAdd("addSymptom");
         this.listenForAssociationAdd("addAssociatedFood");
     }
 

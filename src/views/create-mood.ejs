@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="stylesheets/output.css">
     <script type="module">
         import {createItem} from "./js/createItem.js";
-        const scripts = new createItem('S');
+        const scripts = new createItem('M');
     </script>
     <%-include('partials/favicon') %>
     <title>My Food Journal</title>
@@ -15,21 +15,21 @@
     <%-include('partials/nav') %>
     <% if (typeof error != "undefined") {
         if (error == 'asdup') { %>
-            <%-include('partials/popup', {text:'You cannot have duplicate associated foods', href:'create-sickness'}) %>
+            <%-include('partials/popup', {text:'You cannot have duplicate associated foods', href:'create-mood'}) %>
         <% } else { %>
-            <%-include('partials/popup', {text:error, href:'create-sickness'}) %>
+            <%-include('partials/popup', {text:error, href:'create-mood'}) %>
         <% } %>
     <% } else if (typeof created != "undefined") { %>
-         <%-include('partials/popup', {text:"Sickness created!", href:'create-sickness'}) %>
+         <%-include('partials/popup', {text:"Mood created!", href:'create-mood'}) %>
     <% } %>
     <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
         <div class="heading flex flex-col mb-1">
-            <%-include('partials/icon', {src:"/assets/sickness-icon.png", 
-            alt:"An icon of an ill face, linking to the create sickness page", addClass: "h-4 mx-auto p-0"}) %>
-            <h3 class="mx-auto mb-1">New Sickness</h3>
+            <%-include('partials/icon', {src:"/assets/mood-icon.png", 
+            alt:"An icon of a smiling face, linking to the create mood page", addClass: "h-4 mx-auto p-0"}) %>
+            <h3 class="mx-auto mb-1">New Mood</h3>
             <form action="#", method="POST" class="border-style border-light-primary-200 flex flex-col gap-0.5">
                 <fieldset>
-                    <label for="name">Illness:</label>
+                    <label for="name">Mood:</label>
                     <input type="text" name="name" class="border-underline" required>
                 </fieldset>
                 <fieldset>
@@ -37,17 +37,12 @@
                     <input type="text" name="desc" class="border-underline">
                 </fieldset>
                 <fieldset class="addList">
-                    <p>Symptoms:</p>
-                    <fieldset id="symptoms"></fieldset>
-                    <button type="button" id="addSymptom" class="w-fit">Add symptom</button>
-                </fieldset>
-                <fieldset class="addList">
                     <p>Associated Foods:</p>
                     <fieldset id="associatedFoods"></fieldset>
                     <button type="button" id="addAssociatedFood" class="w-fit">Add association</button>
                     <input type="hidden" name="foodOptions" id="foodOptions" value="<%=foodOptions%>">
                 </fieldset>
-                <input type="submit" value="Add Sickness" class="flex mx-auto my-1">
+                <input type="submit" value="Add Mood" class="flex mx-auto my-1">
             </form>
         </div>
     </main>
