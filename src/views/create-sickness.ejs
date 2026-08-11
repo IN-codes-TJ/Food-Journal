@@ -15,11 +15,13 @@
     <%-include('partials/nav') %>
     <% if (typeof error != "undefined") {
         if (error == 'asdup') { %>
-            <%-include('partials/popup', {error:'You cannot have duplicate associated foods', href:'create-sickness'}) %>
+            <%-include('partials/popup', {text:'You cannot have duplicate associated foods', href:'create-sickness'}) %>
         <% } else { %>
-            <%-include('partials/popup', {error, href:'create-sickness'}) %>
-        <% }
-    } %>
+            <%-include('partials/popup', {text:error, href:'create-sickness'}) %>
+        <% } %>
+    <% } else if (typeof created != "undefined") { %>
+         <%-include('partials/popup', {text:"Sickness created!", href:'create-sickness'}) %>
+    <% } %>
     <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
         <div class="heading flex flex-col mb-1">
             <%-include('partials/icon', {src:"/assets/sickness-icon.png", 

@@ -100,7 +100,7 @@ class itemsModel {
             [eatenID]
          );
          var effectsJsonRes = JSON.parse(JSON.stringify(effects.rows));
-         console.log(effectsJsonRes)
+
          var effectData;
          var effectsData = [];
          var query;
@@ -119,7 +119,7 @@ class itemsModel {
 
             effectsData.push(JSON.parse(JSON.stringify(effectData.rows))[0]);
          }
-         console.log(effectsData)
+
          return {'foodData': dataItem, 'ingredients': finalIngredients, 'effects': effectsData};
       }
       catch (error) {
@@ -147,7 +147,7 @@ class itemsModel {
          // Get associated foods that resulted in this mood
 
          var associationsData = await connect.pool.query(
-            "SELECT * FROM eatenData WHERE eatenID = (SELECT eatenID FROM effect WHERE causeTypeID = $1 AND causeType = 'M' LIMIT 1);",
+            "SELECT * FROM eatenData WHERE eatenID IN (SELECT eatenID FROM effect WHERE causeTypeID = $1 AND causeType = 'M');",
             [moodID]
          );
          var associationsJsonRes = JSON.parse(JSON.stringify(associationsData.rows));
@@ -186,7 +186,7 @@ class itemsModel {
          // Get associated foods that resulted in this sickness
 
          var associationsData = await connect.pool.query(
-            "SELECT * FROM eatenData WHERE eatenID = (SELECT eatenID FROM effect WHERE causeTypeID = $1 AND causeType = 'S' LIMIT 1);",
+            "SELECT * FROM eatenData WHERE eatenID IN (SELECT eatenID FROM effect WHERE causeTypeID = $1 AND causeType = 'S');",
             [sicknessID]
          );
          var associationsJsonRes = JSON.parse(JSON.stringify(associationsData.rows));
