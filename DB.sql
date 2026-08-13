@@ -54,13 +54,14 @@ CREATE TABLE eatenFood(
 ); /* TESTED */
 
 /* For modifications made to foods that were eaten */
+CREATE DOMAIN modificationType AS VARCHAR(6)
+DEFAULT 'Add' CHECK (VALUE IN ('Add', 'Remove'));
 CREATE TABLE modification (
 	modificationID		SERIAL PRIMARY KEY,
 	eatenID 			INTEGER NOT NULL,
-	alteredIngredientID	INTEGER NOT NULL,
-	newIngredient		VARCHAR(128) NOT NULL,
+	modificationType	modificationType,
+	ingredientName		VARCHAR(128) NOT NULL,
 	FOREIGN KEY (eatenID) REFERENCES eatenFood ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (alteredIngredientID) REFERENCES ingredient ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
 
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <script type="module">
+        import {createItem} from "./js/createItem.js";
+        const scripts = new createItem('F');
+    </script>
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <%-include('partials/nav') %>
+    <% if (typeof error != "undefined") { %>
+         <%-include('partials/popup', {text:"Your food could not be created", href:'create-food'}) %>
+    <% } else if (typeof created != "undefined") { %>
+         <%-include('partials/popup', {text:"Food created!", href:'create-food'}) %>
+    <% } %>
+    <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
+        <div class="heading flex flex-col mb-1">
+            <%-include('partials/icon', {src:"/assets/food-icon.png", 
+            alt:"An icon of a strawberry", addClass: "h-4 mx-auto p-0"}) %>
+            <h3 class="mx-auto mb-1">New Food</h3>
+            <form action="#", method="POST" class="border-style border-light-primary-200 flex flex-col gap-0.5">
+                <fieldset>
+                    <label for="name">Food:</label>
+                    <input type="text" name="name" class="border-underline" required>
+                </fieldset>
+                <fieldset>
+                    <label for="desc">Description:</label>
+                    <input type="text" name="desc" class="border-underline">
+                </fieldset>
+                <fieldset class="addList">
+                    <p>Ingredients:</p>
+                    <fieldset id="ingredients"></fieldset>
+                    <button type="button" id="addIngredient" class="w-fit">Add ingredient</button>
+                </fieldset>
+                <input type="submit" value="Add Food" class="flex mx-auto my-1">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

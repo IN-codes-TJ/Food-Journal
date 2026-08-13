@@ -43,6 +43,34 @@ class itemsModel {
 
    }
 
+   async getFoodItem(foodID) {
+      try {
+         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         await connect.pool.query(setSchema);
+
+         // Get data about this food item
+
+         var foodData = await connect.pool.query(
+            "SELECT * FROM foodData WHERE foodID = $1",
+            [foodID]
+         );
+         var foodDataRes = foodData.rows[0];
+
+         var ingredients = await connect.pool.query(
+            "SELECT * FROM ingredient WHERE foodID = $1",
+            [foodDataRes['foodid']]
+         );
+         var ingredientsJsonRes = ingredients.rows;
+
+         return {foodData: foodDataRes, ingredients: ingredientsJsonRes};
+      }
+      catch (error) {
+         console.error(error);
+         return {'error': true};
+      }
+
+   }
+
    async getEatenItems(userID) {
       try {
          const setSchema = "SET search_path TO foodjournal, PUBLIC;"
@@ -94,28 +122,33 @@ class itemsModel {
             "SELECT * FROM ingredient WHERE foodID = $1",
             [dataItem['foodid']]
          );
-         var ingredientsJsonRes = JSON.parse(JSON.stringify(ingredients.rows));
+         var ingredientsJsonRes = ingredients.rows;
 
+         // TODO: Edit to support new modification table
          var alteredIngredients = await connect.pool.query(
                "SELECT * FROM modification WHERE eatenID = $1",
                [eatenID]
          );
-         var alteredJsonRes = JSON.parse(JSON.stringify(alteredIngredients.rows));
-
-         var finalIngredients = [];
-         var modified = false;
-         for (var ingredient of ingredientsJsonRes) {
-            modified = false;
-            for (var alteration of alteredJsonRes) {
-               if (alteration['alteredingredientid'] == ingredient['ingredientid']) {
-                  ingredient['name'] = alteration['newingredient'];
-                  modified = true;
-               }
-               break;
+         var alteredJsonRes = alteredIngredients.rows;
+         
+         for (var modification of alteredJsonRes) {
+            if (modification['modificationtype'] == 'A') {
+               // This modification adds an ingredient
+               ingredientsJsonRes.push({
+                  modified: true,
+                  name: modification['ingredientname']
+               });
             }
-            ingredient['modified'] = modified;
-            finalIngredients.push(ingredient);
+            else {
+               // This modification removes an ingredient
+               for (let i = 0; i < ingredientsJsonRes.length; i++) {
+                  if (ingredientsJsonRes[i]['name'] == modification['ingredientname']) {
+                     ingredientsJsonRes.splice(i, 1);
+                  }
+               }
+            }
          }
+         console.log(ingredientsJsonRes);
 
          var effects = await connect.pool.query(
             "SELECT * FROM effect WHERE eatenID = $1;",
@@ -142,7 +175,7 @@ class itemsModel {
             effectsData.push(JSON.parse(JSON.stringify(effectData.rows))[0]);
          }
 
-         return {'foodData': dataItem, 'ingredients': finalIngredients, 'effects': effectsData};
+         return {'foodData': dataItem, 'ingredients': ingredientsJsonRes, 'effects': effectsData};
       }
       catch (error) {
          console.error(error);

@@ -3,7 +3,7 @@
 @theme {
     --spacing: 1rem;
     --border-size: 2px;
-    --border-size-small: 2px;
+    --border-size-small: 1.8px;
     --border-rounded: 20px;
 
     /* Colour Schemes (not finished) */
@@ -123,6 +123,32 @@
         @apply mx-auto!;
     }
 
+    /* DROPDOWNS */
+    .dropdown select {
+        @apply border-light-primary dark:border-dark-primary;
+        @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
+        @apply hover:bg-light-primary hover:dark:bg-dark-primary hover:text-dark-text hover:cursor-pointer;
+
+        @apply py-0 px-0.5 transition-colors;
+
+        @apply appearance-none;
+    }
+
+    .dropdown {
+        @apply relative w-fit;
+    }
+
+    .dropdown::before {
+        @apply border-l-(length:--border-size-small) border-b-(length:--border-size-small) border-light-text dark:border-dark-text;
+        @apply absolute w-0.5 h-0.5 rotate-45 right-0.5 top-1/2 -translate-y-1/2 transition-transform;
+        content: "";
+    }
+
+    .dropdown:hover::before {
+        @apply border-dark-text;
+        @apply -rotate-45! -translate-y-2/3;
+    }
+
     /* MODIFICATIONS */
     .modification {
         overflow-x: hidden;
@@ -195,6 +221,28 @@
 
     .addList fieldset div input {
         @apply w-full;
+    }
+
+    /* CREATE-EATEN */
+    /*.ingredientsSelection {
+        @apply w-fit! accent-light-background dark:accent-dark-background;
+    }
+
+    .ingredientsSelection.checked {
+        @apply accent-light-primary! dark:accent-dark-primary!;
+    }*/
+
+    .ingredientsSelection {
+        @apply w-1! h-1! translate-y-1/4 grid place-content-center;
+        @apply border-(length:--border-size) rounded-(length:--border-rounded) border-light-text;
+        appearance: none;
+    }
+
+    .ingredientsSelection.checked::before {
+        @apply w-0.5 h-0.5 rounded-(length:--border-rounded);
+        content: "";
+        transform: scale(1);
+        box-shadow: inset 1em 1em var(--color-light-primary);
     }
 
     /* OTHER SPECIFICS */

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <script type="module">
+        import {createItem} from "./js/createItem.js";
+        const scripts = new createItem('E');
+    </script>
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <%-include('partials/nav') %>
+    <% if (typeof error != "undefined") { %>
+        <%-include('partials/popup', {text:"Your eaten food could not be established.", href:'create-eaten'}) %>
+    <% } else if (typeof created != "undefined") { %>
+         <%-include('partials/popup', {text:"Eaten food established!", href:'create-eaten'}) %>
+    <% } %>
+    <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
+        <div class="heading flex flex-col mb-1">
+            <%-include('partials/icon', {src:"/assets/food-icon.png", 
+            alt:"An icon of a strawberry", addClass: "h-4 mx-auto p-0"}) %>
+            <h3 class="mx-auto mb-1">New Eaten Food</h3>
+            <form action="#", method="POST" class="border-style border-light-primary-200 flex flex-col gap-0.5">
+                <h2 class="text-center"><%= food['name'] %></h2>
+                <p class="border-style"><%= food['description'] %></p>
+                <fieldset class="addList">
+                    <p>Ingredients:</p>
+                    <fieldset id="ingredients">
+                        <% for (var ingredient of ingredients) { %>
+                            <div class="flex flex-row gap-1">
+                                <input type="checkbox" value="<%= ingredient['name'] %>" name="checked[<%= ingredient['ingredientid'] %>]" class="ingredientsSelection checked" checked>
+                                <label for="checked[<%= ingredient['ingredientid'] %>]"><%= ingredient['name'] %></label>
+                            </div>
+                        <% } %>
+                    </fieldset>
+                            
+                    <button type="button" id="addIngredient" class="w-fit">Add ingredient</button>
+                </fieldset>
+                <div class="dropdown">
+                    <select name="opinion" id="opinion" class="w-fit">
+                        <option value="Loved">Loved</option>
+                        <option value="Liked">Liked</option>
+                        <option value="Okay">Okay</option>
+                        <option value="Disliked">Disliked</option>
+                        <option value="Hated">Hated</option>
+                    </select>
+                </div>
+                <input type="submit" value="Declare Eaten Food" class="flex mx-auto my-1">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

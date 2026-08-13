@@ -23,6 +23,8 @@ var moodItemRouter = require("./routes/mood-item");
 var sicknessItemRouter = require("./routes/sickness-item");
 var createSicknessRouter = require("./routes/create-sickness");
 var createMoodRouter = require("./routes/create-mood");
+var createFoodRouter = require("./routes/create-food");
+var createEatenRouter = require("./routes/create-eaten");
 var foodListRouter = require("./routes/food-list");
 
 app.use("/error", errorRouter);
@@ -33,6 +35,8 @@ app.use("/mood-item", moodItemRouter);
 app.use("/sickness-item", sicknessItemRouter);
 app.use("/create-sickness", createSicknessRouter);
 app.use("/create-mood", createMoodRouter);
+app.use("/create-food", createFoodRouter);
+app.use("/create-eaten", createEatenRouter);
 app.use("/food-list", foodListRouter);
 
 // Error handling

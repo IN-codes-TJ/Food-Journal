@@ -1,13 +1,22 @@
 export class createItem {
     constructor(type) {
-        if (type == 'S') this.addToSymptom = document.getElementById("symptoms");
-        this.addToAssociation = document.getElementById("associatedFoods");
+        this.type = type;
+        if (type == 'S' || type == 'M') {
+            if (type == 'S') this.addToSymptom = document.getElementById("symptoms");
+            this.addToAssociation = document.getElementById("associatedFoods");
 
-        var foodOptionsRaw = document.getElementById("foodOptions");
-        this.foodOptions = JSON.parse(foodOptionsRaw.getAttribute("value"));
-        
-        if (type == 'S') this.listenForSymptomAdd("addSymptom");
-        this.listenForAssociationAdd("addAssociatedFood");
+            var foodOptionsRaw = document.getElementById("foodOptions");
+            this.foodOptions = JSON.parse(foodOptionsRaw.getAttribute("value"));
+            
+            if (type == 'S') this.listenForSymptomAdd("addSymptom");
+            this.listenForAssociationAdd("addAssociatedFood");
+        }
+        else {
+            this.addToIngredient = document.getElementById("ingredients");
+            this.listenForIngredientAdd("addIngredient");
+
+            if (type == 'E') this.listenForCheckBox("ingredients");
+        }
     }
 
     createDeletor(newDiv) {
@@ -80,6 +89,53 @@ export class createItem {
 
             this.addToAssociation.appendChild(newDiv);
         })
+        return;
+    }
+
+    listenForIngredientAdd(elementId) {
+        var target = document.getElementById(elementId);
+        
+        target.addEventListener("click", ()=>{
+            var newDiv = document.createElement("div");
+
+            var newInputElement = document.createElement("input");
+            newInputElement.setAttribute("type", "text");
+            newInputElement.setAttribute("class", "border-underline");
+            newInputElement.setAttribute("required", "");
+            if (this.type == 'F') newInputElement.setAttribute("name", "ingredient[]");
+            else newInputElement.setAttribute("name", "modifications[]");
+            newDiv.appendChild(newInputElement);
+
+            this.createDeletor(newDiv);
+
+            this.addToIngredient.appendChild(newDiv);
+        })
+        return;
+    }
+
+    listenForCheckBox(elementId) {
+        var target = document.querySelectorAll("#"+elementId+" div input");
+        
+        for (var child of target) {
+            if (child.hasAttribute("name")) {
+                // It is the input element
+                child.addEventListener("click",(e)=>{
+                    e.preventDefault();
+                    e.target.classList.toggle("checked");
+                    var ingredientid = e.target.getAttribute("name").split("[")[1].replace("]", "");
+                    
+                    if (e.target.classList.contains("checked")) {
+                        var newname = "checked[" + ingredientid + "]";
+                        e.target.setAttribute("name", newname);
+                    }
+                    else {
+                        var newname = "unchecked[" + ingredientid + "]";
+                        e.target.setAttribute("name", newname)
+                    }
+                })
+            }
+        }
+
         return;
     }
 }
