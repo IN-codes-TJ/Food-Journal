@@ -14,9 +14,9 @@
 <body>
     <%-include('partials/nav') %>
     <% if (typeof error != "undefined") { %>
-        <%-include('partials/popup', {text:"Your eaten food could not be established.", href:'create-eaten'}) %>
+        <%-include('partials/popup', {text:"Your eaten food could not be established.", href: href}) %>
     <% } else if (typeof created != "undefined") { %>
-         <%-include('partials/popup', {text:"Eaten food established!", href:'create-eaten'}) %>
+         <%-include('partials/popup', {text:"Eaten food established!", href: href}) %>
     <% } %>
     <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
         <div class="heading flex flex-col mb-1">

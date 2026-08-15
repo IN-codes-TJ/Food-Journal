@@ -352,47 +352,17 @@
     border-left-style: var(--tw-border-style);
     border-left-width: var(--border-size-small);
   }
-  .border-green-900 {
-    border-color: var(--color-green-900);
-  }
   .border-light-navcolour {
     border-color: var(--color-light-navcolour);
   }
   .border-light-primary-200 {
     border-color: var(--color-light-primary-200);
   }
-  .border-orange-900 {
-    border-color: var(--color-orange-900);
-  }
-  .border-red-900 {
-    border-color: var(--color-red-900);
-  }
-  .border-teal-900 {
-    border-color: var(--color-teal-900);
-  }
-  .border-yellow-900 {
-    border-color: var(--color-yellow-900);
-  }
   .border-b-transparent {
     border-bottom-color: transparent;
   }
-  .bg-blue-200 {
-    background-color: var(--color-blue-200);
-  }
-  .bg-green-200 {
-    background-color: var(--color-green-200);
-  }
   .bg-light-background {
     background-color: var(--color-light-background);
-  }
-  .bg-orange-200 {
-    background-color: var(--color-orange-200);
-  }
-  .bg-red-200 {
-    background-color: var(--color-red-200);
-  }
-  .bg-yellow-200 {
-    background-color: var(--color-yellow-200);
   }
   .p-0 {
     padding: 0;
@@ -489,34 +459,9 @@
       border-left-color: var(--color-dark-text);
     }
   }
-  .dark\:bg-blue-800 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-blue-800);
-    }
-  }
   .dark\:bg-dark-background {
     @media (prefers-color-scheme: dark) {
       background-color: var(--color-dark-background);
-    }
-  }
-  .dark\:bg-green-800 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-green-800);
-    }
-  }
-  .dark\:bg-orange-800 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-orange-800);
-    }
-  }
-  .dark\:bg-red-800 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-red-800);
-    }
-  }
-  .dark\:bg-yellow-800 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-yellow-800);
     }
   }
 }
@@ -551,6 +496,9 @@
   }
   p, label, input {
     overflow-wrap: anywhere;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
   }
 }
 @layer components {
@@ -723,6 +671,61 @@
     --tw-translate-y: calc(calc(2 / 3 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
     rotate: calc(45deg * -1) !important;
+  }
+  option[value="Loved"], .Loved {
+    border-color: var(--color-teal-900) !important;
+    background-color: var(--color-blue-200);
+    color: var(--color-light-text) !important;
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-blue-800);
+    }
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-dark-text) !important;
+    }
+  }
+  option[value="Liked"], .Liked {
+    border-color: var(--color-green-900) !important;
+    background-color: var(--color-green-200);
+    color: var(--color-light-text) !important;
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-green-800);
+    }
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-dark-text) !important;
+    }
+  }
+  option[value="Okay"], .Okay {
+    border-color: var(--color-yellow-900) !important;
+    background-color: var(--color-yellow-200);
+    color: var(--color-light-text) !important;
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-yellow-800);
+    }
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-dark-text) !important;
+    }
+  }
+  option[value="Disliked"], .Disliked {
+    border-color: var(--color-orange-900) !important;
+    background-color: var(--color-orange-200);
+    color: var(--color-light-text) !important;
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-orange-800);
+    }
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-dark-text) !important;
+    }
+  }
+  option[value="Hated"], .Hated {
+    border-color: var(--color-red-900) !important;
+    background-color: var(--color-red-200);
+    color: var(--color-light-text) !important;
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-red-800);
+    }
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-dark-text) !important;
+    }
   }
   .modification {
     overflow-x: hidden;

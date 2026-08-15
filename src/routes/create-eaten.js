@@ -19,14 +19,14 @@ router.get('/', async function(req, res) {
         var foodData = await itemsModel.getFoodItem(foodID);
         
         if (typeof req.query.err == 'undefined' && typeof req.query.created == 'undefined') {
-            res.render("create-eaten", {food: foodData['foodData'], ingredients: foodData['ingredients']})
+            res.render("create-eaten", {food: foodData['foodData'], ingredients: foodData['ingredients'], href: "create-eaten?id="+foodID})
         }
         else if (typeof req.query.created != 'undefined') {
-            res.render('create-eaten', {created: true, food});
+            res.render('create-eaten', {created: true, food: foodData['foodData'], ingredients: foodData['ingredients'], href: "create-eaten?id="+foodID});
         }
         else {
             // An error occured
-            res.render('create-eaten', {error: req.query.err, food});
+            res.render('create-eaten', {error: req.query.err, food:foodData['foodData'], ingredients: foodData['ingredients'], href: "create-eaten?id="+foodID});
         }
     }
     catch (error) {
@@ -36,25 +36,21 @@ router.get('/', async function(req, res) {
 });
 
 router.post("/", limiter, async(req, res, next) => {
-    var userID = 1;
+    const userID = 1;
+    const foodID = req.query.id;
 
-    const checked = req.body.checked || "";
     const unchecked = req.body.unchecked || "";
     const modifications = req.body.modifications || "";
-    console.log("checked: " + checked);
-    console.log("unchecked: " + unchecked);
-    console.log("modifications: "+modifications);
+    const opinion = req.body.opinion;
 
-    //TODO: Styling for checked and unchecked
-
-    /*createModel.createEatenFood(userID, name, ingredients, modifications).then((result)=>{
+    createModel.createEatenFood(userID, foodID, unchecked, modifications, opinion).then((result)=>{
         if (result == true) {
-            res.redirect("create-eaten?created");
+            res.redirect("create-eaten?id="+foodID+"&created");
         }
         else {
-            res.redirect("create-eaten?err=nCreate")
+            res.redirect("create-eaten?id="+foodID+"&err=nCreate")
         }
-    });*/
+    });
 
 });
 

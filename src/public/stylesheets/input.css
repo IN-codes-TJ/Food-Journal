@@ -54,6 +54,10 @@
     p, label, input {
         @apply wrap-anywhere;
     }
+
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+    }
 }
 
 @layer components {
@@ -147,6 +151,26 @@
     .dropdown:hover::before {
         @apply border-dark-text;
         @apply -rotate-45! -translate-y-2/3;
+    }
+
+    option[value="Loved"], .Loved {
+        @apply border-teal-900! bg-blue-200 dark:bg-blue-800 text-light-text! dark:text-dark-text!;
+    }
+
+    option[value="Liked"], .Liked {
+        @apply border-green-900! bg-green-200 dark:bg-green-800 text-light-text! dark:text-dark-text!;
+    }
+
+    option[value="Okay"], .Okay {
+        @apply border-yellow-900! bg-yellow-200 dark:bg-yellow-800 text-light-text! dark:text-dark-text!;
+    }
+
+    option[value="Disliked"], .Disliked {
+        @apply border-orange-900! bg-orange-200 dark:bg-orange-800 text-light-text! dark:text-dark-text!;
+    }
+
+    option[value="Hated"], .Hated {
+        @apply border-red-900! bg-red-200 dark:bg-red-800 text-light-text! dark:text-dark-text!;
     }
 
     /* MODIFICATIONS */

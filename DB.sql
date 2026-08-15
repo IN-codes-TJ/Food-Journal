@@ -54,8 +54,8 @@ CREATE TABLE eatenFood(
 ); /* TESTED */
 
 /* For modifications made to foods that were eaten */
-CREATE DOMAIN modificationType AS VARCHAR(6)
-DEFAULT 'Add' CHECK (VALUE IN ('Add', 'Remove'));
+CREATE DOMAIN modificationType AS VARCHAR(1)
+DEFAULT 'Add' CHECK (VALUE IN ('A', 'R'));
 CREATE TABLE modification (
 	modificationID		SERIAL PRIMARY KEY,
 	eatenID 			INTEGER NOT NULL,

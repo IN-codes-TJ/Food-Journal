@@ -98,6 +98,40 @@ class createModel {
          return {'error': true};
       }
    }
+
+   async createEatenFood(userID, foodID, unchecked, modifications, opinion) {
+      try {
+         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         await connect.pool.query(setSchema);
+         // Add data to database
+
+         var eatenData = await connect.pool.query(
+            "INSERT INTO eatenFood(userid, foodid, satisfaction) VALUES($1, $2, $3) RETURNING eatenID",
+            [userID, foodID, opinion]
+         );
+         var eatenID = eatenData.rows[0]['eatenid'];
+
+         var modificationInsert;
+         for (var modification of unchecked) {
+            modificationInsert = await connect.pool.query(
+               "INSERT INTO modification(eatenID, modificationType, ingredientName) VALUES ($1, 'R', $2);",
+               [eatenID, modification]
+            );
+         }
+         for (var modification of modifications) {
+            modificationInsert = await connect.pool.query(
+               "INSERT INTO modification(eatenID, modificationType, ingredientName) VALUES ($1, 'A', $2);",
+               [eatenID, modification]
+            );
+         }
+
+         return true;
+      }
+      catch (error) {
+         console.error(error);
+         return {'error': true};
+      }
+   }
 }
 
 
