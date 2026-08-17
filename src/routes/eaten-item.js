@@ -11,7 +11,6 @@ router.get('/', async function(req, res) {
     }
     catch (error) {
         console.error(error);
-        console.log("im heere");
         res.render('error');
     }
 });

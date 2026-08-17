@@ -148,7 +148,6 @@ class itemsModel {
                }
             }
          }
-         console.log(ingredientsJsonRes);
 
          var effects = await connect.pool.query(
             "SELECT * FROM effect WHERE eatenID = $1;",
