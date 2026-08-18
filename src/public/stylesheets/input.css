@@ -248,17 +248,9 @@
     }
 
     /* CREATE-EATEN */
-    /*.ingredientsSelection {
-        @apply w-fit! accent-light-background dark:accent-dark-background;
-    }
-
-    .ingredientsSelection.checked {
-        @apply accent-light-primary! dark:accent-dark-primary!;
-    }*/
-
     .ingredientsSelection {
         @apply w-1! h-1! translate-y-1/4 grid place-content-center;
-        @apply border-(length:--border-size) rounded-(length:--border-rounded) border-light-text;
+        @apply border-(length:--border-size) rounded-(length:--border-rounded) border-light-text dark:border-dark-text;
         appearance: none;
     }
 
@@ -267,6 +259,12 @@
         content: "";
         transform: scale(1);
         box-shadow: inset 1em 1em var(--color-light-primary);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .ingredientsSelection.checked::before {
+            box-shadow: inset 1em 1em var(--color-dark-primary);
+        }
     }
 
     /* OTHER SPECIFICS */

@@ -12,7 +12,7 @@
     <title>My Food Journal</title>
 </head>
 <body>
-    <%-include('partials/nav') %>
+    <%-include('partials/nav', {href:null}) %>
     <% if (typeof error != "undefined") { %>
         <%-include('partials/popup', {text:"Your eaten food could not be established.", href: href}) %>
     <% } else if (typeof created != "undefined") { %>
