@@ -10,6 +10,8 @@ router.get('/', async function(req, res) {
         alt:"A bin, clicked to delete items", text:"Delete", addClass:(item['type'] == 'Food' ? 'deleteItem Food-'+item['foodid'] : item['type'] == 'Mood' ? 'deleteItem Mood-'+item['moodid'] : 'deleteItem Sickness-'+item['sicknessid'])}) %>
                     
     */
+   console.log(req.user.displayName);
+   console.log(req.user);
    var userID = 1;
    try {
         timeItemsModel.getTimeItems(userID).then((result)=>{
