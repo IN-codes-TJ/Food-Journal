@@ -13,8 +13,7 @@ const itemsModel = require('../model/itemsModel');
 
 router.get('/', async function(req, res) {
     try {
-        var userID = 1;
-        var foodOptions = await itemsModel.getEatenItems(userID);
+        var foodOptions = await itemsModel.getEatenItems(req.user.id);
         
         if (typeof req.query.err == 'undefined' && typeof req.query.created == 'undefined') {
             res.render("create-mood", {foodOptions})
@@ -34,8 +33,6 @@ router.get('/', async function(req, res) {
 });
 
 router.post("/", limiter, async(req, res, next) => {
-    var userID = 1;
-
     const name = req.body.name;
     const description = req.body.desc || "";
     const associatedFoods = req.body.associatedFoods || "";
@@ -52,7 +49,7 @@ router.post("/", limiter, async(req, res, next) => {
         }
     }}
 
-    createModel.createMood(userID, name, description, associatedFoods).then((result)=>{
+    createModel.createMood(req.user.id, name, description, associatedFoods).then((result)=>{
         if (result == true) {
             res.redirect("create-mood?created");
         }

@@ -7,12 +7,10 @@ SET SEARCH_PATH TO foodjournal, PUBLIC;
 /* User account information */
 CREATE TABLE account (
 	userID				SERIAL PRIMARY KEY,
-	username			VARCHAR(128) NOT NULL UNIQUE,
-	email				VARCHAR(128) NOT NULL UNIQUE CHECK (email LIKE '_%@_%._%'),
-	password			VARCHAR(256) NOT NULL /* Hashed */
+	username			VARCHAR(128),
+	email				VARCHAR(128) UNIQUE CHECK (email LIKE '_%@_%._%'),
+	password			VARCHAR(256)/* Hashed if provided */
 ); /* TESTED */
-
-
 
 /* FOOD */
 
@@ -61,7 +59,7 @@ CREATE TABLE modification (
 	eatenID 			INTEGER NOT NULL,
 	modificationType	modificationType,
 	ingredientName		VARCHAR(128) NOT NULL,
-	FOREIGN KEY (eatenID) REFERENCES eatenFood ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (eatenID) REFERENCES eatenFood ON UPDATE CASCADE ON DELETE CASCADE
 ); /* TESTED */
 
 
@@ -176,7 +174,7 @@ SELECT sicknessID as ID, userID, name, description, time, 'Sickness' as type FRO
 ORDER BY time;
 
 /* Test Data */
-
+/*
 INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
 INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff');
 INSERT INTO eatenFood VALUES (4, 1, 1); 
@@ -195,3 +193,4 @@ INSERT INTO effect (eatenID, causeTypeID, causeType) VALUES (4, 1, 'S');
 DELETE FROM mood;
 SELECT * FROM mood;
 INSERT INTO effect (eatenID, causeTypeID, causeType) VALUES (4, 1, 'M');
+*/

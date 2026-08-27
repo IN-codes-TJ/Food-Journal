@@ -51,13 +51,8 @@ app.get(
     passport.authenticate("google", { scope: ["email"]})
 );
 
-app.get(
-    "/auth/google/callback",
-    passport.authenticate("google", {failureRedirect: "/signup"}), (req, res) => {
-        // Successfull authentication: go to index
-        res.redirect("/");
-    }
-)
+var authCallbackRouter = require("./routes/authCallback");
+app.use("/auth/google/callback", authCallbackRouter);
 
 var errorRouter = require("./routes/error");
 var signupRouter = require("./routes/signup");
@@ -87,9 +82,9 @@ app.use("/create-eaten", createEatenRouter);
 app.use("/food-list", foodListRouter);
 
 // Error handling
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
     res.redirect("/error");
-})*/
+})
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

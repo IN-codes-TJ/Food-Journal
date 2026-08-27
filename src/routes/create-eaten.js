@@ -13,8 +13,6 @@ const itemsModel = require('../model/itemsModel');
 
 router.get('/', async function(req, res) {
     try {
-        var userID = 1;
-
         var foodID = req.query.id;
         var foodData = await itemsModel.getFoodItem(foodID);
         
@@ -36,14 +34,13 @@ router.get('/', async function(req, res) {
 });
 
 router.post("/", limiter, async(req, res, next) => {
-    const userID = 1;
     const foodID = req.query.id;
 
     const unchecked = req.body.unchecked || "";
     const modifications = req.body.modifications || "";
     const opinion = req.body.opinion;
 
-    createModel.createEatenFood(userID, foodID, unchecked, modifications, opinion).then((result)=>{
+    createModel.createEatenFood(req.user.id, foodID, unchecked, modifications, opinion).then((result)=>{
         if (result == true) {
             res.redirect("create-eaten?id="+foodID+"&created");
         }

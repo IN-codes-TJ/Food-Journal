@@ -11,6 +11,7 @@
     <%-include('partials/nav', {'home': 'home'}) %>
     <main class="flex flex-col justify-center mx-auto max-w-52 w-[80vw]">
         <h1 class="text-center">My Food Journal</h1>
+        <h3 class="italic mx-auto">Hello, <%= username %>!</h3>
         <% if (typeof timeItems[0] != 'undefined') { %>
             <div>
             <% for (var timeItem of timeItems) { %>

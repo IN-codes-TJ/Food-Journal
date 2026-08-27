@@ -3,19 +3,9 @@ const router = express.Router();
 const timeItemsModel = require('../model/timeItemsModel');
 
 router.get('/', async function(req, res) {
-    // Change 1 to userID
-    // Event listener for delete buttons
-    /* 
-        <%-include('partials/icon', {src:"/assets/Delete-Icon.png", 
-        alt:"A bin, clicked to delete items", text:"Delete", addClass:(item['type'] == 'Food' ? 'deleteItem Food-'+item['foodid'] : item['type'] == 'Mood' ? 'deleteItem Mood-'+item['moodid'] : 'deleteItem Sickness-'+item['sicknessid'])}) %>
-                    
-    */
-   console.log(req.user.displayName);
-   console.log(req.user);
-   var userID = 1;
    try {
-        timeItemsModel.getTimeItems(userID).then((result)=>{
-            res.render('index', {timeItems: result});
+        timeItemsModel.getTimeItems(req.user.id).then((result)=>{
+            res.render('index', {timeItems: result, username: req.user.username});
         });
     }
     catch (error) {

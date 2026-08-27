@@ -12,7 +12,6 @@ const createModel = require('../model/createModel');
 
 router.get('/', async function(req, res) {
     try {
-        var userID = 1;
         if (typeof req.query.err == 'undefined' && typeof req.query.created == 'undefined') {
             res.render("create-food")
         }
@@ -31,13 +30,11 @@ router.get('/', async function(req, res) {
 });
 
 router.post("/", limiter, async(req, res, next) => {
-    var userID = 1;
-
     const name = req.body.name;
     const description = req.body.desc || "";
     const ingredients = req.body.ingredient || "";
     
-    createModel.createFood(userID, name, description, ingredients).then((result)=>{
+    createModel.createFood(req.user.id, name, description, ingredients).then((result)=>{
         if (result == true) {
             res.redirect("create-food?created");
         }

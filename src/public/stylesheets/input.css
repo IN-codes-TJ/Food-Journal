@@ -153,6 +153,10 @@
         @apply -rotate-45! -translate-y-2/3;
     }
 
+    option {
+        @apply bg-light-background dark:bg-dark-background;
+    }
+
     option[value="Loved"], .Loved {
         @apply border-teal-900! bg-blue-200 dark:bg-blue-800 text-light-text! dark:text-dark-text!;
     }
@@ -189,27 +193,27 @@
 
     /* ITEMS */
     .border-colour {
-        @apply border-(length:--border-size) border-light-primary dark:border-dark-primary;
+        @apply border-(length:--border-size) border-light-primary-200 dark:border-dark-primary-200;
     }
 
     .border-style {
-        @apply border-light-primary dark:border-dark-primary;
+        @apply border-light-primary-200 dark:border-dark-primary-200;
         @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
     }
 
     .border-underline {
-        @apply border-b-(length:--border-size) border-b-light-primary dark:border-b-dark-primary;
+        @apply border-b-(length:--border-size) border-b-light-primary-200 dark:border-b-dark-primary-200;
     }
 
     .div-hover {
-        @apply border-light-primary dark:border-dark-primary;
+        @apply border-light-primary-200 dark:border-dark-primary-200;
         @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
         @apply hover:bg-light-primary-200 hover:dark:bg-dark-primary-200 hover:cursor-pointer;
     }
 
     .div-still {
         @apply bg-light-background dark:bg-dark-background;
-        @apply border-light-primary dark:border-dark-primary;
+        @apply border-light-primary-200 dark:border-dark-primary-200;
         @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
     }
 
