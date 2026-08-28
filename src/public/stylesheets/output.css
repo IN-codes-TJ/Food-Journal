@@ -359,10 +359,6 @@
     border-right-style: var(--tw-border-style);
     border-right-width: var(--border-size);
   }
-  .border-b-\(length\:--border-size\) {
-    border-bottom-style: var(--tw-border-style);
-    border-bottom-width: var(--border-size);
-  }
   .border-l-\(length\:--border-size-small\) {
     border-left-style: var(--tw-border-style);
     border-left-width: var(--border-size-small);
@@ -372,9 +368,6 @@
   }
   .border-light-primary-200 {
     border-color: var(--color-light-primary-200);
-  }
-  .border-red-700 {
-    border-color: var(--color-red-700);
   }
   .border-b-transparent {
     border-bottom-color: transparent;
@@ -418,6 +411,12 @@
   }
   .text-red-500 {
     color: var(--color-red-500);
+  }
+  .lowercase {
+    text-transform: lowercase;
+  }
+  .uppercase {
+    text-transform: uppercase;
   }
   .italic {
     font-style: italic;
