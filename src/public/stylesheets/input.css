@@ -26,7 +26,7 @@
 
 @layer base {
     body {
-        @apply bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text mt-4;
+        @apply bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text my-4;
         font-family: 'Chivo', sans-serif;
         font-weight: 300;
     }

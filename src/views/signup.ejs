@@ -16,28 +16,28 @@
         <form action="#" method="POST" class="border-style flex flex-col gap-1">
             <fieldset class="flex flex-col">
                <legend for="username" class="px-1 py-0 mb-0">Username</legend>
+               <h5 class="px-1">(If no username is entered, it will be set to your email instead)</h5>
                <input name="username" type="username" placeholder="Lorem Ipsum" class="grow div-hover">
-               <h5 class="text-red-500 text-center">If no username is entered, it will be set to your email instead.</h5>
-               <h5 class="text-red-500 text-center"><%= (typeof usernameErr != "undefined") ? usernameErr %></h5>
+               <h5 class="text-red-500 text-center"><%= (typeof usernameErr != "undefined") ? usernameErr : "" %></h5>
             </fieldset>
             <fieldset class="flex flex-col">
                <legend for="email" class="px-1 py-0 mb-0">Email</legend>
                <input name="email" type="email" placeholder="LoremIpsum@gmail.com" class="grow div-hover" required>
-               <h5 class="text-red-500 text-center"><%= (typeof emailErr != "undefined") ? emailErr %></h5>
+               <h5 class="text-red-500 text-center"><%= (typeof emailErr != "undefined") ? emailErr : ""%></h5>
             </fieldset>
             <fieldset class="flex flex-col">
                <label for="password" class="px-1 py-0 mb-0">Password</label>
                <input name="password" type="password" placeholder="*****" class="grow div-hover">
                 <% if (typeof passwordErrs != "undefined") { %>
                     <% for (var err of passwordErrs) { %>
-                        <h5 class="text-red-500 text-center">err</h5>
+                        <h5 class="text-red-500 text-center"><%= err %></h5>
                     <% } %>
                 <% } %>
             </fieldset>
             <fieldset class="flex flex-col">
                <label for="confirmPassword" class="px-1 py-0 mb-0">Confirm Password</label>
                <input name="confirmPassword" type="password" placeholder="*****" class="grow div-hover">
-               <h5 class="text-red-500 text-center"><%= (typeof confirmPasswordErr != "undefined") ? confirmPasswordErr %></h5>
+               <h5 class="text-red-500 text-center"><%= (typeof confirmPasswordErr != "undefined") ? confirmPasswordErr : "" %></h5>
             </fieldset>
 
             <input type="submit" value="Sign-Up" name="submit" class="button mx-auto my-0">
