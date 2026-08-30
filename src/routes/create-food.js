@@ -11,6 +11,11 @@ const limiter = rateLimit({
 const createModel = require('../model/createModel');
 
 router.get('/', async function(req, res) {
+    if (typeof req.user?.id == "undefined") {
+        res.redirect("/signup");
+        return;
+    }
+    
     try {
         if (typeof req.query.err == 'undefined' && typeof req.query.created == 'undefined') {
             res.render("create-food")

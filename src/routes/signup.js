@@ -33,10 +33,10 @@ router.post('/', [
         for (const error of alert) {
             if (error['path'] == 'username') usernameErr = error;
             else if (error['path'] == 'email') emailErr = error;
-            else if (error['path'] == 'password') passwordErrs.push(error);
+            else if (error['path'] == 'password') passwordErrs.push(error.msg);
         }
-
-        res.render('signup', {usernameErr: usernameErr, emailErr: emailErr, passwordErrs: passwordErrs, confirmPasswordErr: confirmPasswordErr});
+        
+        res.render('signup', {usernameErr: usernameErr.msg, emailErr: emailErr.msg, passwordErrs: passwordErrs, confirmPasswordErr: confirmPasswordErr});
         return;
     } 
 
