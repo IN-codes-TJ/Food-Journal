@@ -12,7 +12,7 @@ const createModel = require('../model/createModel');
 const itemsModel = require('../model/itemsModel');
 
 router.get('/', async function(req, res) {
-    if (typeof req.user?.id == "undefined") {
+    if (typeof req.session.user == "undefined") {
         res.redirect("/signup");
         return;
     }
@@ -45,7 +45,7 @@ router.post("/", limiter, async(req, res, next) => {
     const modifications = req.body.modifications || "";
     const opinion = req.body.opinion;
 
-    createModel.createEatenFood(req.user.id, foodID, unchecked, modifications, opinion).then((result)=>{
+    createModel.createEatenFood(req.session.user.id, foodID, unchecked, modifications, opinion).then((result)=>{
         if (result == true) {
             res.redirect("create-eaten?id="+foodID+"&created");
         }

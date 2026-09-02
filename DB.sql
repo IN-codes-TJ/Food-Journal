@@ -175,6 +175,7 @@ ORDER BY time;
 
 /* Test Data */
 /*
+SELECT * FROM account;
 INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
 INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff');
 INSERT INTO eatenFood VALUES (4, 1, 1); 
@@ -192,5 +193,6 @@ INSERT INTO sickness (sicknessID, userID, name, description) VALUES (1, 1, 'Stom
 INSERT INTO effect (eatenID, causeTypeID, causeType) VALUES (4, 1, 'S');
 DELETE FROM mood;
 SELECT * FROM mood;
+SELECT * FROM eatenFood;
 INSERT INTO effect (eatenID, causeTypeID, causeType) VALUES (4, 1, 'M');
 */

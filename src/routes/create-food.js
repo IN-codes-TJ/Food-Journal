@@ -11,7 +11,7 @@ const limiter = rateLimit({
 const createModel = require('../model/createModel');
 
 router.get('/', async function(req, res) {
-    if (typeof req.user?.id == "undefined") {
+    if (typeof req.session.user == "undefined") {
         res.redirect("/signup");
         return;
     }
@@ -39,7 +39,7 @@ router.post("/", limiter, async(req, res, next) => {
     const description = req.body.desc || "";
     const ingredients = req.body.ingredient || "";
     
-    createModel.createFood(req.user.id, name, description, ingredients).then((result)=>{
+    createModel.createFood(req.session.user.id, name, description, ingredients).then((result)=>{
         if (result == true) {
             res.redirect("create-food?created");
         }

@@ -9,6 +9,10 @@
 </head>
 <body>
     <main>
+        <% if (typeof message != "undefined") { %>
+            <h3><%= message %></h3>
+        <% } %>
+        
         You have been blocked from this page. Please try again later.
     </main>
 </body>

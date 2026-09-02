@@ -3,14 +3,14 @@ const router = express.Router();
 const timeItemsModel = require('../model/timeItemsModel');
 
 router.get('/', async function(req, res) {
-    if (typeof req.user?.id == "undefined") {
+    if (typeof req.session.user == "undefined") {
         res.redirect("/signup");
         return;
     }
-
+    
    try {
-        timeItemsModel.getTimeItems(req.user.id).then((result)=>{
-            res.render('index', {timeItems: result, username: req.user.username});
+        timeItemsModel.getTimeItems(req.session.user.id).then((result)=>{
+            res.render('index', {timeItems: result, username: req.session.user.username});
         });
     }
     catch (error) {

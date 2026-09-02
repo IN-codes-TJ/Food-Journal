@@ -7,8 +7,8 @@ router.get("/",
     passport.authenticate("google", {failureRedirect: "/signup"}), (req, res) => {
         // Successfull authentication
         userModel.createUser(req.user.emails[0]['value'], undefined, undefined).then((result)=>{
-            req.user.id = result['userid'];
-            req.user.username = (result['username'] == null) ? result['email'] : result['username'];
+            req.session.user = {id: result['userid'], username: (result['username'] == null) ? result['email'] : result['username']};
+
             res.redirect("/");
         });
     }

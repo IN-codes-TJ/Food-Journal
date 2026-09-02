@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <%-include('partials/nav') %>
+    <main class="flex flex-col justify-center mx-auto max-w-52 w-[80vw]">
+        <h1 class="text-center">My Account</h1>
+        <div class="border-style flex flex-col gap-1">
+            <p>Username: <i><%= username == null ? "[NOT PROVIDED]" : username %></i></p>
+            <p>Email: <i><%= email %></i></p>
+            <a href="logout" class="submit w-fit">Log Out</a>
+        </div>
+    </main>
+</body>
+</html>

@@ -3,7 +3,7 @@ const router = express.Router();
 const itemsModel = require('../model/itemsModel');
 
 router.get('/', async function(req, res) {
-    if (typeof req.user?.id == "undefined") {
+    if (typeof req.session.user == "undefined") {
         res.redirect("/signup");
         return;
     }

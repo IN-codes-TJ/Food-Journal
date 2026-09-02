@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const itemsModel = require('../model/itemsModel');
+const userModel = require('../model/userModel');
 
 router.get('/', async function(req, res) {
     if (typeof req.session.user == "undefined") {
@@ -8,10 +8,10 @@ router.get('/', async function(req, res) {
         return;
     }
     
-    try {
-        itemsModel.getEatenItem(req.query.id).then((result)=>{
-            if (typeof result['error'] != 'undefined') {res.redirect("/error")};
-            res.render('eaten-item', {item: result['foodData'], ingredients: result['ingredients'], effects: result['effects']});
+   try {
+        userModel.getUser(req.session.user.id).then((result)=>{
+            console.log(result)
+            res.render('account', {username: result['username'], email: result['email']});
         });
     }
     catch (error) {

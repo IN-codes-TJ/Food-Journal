@@ -11,8 +11,9 @@
 </head>
 <body>
     <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
-        <h1 class="w-fit mx-auto border-underline">Sign-Up (work in progress)</h1>
-        <h5 class="text-red-500 text-center">Please Note: By signing up to this website, I will be storing your email address and any other account information you provide. This is used only to identify your data, so you only see the data that belongs to you. </h5>
+        <h1 class="w-fit mx-auto border-underline">Sign-Up</h1>
+        <h5 class="text-red-500 text-center"><%= (typeof otherErr != "undefined") ? otherErr : "" %></h5>
+    
         <form action="#" method="POST" class="border-style flex flex-col gap-1">
             <fieldset class="flex flex-col">
                <legend for="username" class="px-1 py-0 mb-0">Username</legend>
@@ -21,13 +22,13 @@
                <h5 class="text-red-500 text-center"><%= (typeof usernameErr != "undefined") ? usernameErr : "" %></h5>
             </fieldset>
             <fieldset class="flex flex-col">
-               <legend for="email" class="px-1 py-0 mb-0">Email</legend>
+               <legend for="email" class="px-1 py-0 mb-0">Email*</legend>
                <input name="email" type="email" placeholder="LoremIpsum@gmail.com" class="grow div-hover" required>
                <h5 class="text-red-500 text-center"><%= (typeof emailErr != "undefined") ? emailErr : ""%></h5>
             </fieldset>
             <fieldset class="flex flex-col">
-               <label for="password" class="px-1 py-0 mb-0">Password</label>
-               <input name="password" type="password" placeholder="*****" class="grow div-hover">
+               <label for="password" class="px-1 py-0 mb-0">Password*</label>
+               <input name="password" type="password" placeholder="*****" class="grow div-hover" required>
                 <% if (typeof passwordErrs != "undefined") { %>
                     <% for (var err of passwordErrs) { %>
                         <h5 class="text-red-500 text-center"><%= err %></h5>
@@ -35,11 +36,12 @@
                 <% } %>
             </fieldset>
             <fieldset class="flex flex-col">
-               <label for="confirmPassword" class="px-1 py-0 mb-0">Confirm Password</label>
-               <input name="confirmPassword" type="password" placeholder="*****" class="grow div-hover">
+               <label for="confirmPassword" class="px-1 py-0 mb-0">Confirm Password*</label>
+               <input name="confirmPassword" type="password" placeholder="*****" class="grow div-hover" required>
                <h5 class="text-red-500 text-center"><%= (typeof confirmPasswordErr != "undefined") ? confirmPasswordErr : "" %></h5>
             </fieldset>
 
+            <h5 class="text-red-500 text-center">By signing up to this website, I will be storing your email address and any other account information you provide. This is used only to identify your data, so you only see the data that belongs to you. </h5>
             <input type="submit" value="Sign-Up" name="submit" class="button mx-auto my-0">
             <p class="mx-auto">Already have an account? Login <a href="login" class="hover:text-blue-500 underline">here</a> (or explore alternative methods below).</P>
         </form>

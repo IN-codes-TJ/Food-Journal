@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="361756584618-r66htrjk50r4l1r9g6cu2760qvub6f3n.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="stylesheets/output.css">
+    <%-include('partials/favicon') %>
+    <title>My Food Journal</title>
+</head>
+<body>
+    <main class="flex flex-col gap-1 justify-center mx-auto max-w-52 w-[80vw]">
+        <h1 class="w-fit mx-auto border-underline">Log-In</h1>
+        
+        <form action="#" method="POST" class="border-style flex flex-col gap-1">
+            <fieldset class="flex flex-col">
+               <legend for="emailUsername" class="px-1 py-0 mb-0">Username or Email*</legend>
+               <input name="emailUsername" type="emailUsername" placeholder="Lorem Ipsum" class="grow div-hover" required>
+            </fieldset>
+            <fieldset class="flex flex-col">
+               <label for="password" class="px-1 py-0 mb-0">Password*</label>
+               <input name="password" type="password" placeholder="*****" class="grow div-hover" required>
+            </fieldset>
+
+            <h5 class="text-red-500 text-center"><%= (typeof otherErr != "undefined") ? otherErr : "" %></h5>
+            <input type="submit" value="Log-In" name="submit" class="button mx-auto my-0">
+            <p class="mx-auto">Don't have an account? Sign-up <a href="signup" class="hover:text-blue-500 underline">here</a>.</P>
+        </form>
+    </main>
+</body>

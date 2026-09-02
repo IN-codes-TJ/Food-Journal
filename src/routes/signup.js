@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const {check, validationResult} = require("express-validator");
 const userModel = require("../model/userModel");
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+    max: 10, // Max no. of requests
+    windowMs: 2*60*1000, // 2 min rate limit time (ms)
+    message: 'You have made too many signup attempts. Please try again in 2 minutes.',
+    handler: (req, res, next, options) => {
+        res.render('blocked', {message: 'You have made too many signup attempts. Please try again in 2 minutes.'});
+    }
+});
 
 router.get('/', function(req, res) {
     
@@ -9,8 +18,9 @@ router.get('/', function(req, res) {
     
 });
 
-router.post('/', [
-    check('username').notEmpty().isLength({min:3, max:128}).withMessage('Username must be at least 5 characters'),
+router.post('/', limiter, [
+    check('username').notEmpty().isLength({min:3, max:128}).withMessage('Username must be at least 5 characters').optional({
+        values: 'undefined' | 'null' | 'falsy', nullable: true, checkFalsy: true}), // Username is optional
     check('email').notEmpty().isEmail().withMessage('Invalid email format'),
     check('password').notEmpty().isLength({min:5, max:256}).withMessage('Password must be at least 5 characters'),
     check('password').notEmpty().matches(/\S*[a-z]\S*/).withMessage('Password must include a lowercase letter'),
@@ -31,12 +41,12 @@ router.post('/', [
         
 
         for (const error of alert) {
-            if (error['path'] == 'username') usernameErr = error;
-            else if (error['path'] == 'email') emailErr = error;
+            if (error['path'] == 'username') usernameErr = error.msg;
+            else if (error['path'] == 'email') emailErr = error.msg;
             else if (error['path'] == 'password') passwordErrs.push(error.msg);
         }
         
-        res.render('signup', {usernameErr: usernameErr.msg, emailErr: emailErr.msg, passwordErrs: passwordErrs, confirmPasswordErr: confirmPasswordErr});
+        res.render('signup', {usernameErr: usernameErr, emailErr: emailErr, passwordErrs: passwordErrs, confirmPasswordErr: confirmPasswordErr});
         return;
     } 
 
@@ -46,11 +56,20 @@ router.post('/', [
     const email = req.body.email;
     const password = req.body.password;
 
+    userModel.createUser(email, username, password).then((result) => {
+        if (result == false || typeof result.error != "undefined") {
+            res.render('signup', {otherErr: 'Your account could not be created'});
+            return;
+        }
+        else if (typeof result.message != "undefined") {
+            res.render('signup', {emailErr: result.message});
+            return;
+        }
+        
+        req.session.user = {id: result['userid'], username: (result['username'] == null) ? result['email'] : result['username']};
 
-    console.log(typeof username);
-    console.log(typeof email);
-    console.log(typeof password);
-    //userModel.createUser(username, email, password)
+        res.redirect("/");
+    })
 });
 
 module.exports = router;
