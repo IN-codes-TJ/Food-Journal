@@ -4,18 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/output.css">
+    <script src="js/changePassword.js" defer></script>
     <%-include('partials/favicon') %>
     <title>My Food Journal</title>
 </head>
 <body>
     <%-include('partials/nav') %>
     <main class="flex flex-col justify-center mx-auto max-w-52 w-[80vw]">
-        <h1 class="text-center">My Account</h1>
-        <div class="border-style flex flex-col gap-1">
-            <p>Username: <i><%= username == null ? "[NOT PROVIDED]" : username %></i></p>
-            <p>Email: <i><%= email %></i></p>
-            <a href="logout" class="submit w-fit">Log Out</a>
-        </div>
+        <h1 class="text-center mb-1">My Account</h1>
+        <form action="#" method="POST" class="border-style flex flex-col gap-1">
+            <fieldset class="flex flex-col">
+               <legend for="username" class="px-1 py-0 mb-0">Username</legend>
+               <% if (username == null) { %>
+                    <input name="username" type="username" placeholder="[NOT PROVIDED]" class="grow div-hover py-0.5">
+                <% } else { %>
+                    <input name="username" type="username" value="<%= username %>" class="grow div-hover py-0.5">
+                <% } %>
+            </fieldset>
+            <fieldset class="flex flex-col">
+               <legend for="email" class="px-1 py-0 mb-0">Email</legend>
+               <input name="email" type="email" value="<%= email %>" class="grow div-hover py-0.5">
+            </fieldset>
+            <fieldset class="flex flex-col">
+               <label for="password" class="px-1 py-0 mb-0">Password</label>
+               <input name="password" type="password" placeholder="*****" class="grow div-hover py-0.5" id="accPassword">
+            </fieldset>
+            <fieldset class="flex flex-col hidden" id="accChangePWDiv">
+               <label for="confirmPassword" class="px-1 py-0 mb-0">Confirm Password</label>
+               <input name="confirmPassword" type="password" placeholder="*****" class="grow div-hover py-0.5" id="accChangePassword">
+            </fieldset>
+            <h5 class="text-red-500 text-center"><%= (typeof confirmPasswordErr != "undefined") ? confirmPasswordErr : "" %></h5>
+            <input type="submit" value="Save Changes" name="submit" class="button mx-auto my-0">
+        </form>
+        <a href="logout" class="submit w-fit mx-auto mt-1">Log Out</a>
     </main>
 </body>
 </html>

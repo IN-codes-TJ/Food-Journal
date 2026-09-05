@@ -138,6 +138,21 @@ class userModel {
             return {'error': true};
         }
     }
+
+    async changeUsername(id, username) {
+        console.log("changing username")
+        console.log(username)
+    }
+
+    async changeEmail(id, email) {
+        console.log("changing email")
+        console.log(email)
+    }
+
+    async changePassword(id, password) {
+        console.log("changing password")
+        console.log(password)
+    }
 }
 
 module.exports = new userModel();
