@@ -14,7 +14,7 @@ const limiter = rateLimit({
 
 router.get('/', function(req, res) {
     
-    res.render("login", {});
+    res.render("login", {googleContent: process.env.CLIENT_ID});
     
 });
 
@@ -24,7 +24,7 @@ router.post('/', limiter, async (req, res, next) => {
 
     userModel.login(emailUsername, password).then((result) => {
         if (result == false || typeof result.error != "undefined") {
-            res.render('login', {otherErr: 'You could not be logged in.'});
+            res.render('login', {googleContent: process.env.CLIENT_ID, otherErr: 'You could not be logged in.'});
             return;
         }
         

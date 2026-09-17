@@ -14,7 +14,7 @@ const limiter = rateLimit({
 
 router.get('/', function(req, res) {
     
-    res.render("signup", {});
+    res.render("signup", {googleContent: process.env.CLIENT_ID});
     
 });
 
@@ -46,7 +46,7 @@ router.post('/', limiter, [
             else if (error['path'] == 'password') passwordErrs.push(error.msg);
         }
         
-        res.render('signup', {usernameErr: usernameErr, emailErr: emailErr, passwordErrs: passwordErrs, confirmPasswordErr: confirmPasswordErr});
+        res.render('signup', {googleContent: process.env.CLIENT_ID, usernameErr: usernameErr, emailErr: emailErr, passwordErrs: passwordErrs, confirmPasswordErr: confirmPasswordErr});
         return;
     } 
 
@@ -58,11 +58,11 @@ router.post('/', limiter, [
 
     userModel.createUser(email, username, password).then((result) => {
         if (result == false || typeof result.error != "undefined") {
-            res.render('signup', {otherErr: 'Your account could not be created'});
+            res.render('signup', {googleContent: process.env.CLIENT_ID, otherErr: 'Your account could not be created'});
             return;
         }
         else if (typeof result.message != "undefined") {
-            res.render('signup', {emailErr: result.message});
+            res.render('signup', {googleContent: process.env.CLIENT_ID, emailErr: result.message});
             return;
         }
         
