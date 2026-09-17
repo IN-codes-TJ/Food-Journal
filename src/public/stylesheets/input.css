@@ -9,14 +9,14 @@
     /* Colour Schemes (not finished) */
     /* 201, 79, 132*/
     --color-light-primary: rgb(117, 183, 42);
-    --color-light-primary-200: rgba(117, 183, 42, 0.1); /* Defo change (maybe also primary so more vibrant) */
+    --color-light-primary-200: #f1f8e9; /* Equivalent to primary 0.2 alpha on white background*/
     --color-light-pop: #66DAC5;
     --color-light-text: black;
     --color-light-background: white; 
     --color-light-navcolour: #302408;
 
     --color-dark-primary: rgb(176, 48, 163);
-    --color-dark-primary-200: rgba(176, 48, 163, 0.2);
+    --color-dark-primary-200: #230a21; /* Equivalent to primary 0.2 alpha on black background*/
     --color-dark-pop: #aaaaaa;
     --color-dark-text: white;
     --color-dark-background: black;
@@ -57,6 +57,15 @@
 
     input:focus, textarea:focus, select:focus {
         outline: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--color-dark-text);
+            -webkit-box-shadow: 0 0 0px 40rem var(--color-dark-background) inset;
+        }
     }
 }
 
@@ -211,9 +220,9 @@
         @apply hover:bg-light-primary-200 hover:dark:bg-dark-primary-200 hover:cursor-pointer;
     }
 
-    .div-still {
-        @apply bg-light-background dark:bg-dark-background;
-        @apply border-light-primary-200 dark:border-dark-primary-200;
+    .popup {
+        @apply bg-light-primary-200 dark:bg-dark-primary-200;
+        @apply border-light-primary dark:border-dark-primary;
         @apply border-(length:--border-size) rounded-(length:--border-rounded) p-1;
     }
 

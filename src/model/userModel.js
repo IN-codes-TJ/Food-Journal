@@ -140,18 +140,45 @@ class userModel {
     }
 
     async changeUsername(id, username) {
-        console.log("changing username")
-        console.log(username)
+        const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+        await connect.pool.query(setSchema);
+
+        var userInfo = await connect.pool.query(
+            "UPDATE account SET username = $1 WHERE userid = $2 RETURNING userid;",
+            [username, id]
+        );
+        var userInfoRes = JSON.parse(JSON.stringify(userInfo.rows))[0];
+
+        return userInfoRes;
     }
 
     async changeEmail(id, email) {
-        console.log("changing email")
-        console.log(email)
+        const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+        await connect.pool.query(setSchema);
+
+        var userInfo = await connect.pool.query(
+            "UPDATE account SET email = $1 WHERE userid = $2 RETURING userid;",
+            [email, id]
+        );
+        var userInfoRes = JSON.parse(JSON.stringify(userInfo.rows))[0];
+        
+        return userInfoRes;
     }
 
     async changePassword(id, password) {
-        console.log("changing password")
-        console.log(password)
+        const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+        await connect.pool.query(setSchema);
+
+        password = await this.hash(password);
+        if (password == false) return false;
+
+        var userInfo = await connect.pool.query(
+            "UPDATE account SET password = $1 WHERE userid = $2 RETURNING userid;",
+            [password, id]
+        );
+        var userInfoRes = JSON.parse(JSON.stringify(userInfo.rows))[0];
+
+        return userInfoRes;
     }
 }
 

@@ -175,7 +175,7 @@ ORDER BY time;
 
 /* Test Data */
 /*
-SELECT * FROM account;
+SELECT * FROM account WHERE userid = 2;
 INSERT INTO account VALUES (1, 'Test', 'Test@gmail.com', 'testpw');
 INSERT INTO foodData VALUES (1, 1, 'Sandwich', 'Tasty stuff');
 INSERT INTO eatenFood VALUES (4, 1, 1); 

@@ -10,6 +10,11 @@
 </head>
 <body>
     <%-include('partials/nav') %>
+    <% if (successfullyChanged == "true") { %>
+        <%-include('partials/popup', {text:"Your details have been changed!", href: "/account"}) %>
+    <% } else if (successfullyChanged == "false") { %>
+        <%-include('partials/popup', {text:"Your details could not be changed.", href: "/account"}) %>
+    <% } %>
     <main class="flex flex-col justify-center mx-auto max-w-52 w-[80vw]">
         <h1 class="text-center mb-1">My Account</h1>
         <form action="#" method="POST" class="border-style flex flex-col gap-1">
@@ -18,23 +23,31 @@
                <% if (username == null) { %>
                     <input name="username" type="username" placeholder="[NOT PROVIDED]" class="grow div-hover py-0.5">
                 <% } else { %>
-                    <input name="username" type="username" value="<%= username %>" class="grow div-hover py-0.5">
+                    <input name="username" type="username" placeholder="<%= username %>" class="grow div-hover py-0.5">
                 <% } %>
+               <h5 class="text-red-500 text-center"><%= (typeof usernameErr != "undefined") ? usernameErr : "" %></h5>
             </fieldset>
             <fieldset class="flex flex-col">
                <legend for="email" class="px-1 py-0 mb-0">Email</legend>
-               <input name="email" type="email" value="<%= email %>" class="grow div-hover py-0.5">
+               <input name="email" type="email" placeholder="<%= email %>" class="grow div-hover py-0.5">
+               <h5 class="text-red-500 text-center">WARNING: Changing emails associated with Google Sign-Up accounts may result in account information disappearing. If this happens, please contact me and I will try to fix it!</h5>
+               <h5 class="text-red-500 text-center"><%= (typeof emailErr != "undefined") ? emailErr : ""%></h5>
             </fieldset>
             <fieldset class="flex flex-col">
                <label for="password" class="px-1 py-0 mb-0">Password</label>
                <input name="password" type="password" placeholder="*****" class="grow div-hover py-0.5" id="accPassword">
+                <% if (typeof passwordErrs != "undefined") { %>
+                    <% for (var err of passwordErrs) { %>
+                        <h5 class="text-red-500 text-center"><%= err %></h5>
+                    <% } %>
+                <% } %>
             </fieldset>
             <fieldset class="flex flex-col hidden" id="accChangePWDiv">
                <label for="confirmPassword" class="px-1 py-0 mb-0">Confirm Password</label>
                <input name="confirmPassword" type="password" placeholder="*****" class="grow div-hover py-0.5" id="accChangePassword">
             </fieldset>
             <h5 class="text-red-500 text-center"><%= (typeof confirmPasswordErr != "undefined") ? confirmPasswordErr : "" %></h5>
-            <input type="submit" value="Save Changes" name="submit" class="button mx-auto my-0">
+            <input type="submit" value="Save Changes" name="submit" class="button mx-auto my-0"><h3 class="text-light-primary dark:text-dark-primary text-center"><%= (successfullyChanged == "true") ? "Your details have been changed!" : "" %></h3>
         </form>
         <a href="logout" class="submit w-fit mx-auto mt-1">Log Out</a>
     </main>
