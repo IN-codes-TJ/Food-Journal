@@ -9,7 +9,7 @@ class createModel {
 
    async createSickness(userID, name, description, symptoms, associatedFoods) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
          // Add data to database
 
@@ -45,7 +45,7 @@ class createModel {
 
    async createMood(userID, name, description, associatedFoods) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
          // Add data to database
 
@@ -73,7 +73,7 @@ class createModel {
 
    async createFood(userID, name, description, ingredients) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
          // Add data to database
 
@@ -101,7 +101,7 @@ class createModel {
 
    async createEatenFood(userID, foodID, unchecked, modifications, opinion) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
          // Add data to database
 

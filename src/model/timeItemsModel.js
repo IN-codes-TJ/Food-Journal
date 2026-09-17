@@ -9,7 +9,7 @@ class itemsModel {
 
    async getTimeItems(userID) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
 
          // Get all data (foods, moods and sicknesses), ordered and grouped

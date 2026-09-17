@@ -7,8 +7,6 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const app = express();
 
-const port = 5432;
-
 const ejs = require("ejs");
 const path = require("path");
 
@@ -35,7 +33,7 @@ passport.use(
     new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: 'http://localhost:5432/auth/google/callback'
+        callbackURL: `http://localhost:${process.env.SERVER_PORT}/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
         return done(null, profile);
@@ -113,8 +111,8 @@ app.use((req, res, next) => {
 })*/
 
 if (require.main === module) {
-    app.listen(port, () => {
-        console.log(`Server running on http://localhost:${port}`);
+    app.listen(process.env.SERVER_PORT, () => {
+        console.log(`Server running on http://localhost:${process.env.SERVER_PORT}`);
     });
 }
 

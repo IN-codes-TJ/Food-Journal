@@ -11,7 +11,7 @@ class userModel {
 
     async createUser(email, username, password) {
         try {
-            const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+            const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
             await connect.pool.query(setSchema);
 
             var userInfo;
@@ -90,7 +90,7 @@ class userModel {
 
     async login(emailUsername, password) {
         try {
-            const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+            const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
             await connect.pool.query(setSchema);
 
             var userInfo = await connect.pool.query(
@@ -122,7 +122,7 @@ class userModel {
 
     async getUser(id) {
         try {
-            const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+            const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
             await connect.pool.query(setSchema);
 
             var userInfo = await connect.pool.query(
@@ -140,7 +140,7 @@ class userModel {
     }
 
     async changeUsername(id, username) {
-        const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+        const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
         await connect.pool.query(setSchema);
 
         var userInfo = await connect.pool.query(
@@ -153,7 +153,7 @@ class userModel {
     }
 
     async changeEmail(id, email) {
-        const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+        const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
         await connect.pool.query(setSchema);
 
         var userInfo = await connect.pool.query(
@@ -166,7 +166,7 @@ class userModel {
     }
 
     async changePassword(id, password) {
-        const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+        const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
         await connect.pool.query(setSchema);
 
         password = await this.hash(password);

@@ -23,7 +23,7 @@ class itemsModel {
 
    async getFoodItems(userID) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
 
          // Get data about this user's food items
@@ -45,7 +45,7 @@ class itemsModel {
 
    async getFoodItem(foodID) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
 
          // Get data about this food item
@@ -73,7 +73,7 @@ class itemsModel {
 
    async getEatenItems(userID) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
 
          // Get data about this user's food items
@@ -103,7 +103,7 @@ class itemsModel {
 
    async getEatenItem(eatenID) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
 
          // Get data about this food item
@@ -184,7 +184,7 @@ class itemsModel {
 
    async getMoodItem(moodID) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
 
          // Get data about this mood item
@@ -216,7 +216,7 @@ class itemsModel {
 
    async getSicknessItem(sicknessID) {
       try {
-         const setSchema = "SET search_path TO foodjournal, PUBLIC;"
+         const setSchema = `SET search_path TO ${process.env.SCHEMA_NAME}, PUBLIC;`
          await connect.pool.query(setSchema);
 
          // Get data about this sickness item
