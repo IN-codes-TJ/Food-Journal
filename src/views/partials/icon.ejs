@@ -1,13 +1,13 @@
 <% if (typeof href != "string") { %>
     <div class="<%= typeof addClass == 'string' ? addClass + ' icon-parent' : 'icon-parent' %>" id="<%= typeof id == "string" ? id : "" %>">
-        <img src=../public./assets/plain.png" alt="<%=alt%>" style="mask-image: url(<%=src%>)" class="icon">
+        <img src="/assets/plain.png" alt="<%=alt%>" style="mask-image: url(<%=src%>)" class="icon">
         <% if (typeof text == 'string') { %>
             <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
         <% } %>
     </div>
 <% } else { %>
     <a href="<%=href%>" class="<%= typeof addClass == 'string' ? addClass + ' icon-parent' : 'icon-parent' %>" id="<%= typeof id == "string" ? id : "" %>">
-        <img src=../public./assets/plain.png" alt="<%=alt%>" style="mask-image: url(<%=src%>)" class="icon">
+        <img src="/assets/plain.png" alt="<%=alt%>" style="mask-image: url(<%=src%>)" class="icon">
         <% if (typeof text == 'string') { %>
             <h5 class="hidden md:block m-auto text-center"><%=text%></h5>
         <% } %>

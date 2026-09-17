@@ -15,7 +15,7 @@
         <% if (typeof foods[0] != 'undefined') { 
             for (var food of foods) { %>
                 <a href="<%= 'create-eaten?id='+food['foodid'] %>" class="flex flex-row gap-1 justify-center div-hover mb-1">
-                    <%-include('partials/icon', {src:../public./assets/food-icon.png", 
+                    <%-include('partials/icon', {src:"/assets/food-icon.png", 
                     alt:"An icon of a strawberry, linking to the create food page", addClass: "h-2 my-auto p-0 still"}) %>
                     <div class="flex flex-col gap-0.5 ml-0 mr-auto">
                         <h3 class="border-underline"><%= food['name'] %></h3>
