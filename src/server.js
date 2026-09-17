@@ -33,7 +33,7 @@ passport.use(
     new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: `http://localhost:${process.env.SERVER_PORT}/auth/google/callback`
+        callbackURL: `${process.env.SERVER_URL}/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
         return done(null, profile);
@@ -112,7 +112,7 @@ app.use((req, res, next) => {
 
 if (require.main === module) {
     app.listen(process.env.SERVER_PORT, () => {
-        console.log(`Server running on http://localhost:${process.env.SERVER_PORT}`);
+        console.log(`Server running on ${process.env.SERVER_URL}`);
     });
 }
 

@@ -46,7 +46,7 @@
                 <p>There are no associated effects with this food.</p>
             <% } else { for (var effect of effects) { %>
                 <% if (typeof effect['moodid'] != "undefined") { %>
-                    <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
+                    <li class="div-hover border-light-primary-200 dark:border-dark-primary-200 w-fit p-0.5 m-0">
                         <a href="<%= 'mood-item?id='+effect['moodid'] %>" class="flex flex-row gap-1">
                             <%-include('partials/icon', {src:"/assets/mood-icon.png",
                             alt:"An icon of a smiling face, linking to the create mood page", addClass: "h-2 my-auto p-0 still"}) %>
@@ -54,7 +54,7 @@
                         </a>
                     </li>
                 <% } else if (typeof effect['sicknessid'] != "undefined") { %>
-                    <li class="div-hover border-light-primary-200 w-fit p-0.5 m-0">
+                    <li class="div-hover border-light-primary-200 dark:border-dark-primary-200 w-fit p-0.5 m-0">
                         <a href="<%= 'sickness-item?id='+effect['sicknessid'] %>" class="flex flex-row gap-1">
                             <%-include('partials/icon', {src:"/assets/sickness-icon.png", 
                             alt:"An icon of an ill face, linking to the create sickness page", addClass: "h-2 my-auto p-0 still"}) %>
